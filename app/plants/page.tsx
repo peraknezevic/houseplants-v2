@@ -28,8 +28,9 @@ const PlantsPage = async () => {
             <Image
               src={`/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
               alt={plant.title}
-              width="300"
-              height="400"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vh. 33vw"
             />
             <h2>{plant.title}</h2>
           </li>
