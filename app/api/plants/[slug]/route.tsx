@@ -1,13 +1,19 @@
 import schema from "../schema"
+import prisma from "@/prisma/client"
 
-export function GET(
+export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  return Response.json({
-    slug: "monstera-deliciosa",
-    title: "Monstera deliciosa",
+  const plant = await prisma.plant.findUnique({
+    where: { slug: params.slug },
   })
+  if (!plant)
+    return Response.json(
+      { error: "There's no profile page for that plant" },
+      { status: 404 }
+    )
+  return Response.json(plant)
 }
 
 export async function PUT(
@@ -21,7 +27,27 @@ export async function PUT(
   if (!validation.success)
     return Response.json(validation.error.errors, { status: 400 })
 
-  return Response.json({ id: 1, title: body.title }, { status: 201 })
+  const plant = await prisma.plant.findUnique({
+    where: {
+      slug: params.slug,
+    },
+  })
+
+  if (!plant)
+    return Response.json(
+      { error: "There's no profile page for that plant" },
+      { status: 400 }
+    )
+
+  const updatedPlant = await prisma.plant.update({
+    where: { slug: plant.slug },
+    data: {
+      slug: body.slug,
+      title: body.title,
+    },
+  })
+
+  return Response.json(updatedPlant)
 }
 
 export async function DELETE(

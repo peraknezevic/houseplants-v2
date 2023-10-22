@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 
 const NavBar = () => {
@@ -6,6 +7,7 @@ const NavBar = () => {
     { title: "Plants", url: "/plants" },
     { title: "Articles", url: "/articles" },
   ]
+
   return (
     <nav>
       <ul>
