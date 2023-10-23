@@ -1,5 +1,4 @@
 import schema from "./schema"
-
 import prisma from "@/prisma/client"
 
 export async function GET(request: Request) {

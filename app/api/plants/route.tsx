@@ -1,5 +1,4 @@
 import schema from "./schema"
-
 import prisma from "@/prisma/client"
 
 export async function GET(request: Request) {
@@ -26,6 +25,7 @@ export async function POST(request: Request) {
     data: {
       title: body.title,
       slug: body.slug,
+      genusName: body.genusName,
     },
   })
   return Response.json(newPlant, { status: 201 })

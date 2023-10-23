@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Genus` ADD COLUMN `hasPage` BOOLEAN NOT NULL DEFAULT false;
