@@ -23,9 +23,23 @@ export async function POST(request: Request) {
     )
   const newPlant = await prisma.plant.create({
     data: {
-      title: body.title,
       slug: body.slug,
-      genusName: body.genusName,
+      botanicalName: body.botanicalName,
+      hasProfile: body.hasProfile,
+      isSpecies: body.isSpecies,
+      isCultivar: body.isCultivar,
+      isHybrid: body.isHybrid,
+      children: body.children,
+      parents: body.parents,
+      genusPageSlug: body.genusPageSlug,
+      synonyms: body.synonyms,
+      tradeNames: body.tradeNames,
+      commonNames: body.commonNames,
+      namedBy: body.namedBy,
+      inventor: body.inventor,
+      patent: body.patent,
+      nativeArea: body.nativeArea,
+      imageCredits: body.imageCredits,
     },
   })
   return Response.json(newPlant, { status: 201 })

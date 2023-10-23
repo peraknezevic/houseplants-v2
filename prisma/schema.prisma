@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -57,16 +57,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Plant {
-  id             Int     @id @default(autoincrement())
-  title          String  @unique
-  slug           String? @unique
-  genus          String
-  genusPage      GenusPage?   @relation(fields: [genusPageSlug], references: [slug])
-  genusPageSlug String?
-  imageFilename String @default("")
-}
-
 model Article {
   id        Int      @id @default(autoincrement())
   title     String   @unique
@@ -77,14 +67,116 @@ model Article {
   authorId  String?
 }
 
+model Page {
+  id      Int    @id @default(autoincrement())
+  title   String @unique
+  slug    String @unique
+  content String @db.Text()
+}
+
 model GenusPage {
-  id      Int     @id @default(autoincrement())
-  title   String  @unique
-  slug    String  @unique
-  plants  Plant[]
+  id     Int     @id @default(autoincrement())
+  title  String  @unique
+  slug   String  @unique
+  intro  String  @db.Text()
+  plants Plant[]
+}
+
+model Plant {
+  slug          String  @unique
+  botanicalName String  @unique
+  hasProfile    Boolean @default(false)
+
+  isSpecies  Boolean @default(true)
+  isCultivar Boolean @default(false)
+  isHybrid   Boolean @default(false)
+
+  children String[] @default([])
+  parents  String[] @default([])
+
+  genusPage     GenusPage @relation(fields: [genusPageSlug], references: [slug])
+  genusPageSlug String
+
+  synonyms    String?
+  tradeNames  String?
+  commonNames String?
+  namedBy     String?
+  inventor    String?
+  patent      String?
+  nativeArea  String?
+
+  imageCredits String?
+}
+
+model PlantProfile {
+  slug          String @unique
+  botanicalName String @unique
+
+  synonyms    String?
+  namedBy     String?
+  inventor    String?
+  patent      String?
+  tradeNames  String?
+  commonNames String?
+  family      String?
+  subFamily   String?
+  genus       String
+  nativeArea  String?
+
+  care          Care          @default(EASY)
+  light         Light         @default(BRIGHT_LIGHT)
+  watering      String
+  soil          String
+  soilPH        String
+  humidity      Humidity      @default(MEDIUM)
+  feeding       String
+  minimalT      Int
+  optimalT      Int
+  speedOfGrowth SpeedOfGrowth @default(MODERATE)
+  matureSize    String
+  repotting     String
+  flower        String
+  propagation   String
+  toxicity      Toxicity      @default(TOXIC)
+  pests         String
+  diseases      String
+  imageCredits  String?
+  notes         String?       @db.Text()
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum Care {
+  EASY
+  AVARAGE
+  DIFFICULT
+}
+
+enum Light {
+  LOW_LIGHT
+  PARTIAL_SHADE
+  MEDIUM_LIGHT
+  BRIGHT_LIGHT
+  FULL_SUN
+}
+
+enum Humidity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum SpeedOfGrowth {
+  SLOW
+  MODERATE
+  FAST
+}
+
+enum Toxicity {
+  TOXIC
+  NOT_TOXIC
+  NO_INFO
 }
