@@ -27,6 +27,7 @@ export async function POST(request: Request) {
       title: body.title,
       slug: body.slug,
       content: body.content,
+      cardImage: body.cardImage,
     },
   })
   return Response.json(newPage, { status: 201 })

@@ -9,6 +9,7 @@ type Inputs = {
   title: string
   slug: string
   content: string
+  cardImage: string
 }
 
 const CreateNewPage = () => {
@@ -25,7 +26,7 @@ const CreateNewPage = () => {
     <form
       className="max-w-2xl space-y-4 flex flex-col"
       onSubmit={handleSubmit(async (data) => {
-        await axios.post("/api/page", data)
+        await axios.post("/api/pages", data)
         router.push("/pages")
       })}
     >
@@ -40,6 +41,12 @@ const CreateNewPage = () => {
         placeholder="Slug"
         className="input input-bordered w-full"
         {...register("slug")}
+      />
+      <input
+        type="text"
+        placeholder="Image url"
+        className="input input-bordered w-full"
+        {...register("cardImage")}
       />
       <Controller
         name="content"
