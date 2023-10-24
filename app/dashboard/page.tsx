@@ -1,9 +1,7 @@
-import DashboardNav from "./DashboardNav"
-
 const Dashboard = () => {
   return (
     <>
-      <DashboardNav />
+      <p>Welcome to the admin area</p>
     </>
   )
 }

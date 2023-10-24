@@ -1,19 +1,19 @@
-import { pagesSchema } from "@/app/validationSchemas"
+import schema from "../schema"
 import prisma from "@/prisma/client"
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const page = await prisma.page.findUnique({
+  const article = await prisma.article.findUnique({
     where: { slug: params.slug },
   })
-  if (!page)
+  if (!article)
     return Response.json(
-      { error: "This page could not be found" },
+      { error: "This article could not be found" },
       { status: 404 }
     )
-  return Response.json(page)
+  return Response.json(article)
 }
 
 export async function PUT(
@@ -22,24 +22,24 @@ export async function PUT(
 ) {
   const body = await request.json()
 
-  const validation = pagesSchema.safeParse(body)
+  const validation = schema.safeParse(body)
 
   if (!validation.success)
     return Response.json(validation.error.errors, { status: 400 })
 
-  const page = await prisma.page.findUnique({
+  const article = await prisma.article.findUnique({
     where: {
       slug: params.slug,
     },
   })
 
-  if (!page)
+  if (!article)
     return Response.json(
-      { error: "This page could not be found." },
+      { error: "This article could not be found." },
       { status: 400 }
     )
 
-  const pageUpdate = await prisma.page.update({
+  const articleUpdate = await prisma.article.update({
     where: { slug: params.slug },
     data: {
       title: body.title,
@@ -48,7 +48,7 @@ export async function PUT(
     },
   })
 
-  return Response.json(pageUpdate)
+  return Response.json(articleUpdate)
 }
 
 export async function DELETE(

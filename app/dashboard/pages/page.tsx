@@ -1,5 +1,5 @@
 const Pages = () => {
-  return <h1>Pages</h1>
+  return <>Page</>
 }
 
 export default Pages
