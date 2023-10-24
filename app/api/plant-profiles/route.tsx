@@ -1,4 +1,4 @@
-import schema from "./schema"
+import { plantProfileSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 
 export async function GET(request: Request) {
@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const validation = schema.safeParse(body)
+  const validation = plantProfileSchema.safeParse(body)
   if (!validation.success)
     return Response.json(validation.error.errors, { status: 404 })
   const plantProfile = await prisma.plant.findUnique({

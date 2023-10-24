@@ -1,4 +1,4 @@
-import schema from "../schema"
+import { articlesSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 
 export async function GET(
@@ -22,7 +22,7 @@ export async function PUT(
 ) {
   const body = await request.json()
 
-  const validation = schema.safeParse(body)
+  const validation = articlesSchema.safeParse(body)
 
   if (!validation.success)
     return Response.json(validation.error.errors, { status: 400 })
