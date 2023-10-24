@@ -1,12 +1,14 @@
 "use client"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import { useForm, Controller } from "react-hook-form"
+import ErrorMessage from "@/app/components/ErrorMessage"
+import Spinner from "@/app/components/Spinner"
+import { pagesSchema } from "@/app/validationSchemas"
+import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
+import "easymde/dist/easymde.min.css"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { pagesSchema } from "@/app/validationSchemas"
+import { Controller, useForm } from "react-hook-form"
+import SimpleMDE from "react-simplemde-editor"
 import { z } from "zod"
 
 type Inputs = z.infer<typeof pagesSchema>
@@ -23,6 +25,19 @@ const CreateNewPage = () => {
     resolver: zodResolver(pagesSchema),
   })
   const [error, setError] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsSubmitting(true)
+      await axios.post("/api/pages", data)
+      router.push("/dashboard/pages")
+    } catch (error) {
+      setIsSubmitting(false)
+      console.log(error)
+      setError("Unexpected error accured")
+    }
+  })
 
   return (
     <div className="space-y-4">
@@ -31,42 +46,33 @@ const CreateNewPage = () => {
           <span>{error}</span>
         </div>
       )}
-      <form
-        className="max-w-2xl space-y-4 flex flex-col"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            await axios.post("/api/pages", data)
-            router.push("/dashboard/pages")
-          } catch (error) {
-            console.log(error)
-            setError("Unexpected error accured")
-          }
-        })}
-      >
+      <form className="max-w-2xl space-y-4 flex flex-col" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Title"
           className="input input-bordered w-full"
           {...register("title")}
         />
-        {errors.title && <p className="text-red-600">{errors.title.message}</p>}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
         <input
           type="text"
           placeholder="Slug"
           className="input input-bordered w-full"
           {...register("slug")}
         />
-        {errors.slug && <p className="text-red-600">{errors.slug.message}</p>}
+        <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+
         <Controller
           name="content"
           control={control}
           render={({ field }) => <SimpleMDE placeholder="Content" {...field} />}
         />
-        {errors.content && (
-          <p className="text-red-600">{errors.content.message}</p>
-        )}
+        <ErrorMessage>{errors.content?.message}</ErrorMessage>
 
-        <button className="btn">Add New Page</button>
+        <button className="btn" disabled={isSubmitting}>
+          Add New Page {isSubmitting && <Spinner />}
+        </button>
       </form>
     </div>
   )
