@@ -70,6 +70,13 @@ const CreateNewPage = () => {
         />
         <ErrorMessage>{errors.content?.message}</ErrorMessage>
 
+        <select className="select w-full max-w-xs" {...register("published")}>
+          <option value="PUBLISHED">Published</option>
+          <option value="DRAFT">Draft</option>
+          <option value="REVIEW">Review</option>
+        </select>
+        <ErrorMessage>{errors.published?.message}</ErrorMessage>
+
         <button className="btn" disabled={isSubmitting}>
           Add New Page {isSubmitting && <Spinner />}
         </button>

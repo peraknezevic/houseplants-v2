@@ -66,21 +66,27 @@ model Article {
   updatedAt DateTime @updatedAt
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  String?
+  published Publish @default(PUBLISHED)
+
 }
 
 model Page {
-  id      Int    @id @default(autoincrement())
-  title   String @unique
-  slug    String @unique
-  content String @db.Text()
+  id        Int     @id @default(autoincrement())
+  title     String  @unique
+  slug      String  @unique
+  content   String  @db.Text()
+  published Publish @default(PUBLISHED)
+
 }
 
 model GenusPage {
-  id     Int     @id @default(autoincrement())
-  title  String  @unique
-  slug   String  @unique
-  intro  String  @db.Text()
-  plants Plant[]
+  id        Int     @id @default(autoincrement())
+  title     String  @unique
+  slug      String  @unique
+  intro     String  @db.Text()
+  plants    Plant[]
+  published Publish @default(PUBLISHED)
+
 }
 
 model Plant {
@@ -143,6 +149,8 @@ model PlantProfile {
   diseases      String
   imageCredits  String?
   notes         String?       @db.Text()
+
+  published Publish @default(PUBLISHED)
 }
 
 enum Role {
@@ -180,4 +188,10 @@ enum Toxicity {
   TOXIC
   NOT_TOXIC
   NO_INFO
+}
+
+enum Publish {
+  PUBLISHED 
+  DRAFT
+  REVIEW
 }

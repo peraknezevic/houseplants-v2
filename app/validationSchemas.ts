@@ -4,18 +4,21 @@ export const pagesSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   content: z.string().min(100),
+  published: z.enum(["PUBLISH", "DRAFT", "REVIEW"]),
 })
 
 export const articlesSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   content: z.string().min(100),
+  published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
 
 export const generaSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string().min(100),
+  published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
 
 export const plantSchema = z.object({
@@ -85,4 +88,6 @@ export const plantProfileSchema = z.object({
   diseases: z.string().min(3).max(250).optional(),
   imageCredits: z.string().min(3).max(30).optional(),
   notes: z.string().min(3).max(500).optional(),
+
+  published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
