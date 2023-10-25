@@ -27,6 +27,7 @@ export async function POST(request: Request) {
       title: body.title,
       slug: body.slug,
       content: body.content,
+      published: body.published,
     },
   })
   return Response.json(newPage, { status: 201 })

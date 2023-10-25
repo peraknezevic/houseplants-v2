@@ -45,6 +45,7 @@ export async function PUT(
       title: body.title,
       slug: body.slug,
       content: body.content,
+      published: body.published,
     },
   })
 
