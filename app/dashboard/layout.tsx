@@ -8,7 +8,7 @@ export default function DashboardLayout({
   return (
     <div className="flex">
       <DashboardNav />
-      <main className="p-5">{children}</main>
+      <main className="p-5 w-full">{children}</main>
     </div>
   )
 }

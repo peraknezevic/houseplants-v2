@@ -1,34 +1,12 @@
 "use client"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import { useForm, Controller } from "react-hook-form"
+import { plantSchema } from "@/app/validationSchemas"
 import axios from "axios"
+import "easymde/dist/easymde.min.css"
 import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import z from "zod"
 
-type Inputs = {
-  botanicalName: string
-  slug: string
-  hasProfile: boolean
-
-  species: boolean
-  cultivar: boolean
-  hybrid: boolean
-
-  children: string[]
-  parents: string[]
-
-  genusPageSlug: string
-
-  synonyms: string
-  tradeNames: string
-  commonNames: string
-  namedBy: string
-  inventor: string
-  patent: string
-  nativeArea: string
-
-  imageCredits: string
-}
+type Inputs = z.infer<typeof plantSchema>
 
 const CreateNewPlant = () => {
   const router = useRouter()
