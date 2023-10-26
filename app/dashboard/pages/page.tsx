@@ -1,9 +1,8 @@
 import prisma from "@/prisma/client"
-import Link from "next/link"
 import Badge from "../_components/Badge"
 import PageActions from "./PageActions"
-import axios from "axios"
 import DeleteButton from "./_components/DeleteButton"
+import EditButton from "./_components/EditButton"
 
 const Pages = async () => {
   const pages = await prisma.page.findMany()
@@ -23,16 +22,13 @@ const Pages = async () => {
           <tbody>
             {pages.map((page) => (
               <tr key={page.id} className="hover:bg-gray-200">
-                <td>
-                  <Link href={`/dashboard/pages/${page.slug}`}>
-                    {page.title}
-                  </Link>
-                </td>
+                <td>{page.title}</td>
                 <td>{page.slug}</td>
                 <td>
                   <Badge published={page.published} />
                 </td>
                 <td className="space-x-2">
+                  <EditButton pageSlug={page.slug} />
                   <DeleteButton pageSlug={page.slug} />
                 </td>
               </tr>

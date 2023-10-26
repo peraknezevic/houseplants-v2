@@ -26,9 +26,9 @@ export const plantSchema = z.object({
   botanicalName: z.string().min(3).max(40),
   hasProfile: z.boolean().optional(),
 
-  species: z.boolean().optional(),
-  cultivar: z.boolean().optional(),
-  hybrid: z.boolean().optional(),
+  isSpecies: z.boolean().optional(),
+  isCultivar: z.boolean().optional(),
+  isHybrid: z.boolean().optional(),
 
   children: z.string().array().optional(),
   parents: z.string().array().optional(),
