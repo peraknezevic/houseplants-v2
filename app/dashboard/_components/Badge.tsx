@@ -4,7 +4,7 @@ const Badge = ({ published }: { published: String }) => {
       className={`badge
   ${published === "PUBLISHED" && "badge-success"}
   ${published === "DRAFT" && "badge-warning"}
-  ${published === "REVIEW" && "badge-error"}
+  ${published === "REVIEW" && "badge-info"}
 `}
     >
       {published === "PUBLISHED" && "Published"}

@@ -58,5 +58,23 @@ export async function DELETE(
 ) {
   const body = await request.json()
 
+  const page = await prisma.page.findUnique({
+    where: {
+      slug: params.slug,
+    },
+  })
+
+  if (!page)
+    return Response.json(
+      { error: "This page could not be found." },
+      { status: 404 }
+    )
+
+  await prisma.page.delete({
+    where: {
+      slug: params.slug,
+    },
+  })
+
   return Response.json({})
 }

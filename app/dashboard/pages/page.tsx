@@ -20,7 +20,7 @@ const Pages = async () => {
           </thead>
           <tbody>
             {pages.map((page) => (
-              <tr key={page.id}>
+              <tr key={page.id} className="hover:bg-gray-200">
                 <td>
                   <Link href={`/dashboard/pages/${page.slug}`}>
                     {page.title}
@@ -29,6 +29,20 @@ const Pages = async () => {
                 <td>{page.slug}</td>
                 <td>
                   <Badge published={page.published} />
+                </td>
+                <td className="space-x-2">
+                  <Link
+                    href={`/dashboard/pages/${page.slug}`}
+                    className="btn-sm btn-primary"
+                  >
+                    Edit
+                  </Link>
+                  <Link
+                    href={`/dashboard/pages/${page.slug}`}
+                    className="btn-sm btn-error"
+                  >
+                    Delete
+                  </Link>
                 </td>
               </tr>
             ))}

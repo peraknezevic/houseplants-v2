@@ -1,7 +1,6 @@
 import prisma from "@/prisma/client"
-import PageForm from "../../_components/PageForm"
+import PageForm from "../_components/PageForm"
 import { notFound } from "next/navigation"
-import page from "../page"
 
 interface Props {
   params: { slug: string }
