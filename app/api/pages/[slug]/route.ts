@@ -16,7 +16,7 @@ export async function GET(
   return Response.json(page)
 }
 
-export async function PUT(
+export async function PATCH(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
@@ -36,7 +36,7 @@ export async function PUT(
   if (!page)
     return Response.json(
       { error: "This page could not be found." },
-      { status: 400 }
+      { status: 404 }
     )
 
   const pageUpdate = await prisma.page.update({

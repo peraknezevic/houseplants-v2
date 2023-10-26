@@ -35,7 +35,8 @@ const PageForm = ({ page }: { page?: Page }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true)
-      await axios.post("/api/pages", data)
+      if (page) await axios.patch("/api/pages/" + page.slug, data)
+      else await axios.post("/api/pages", data)
       router.push("/dashboard/pages")
     } catch (error) {
       setIsSubmitting(false)
@@ -86,7 +87,7 @@ const PageForm = ({ page }: { page?: Page }) => {
         <ErrorMessage>{errors.published?.message}</ErrorMessage>
 
         <button className="btn" disabled={isSubmitting}>
-          Add New Page {isSubmitting && <Spinner />}
+          {page ? "Update Page" : "Add New Page"} {isSubmitting && <Spinner />}
         </button>
       </form>
     </div>
