@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client"
 import Link from "next/link"
-import Badge from "../components/Badge"
+import Badge from "../_components/Badge"
 import delay from "delay"
 import PageActions from "./PageActions"
 

@@ -1,21 +1,19 @@
+import prisma from "@/prisma/client"
 import { notFound } from "next/navigation"
-import { remark } from "remark"
-import html from "remark-html"
+import ReactMarkdown from "react-markdown"
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const res = await fetch(`http://localhost:3000/api/pages/${params.slug}`)
-  const data = await res.json()
-  const markdown = await remark().use(html).process(data.content)
-  const content = { __html: markdown.value }
-
-  console.log(markdown.value)
-
-  if (!data) return notFound()
+  const page = await prisma.page.findUnique({
+    where: { slug: params.slug },
+  })
+  if (!page) notFound()
 
   return (
-    <div className="p-5">
-      <h1>{data.title}</h1>
-      <div dangerouslySetInnerHTML={content} />
+    <div className="prose p-10 w-full">
+      <h1>{page.title}</h1>
+      <div>
+        <ReactMarkdown>{page.content}</ReactMarkdown>
+      </div>
     </div>
   )
 }

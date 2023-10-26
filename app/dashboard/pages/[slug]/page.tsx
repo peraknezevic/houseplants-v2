@@ -1,24 +1,19 @@
 import prisma from "@/prisma/client"
+import PageForm from "../../_components/PageForm"
 import { notFound } from "next/navigation"
+import page from "../page"
 
 interface Props {
-  params: {
-    slug: string
-  }
+  params: { slug: string }
 }
 
-const PageDetails = async ({ params }: Props) => {
+const EditPage = async ({ params }: Props) => {
   const page = await prisma.page.findUnique({
     where: { slug: params.slug },
   })
   if (!page) notFound()
 
-  return (
-    <div>
-      <h1 className="text-2xl font-bold leading-5 mb-2">{page.title}</h1>
-      <p className="leading-6">{page.content}</p>
-    </div>
-  )
+  return <PageForm page={page} />
 }
 
-export default PageDetails
+export default EditPage
