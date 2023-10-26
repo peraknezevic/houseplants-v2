@@ -1,12 +1,9 @@
-import prisma from "@/prisma/client"
-import Link from "next/link"
-import Badge from "../components/Badge"
-import delay from "delay"
+import Skeleton from "react-loading-skeleton"
+import "react-loading-skeleton/dist/skeleton.css"
 import PageActions from "./PageActions"
 
-const Pages = async () => {
-  const pages = await prisma.page.findMany()
-  await delay(2000)
+const LoadingPages = () => {
+  const pages = [1, 2, 3, 4, 5]
   return (
     <div className="space-y-2">
       <PageActions />
@@ -21,15 +18,15 @@ const Pages = async () => {
           </thead>
           <tbody>
             {pages.map((page) => (
-              <tr key={page.id}>
+              <tr key={page}>
                 <td>
-                  <Link href={`/dashboard/pages/${page.slug}`}>
-                    {page.title}
-                  </Link>
+                  <Skeleton />
                 </td>
-                <td>{page.slug}</td>
                 <td>
-                  <Badge published={page.published} />
+                  <Skeleton />
+                </td>
+                <td>
+                  <Skeleton />
                 </td>
               </tr>
             ))}
@@ -40,4 +37,4 @@ const Pages = async () => {
   )
 }
 
-export default Pages
+export default LoadingPages
