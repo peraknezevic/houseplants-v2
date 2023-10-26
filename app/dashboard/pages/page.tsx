@@ -1,12 +1,11 @@
 import prisma from "@/prisma/client"
 import Link from "next/link"
 import Badge from "../_components/Badge"
-import delay from "delay"
 import PageActions from "./PageActions"
 
 const Pages = async () => {
   const pages = await prisma.page.findMany()
-  await delay(2000)
+
   return (
     <div className="space-y-2">
       <PageActions />
@@ -39,5 +38,7 @@ const Pages = async () => {
     </div>
   )
 }
+
+export const dynamic = "force-dynamic"
 
 export default Pages

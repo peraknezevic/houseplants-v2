@@ -38,9 +38,9 @@ const PageForm = ({ page }: { page?: Page }) => {
       if (page) await axios.patch("/api/pages/" + page.slug, data)
       else await axios.post("/api/pages", data)
       router.push("/dashboard/pages")
+      router.refresh()
     } catch (error) {
       setIsSubmitting(false)
-      console.log(error)
       setError("Unexpected error accured")
     }
   })
