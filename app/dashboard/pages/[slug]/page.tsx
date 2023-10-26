@@ -15,8 +15,8 @@ const PageDetails = async ({ params }: Props) => {
 
   return (
     <div>
-      <h1>{page.title}</h1>
-      <>{page.content}</>
+      <h1 className="text-2xl font-bold leading-5 mb-2">{page.title}</h1>
+      <p className="leading-6">{page.content}</p>
     </div>
   )
 }

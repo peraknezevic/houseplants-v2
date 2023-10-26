@@ -6,7 +6,7 @@ const DashboardNav = () => {
   const { status, data: session } = useSession()
 
   return (
-    <nav className="menu bg-slate-100 w-56">
+    <nav className="menu bg-slate-100 w-64">
       <ul>
         <li className="menu-title uppercase">Plants</li>
         <li>
