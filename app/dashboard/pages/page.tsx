@@ -2,6 +2,8 @@ import prisma from "@/prisma/client"
 import Link from "next/link"
 import Badge from "../_components/Badge"
 import PageActions from "./PageActions"
+import axios from "axios"
+import DeleteButton from "./_components/DeleteButton"
 
 const Pages = async () => {
   const pages = await prisma.page.findMany()
@@ -31,18 +33,7 @@ const Pages = async () => {
                   <Badge published={page.published} />
                 </td>
                 <td className="space-x-2">
-                  <Link
-                    href={`/dashboard/pages/${page.slug}`}
-                    className="btn-sm btn-primary"
-                  >
-                    Edit
-                  </Link>
-                  <Link
-                    href={`/dashboard/pages/${page.slug}`}
-                    className="btn-sm btn-error"
-                  >
-                    Delete
-                  </Link>
+                  <DeleteButton pageSlug={page.slug} />
                 </td>
               </tr>
             ))}

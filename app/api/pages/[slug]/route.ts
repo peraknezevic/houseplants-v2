@@ -56,8 +56,6 @@ export async function DELETE(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const body = await request.json()
-
   const page = await prisma.page.findUnique({
     where: {
       slug: params.slug,
