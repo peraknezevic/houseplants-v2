@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
-import PageActions from "./PageActions"
+import PageActions from "../_components/PageActions"
 
 const LoadingPages = () => {
   const pages = [1, 2, 3, 4, 5]

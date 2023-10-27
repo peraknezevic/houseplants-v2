@@ -2,7 +2,9 @@ import dynamic from "next/dynamic"
 
 const PageForm = dynamic(
   () => import("@/app/dashboard/pages/_components/PageForm"),
-  { ssr: false }
+  {
+    ssr: false,
+  }
 )
 
 const NewPage = () => {

@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   const body = await request.json()
   const validation = plantSchema.safeParse(body)
   if (!validation.success)
-    return Response.json(validation.error.errors, { status: 404 })
+    return Response.json(validation.error.errors, { status: 400 })
   const plant = await prisma.plant.findUnique({
     where: {
       slug: body.slug,

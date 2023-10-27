@@ -1,12 +1,11 @@
-import prisma from "@/prisma/client"
 import Badge from "../_components/Badge"
-import PageActions from "../_components/PageActions"
-import DeleteButton from "../_components/DeleteButton"
-import EditButton from "../_components/EditButton"
+import PageActions from "./PageActions"
+import DeleteButton from "./DeleteButton"
+import EditButton from "./EditButton"
+import { Page } from "@prisma/client"
 
-const Pages = async () => {
-  const pages = await prisma.page.findMany()
-
+const ItemsList = async ({ items }: any) => {
+  console.log(items)
   return (
     <div className="space-y-2">
       <PageActions />
@@ -20,16 +19,16 @@ const Pages = async () => {
             </tr>
           </thead>
           <tbody>
-            {pages.map((page) => (
-              <tr key={page.id} className="hover:bg-gray-200">
-                <td>{page.title}</td>
-                <td>{page.slug}</td>
+            {items.map((item: Page) => (
+              <tr key={item.id} className="hover:bg-gray-200">
+                <td>{item.title}</td>
+                <td>{item.slug}</td>
                 <td>
-                  <Badge published={page.published} />
+                  <Badge published={item.published} />
                 </td>
                 <td className="space-x-2">
-                  <EditButton pageSlug={page.slug} />
-                  <DeleteButton pageSlug={page.slug} />
+                  <EditButton pageSlug={item.slug} />
+                  <DeleteButton pageSlug={item.slug} />
                 </td>
               </tr>
             ))}
@@ -42,4 +41,4 @@ const Pages = async () => {
 
 export const dynamic = "force-dynamic"
 
-export default Pages
+export default ItemsList
