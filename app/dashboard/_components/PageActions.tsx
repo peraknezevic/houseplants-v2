@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-const PageActions = () => {
+const PageActions = ({ cat }: { cat: string }) => {
   return (
-    <Link href="/dashboard/pages/new-page">
-      <button className="btn btn-sm btn-neutral">Add New Page</button>
+    <Link href={`/dashboard/${cat}/new`}>
+      <button className="btn btn-sm btn-neutral">Add New</button>
     </Link>
   )
 }

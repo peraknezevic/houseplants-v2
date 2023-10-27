@@ -5,8 +5,8 @@ import DeleteButton from "../_components/DeleteButton"
 import EditButton from "../_components/EditButton"
 
 const Pages = async () => {
-  const cat = "pages"
-  const pages = await prisma.page.findMany()
+  const cat = "genera"
+  const genera = await prisma.genusPage.findMany()
 
   return (
     <div className="space-y-2">
@@ -15,22 +15,22 @@ const Pages = async () => {
         <table className="table border-gray-200 border">
           <thead>
             <tr className="m-2">
-              <th>Page Title</th>
-              <th>Page Slug</th>
+              <th>Genus Title</th>
+              <th>Genus Slug</th>
               <th>Published</th>
             </tr>
           </thead>
           <tbody>
-            {pages.map((page) => (
-              <tr key={page.id} className="hover:bg-gray-200">
-                <td>{page.title}</td>
-                <td>{page.slug}</td>
+            {genera.map((genus) => (
+              <tr key={genus.id} className="hover:bg-gray-200">
+                <td>{genus.title}</td>
+                <td>{genus.slug}</td>
                 <td>
-                  <Badge published={page.published} />
+                  <Badge published={genus.published} />
                 </td>
                 <td className="space-x-2">
-                  <EditButton cat={cat} slug={page.slug} />
-                  <DeleteButton cat={cat} slug={page.slug} />
+                  <EditButton cat={cat} slug={genus.slug} />
+                  <DeleteButton cat={cat} slug={genus.slug} />
                 </td>
               </tr>
             ))}

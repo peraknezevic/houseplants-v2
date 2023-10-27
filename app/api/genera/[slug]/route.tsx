@@ -16,7 +16,7 @@ export async function GET(
   return Response.json(page)
 }
 
-export async function PUT(
+export async function PATCH(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
@@ -36,7 +36,7 @@ export async function PUT(
   if (!genus)
     return Response.json(
       { error: "This genus could not be found." },
-      { status: 400 }
+      { status: 404 }
     )
 
   const genusUpdate = await prisma.genusPage.update({
@@ -45,6 +45,7 @@ export async function PUT(
       title: body.title,
       slug: body.slug,
       intro: body.intro,
+      published: body.published,
     },
   })
 
