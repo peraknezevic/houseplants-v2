@@ -31,6 +31,7 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true)
+      //   console.log(data)
       if (genus) await axios.patch("/api/genera/" + genus.slug, data)
       else await axios.post("/api/genera", data)
       router.push("/dashboard/genera")
@@ -67,16 +68,7 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
         />
         <ErrorMessage>{errors.slug?.message}</ErrorMessage>
 
-        <input
-          type="text"
-          defaultValue={genus?.intro}
-          placeholder="Slug"
-          className="input input-bordered w-full"
-          {...register("intro")}
-        />
-        <ErrorMessage>{errors.intro?.message}</ErrorMessage>
-
-        {/* <Controller
+        <Controller
           name="intro"
           defaultValue={genus?.intro}
           control={control}
@@ -84,7 +76,7 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
             <SimpleMDE placeholder="Introduction" {...field} />
           )}
         />
-        <ErrorMessage>{errors.intro?.message}</ErrorMessage> */}
+        <ErrorMessage>{errors.intro?.message}</ErrorMessage>
 
         <select className="select w-full max-w-xs" {...register("published")}>
           <option value="PUBLISHED">Published</option>

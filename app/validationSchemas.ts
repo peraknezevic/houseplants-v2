@@ -17,7 +17,7 @@ export const articlesSchema = z.object({
 export const generaSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
-  intro: z.string().min(100),
+  intro: z.string(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
 

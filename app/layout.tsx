@@ -3,8 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import NavBar from "./NavBar"
 import AuthProvider from "./auth/Provider"
-
-const inter = Inter({ subsets: ["latin"] })
+import { GeistSans } from "geist/font"
 
 export const metadata: Metadata = {
   title: "Houseplants",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${GeistSans.className}`}>
         <AuthProvider>
           <NavBar />
           <div>{children}</div>

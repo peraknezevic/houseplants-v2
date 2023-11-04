@@ -8,6 +8,12 @@ const DashboardNav = () => {
   return (
     <nav className="menu bg-slate-100 w-64">
       <ul>
+        {status === "authenticated" && (
+          <li>
+            <Link href="/api/auth/signout">Logout</Link>
+          </li>
+        )}
+
         <li className="menu-title uppercase">Plants</li>
         <li>
           <Link href="/dashboard/plants/new">New Plant</Link>
