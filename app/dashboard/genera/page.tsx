@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client"
-import Badge from "../_components/PublishedBadge"
+import PublishedBadge from "../_components/PublishedBadge"
 import PageActions from "../_components/PageActions"
 import DeleteButton from "../_components/DeleteButton"
 import EditButton from "../_components/EditButton"
@@ -26,7 +26,7 @@ const Pages = async () => {
                 <td>{genus.title}</td>
                 <td>{genus.slug}</td>
                 <td>
-                  <Badge published={genus.published} />
+                  <PublishedBadge published={genus.published} />
                 </td>
                 <td className="space-x-2">
                   <EditButton cat={cat} slug={genus.slug} />

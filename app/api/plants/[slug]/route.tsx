@@ -58,6 +58,7 @@ export async function PATCH(
       inventor: body.inventor,
       patent: body.patent,
       nativeArea: body.nativeArea,
+      hasImage: body.hasImage,
       imageCredits: body.imageCredits,
     },
   })

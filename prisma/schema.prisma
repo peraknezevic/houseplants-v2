@@ -96,15 +96,15 @@ model GenusPage {
 model Plant {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   slug          String  @unique
-  botanicalName String  @unique
+  botanicalName String  
   hasProfile    Boolean @default(false)
 
   isSpecies  Boolean @default(true)
   isCultivar Boolean @default(false)
   isHybrid   Boolean @default(false)
 
-  children String[] @default([])
-  parents  String[] @default([])
+  children String?
+  parents  String?
 
   genusPage     GenusPage @relation(fields: [genusPageSlug], references: [slug])
   genusPageSlug String
@@ -117,6 +117,7 @@ model Plant {
   patent      String?
   nativeArea  String?
 
+  hasImage     Boolean @default(true)
   imageCredits String?
 }
 

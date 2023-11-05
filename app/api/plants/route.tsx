@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       inventor: body.inventor,
       patent: body.patent,
       nativeArea: body.nativeArea,
+      hasImage: body.hasImage,
       imageCredits: body.imageCredits,
     },
   })

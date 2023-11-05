@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.CodeMirror,
+.CodeMirror-scroll {
+  min-height: 100px;
+}

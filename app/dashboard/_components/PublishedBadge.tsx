@@ -1,4 +1,4 @@
-const Badge = ({ published }: { published: String }) => {
+const PublishedBadge = ({ published }: { published: String }) => {
   return (
     <div
       className={`badge
@@ -14,4 +14,4 @@ const Badge = ({ published }: { published: String }) => {
   )
 }
 
-export default Badge
+export default PublishedBadge

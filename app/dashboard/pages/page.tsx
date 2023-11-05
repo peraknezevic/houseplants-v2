@@ -1,11 +1,12 @@
 import prisma from "@/prisma/client"
-import Badge from "../_components/PublishedBadge"
+import PublishedBadge from "../_components/PublishedBadge"
 import PageActions from "../_components/PageActions"
 import DeleteButton from "../_components/DeleteButton"
 import EditButton from "../_components/EditButton"
 
+const cat = "pages"
+
 const Pages = async () => {
-  const cat = "pages"
   const pages = await prisma.page.findMany()
 
   return (
@@ -26,7 +27,7 @@ const Pages = async () => {
                 <td>{page.title}</td>
                 <td>{page.slug}</td>
                 <td>
-                  <Badge published={page.published} />
+                  <PublishedBadge published={page.published} />
                 </td>
                 <td className="space-x-2">
                   <EditButton cat={cat} slug={page.slug} />

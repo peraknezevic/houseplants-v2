@@ -31,7 +31,6 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true)
-      //   console.log(data)
       if (genus) await axios.patch("/api/genera/" + genus.slug, data)
       else await axios.post("/api/genera", data)
       router.push("/dashboard/genera")
@@ -77,6 +76,16 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
           )}
         />
         <ErrorMessage>{errors.intro?.message}</ErrorMessage>
+
+        <Controller
+          name="changeLog"
+          defaultValue={genus?.changeLog}
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder="changeLog" {...field} />
+          )}
+        />
+        <ErrorMessage>{errors.changeLog?.message}</ErrorMessage>
 
         <select className="select w-full max-w-xs" {...register("published")}>
           <option value="PUBLISHED">Published</option>

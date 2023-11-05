@@ -27,6 +27,8 @@ export async function POST(request: Request) {
       title: body.title,
       slug: body.slug,
       intro: body.intro,
+      changeLog: body.changeLog,
+      published: body.published,
     },
   })
   return Response.json(newGenus, { status: 201 })

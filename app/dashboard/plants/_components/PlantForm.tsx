@@ -1,4 +1,6 @@
 "use client"
+import SimpleMDE from "react-simplemde-editor"
+import { Controller, useForm } from "react-hook-form"
 import ErrorMessage from "@/app/components/ErrorMessage"
 import Spinner from "@/app/components/Spinner"
 import { plantSchema } from "@/app/validationSchemas"
@@ -7,13 +9,12 @@ import axios from "axios"
 import "easymde/dist/easymde.min.css"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Plant } from "@prisma/client"
 
-type PageData = z.infer<typeof plantSchema>
+type PlantData = z.infer<typeof plantSchema>
 
-const PageForm = ({ plant }: { plant?: Plant }) => {
+const PlantForm = ({ plant }: { plant?: Plant }) => {
   const router = useRouter()
   const {
     register,
@@ -21,7 +22,7 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<PageData>({
+  } = useForm<PlantData>({
     resolver: zodResolver(plantSchema),
   })
   const [error, setError] = useState("")
@@ -29,7 +30,6 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data)
       setIsSubmitting(true)
       if (plant) await axios.patch("/api/plants/" + plant.slug, data)
       else await axios.post("/api/plants/", data)
@@ -67,23 +67,6 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.slug?.message}</ErrorMessage>
 
-        <label>
-          Has a profile page?{" "}
-          <input type="checkbox" {...register("hasProfile")} />
-        </label>
-
-        <label>
-          Species: <input type="checkbox" {...register("isSpecies")} />
-        </label>
-
-        <label>
-          Cultivar: <input type="checkbox" {...register("isCultivar")} />
-        </label>
-
-        <label>
-          Hybrid: <input type="checkbox" {...register("isHybrid")} />
-        </label>
-
         <input
           type="text"
           defaultValue={plant?.genusPageSlug}
@@ -92,6 +75,51 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
           {...register("genusPageSlug")}
         />
         <ErrorMessage>{errors.genusPageSlug?.message}</ErrorMessage>
+
+        <label>
+          <input
+            defaultChecked={plant?.isSpecies}
+            type="checkbox"
+            {...register("isSpecies")}
+          />{" "}
+          Species
+        </label>
+
+        <label>
+          <input
+            defaultChecked={plant?.isCultivar}
+            type="checkbox"
+            {...register("isCultivar")}
+          />{" "}
+          Cultivar
+        </label>
+
+        <label>
+          <input
+            defaultChecked={plant?.isHybrid}
+            type="checkbox"
+            {...register("isHybrid")}
+          />{" "}
+          Hybrid
+        </label>
+
+        <input
+          type="text"
+          defaultValue={plant?.children || ""}
+          placeholder="Children"
+          className="input input-bordered w-full"
+          {...register("children")}
+        />
+        <ErrorMessage>{errors.children?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.parents || ""}
+          placeholder="Parents"
+          className="input input-bordered w-full"
+          {...register("parents")}
+        />
+        <ErrorMessage>{errors.parents?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -123,7 +151,7 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
         <input
           type="text"
           defaultValue={plant?.namedBy || ""}
-          placeholder="Named by"
+          placeholder="Described by"
           className="input input-bordered w-full"
           {...register("namedBy")}
         />
@@ -156,21 +184,41 @@ const PageForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.nativeArea?.message}</ErrorMessage>
 
+        <label>
+          <input
+            defaultChecked={plant?.hasProfile}
+            type="checkbox"
+            {...register("hasProfile")}
+          />{" "}
+          Has a profile page
+        </label>
+
+        <label>
+          Has Image:{" "}
+          <input
+            defaultChecked={true}
+            type="checkbox"
+            {...register("hasImage")}
+          />
+        </label>
+        <ErrorMessage>{errors.hasImage?.message}</ErrorMessage>
+
         <input
           type="text"
           defaultValue={plant?.imageCredits || ""}
-          placeholder="Image Credits"
+          placeholder="image Credits"
           className="input input-bordered w-full"
           {...register("imageCredits")}
         />
         <ErrorMessage>{errors.imageCredits?.message}</ErrorMessage>
 
         <button className="btn" disabled={isSubmitting}>
-          {plant ? "Update Page" : "Add New Page"} {isSubmitting && <Spinner />}
+          {plant ? "Update Plant" : "Add New Plant"}{" "}
+          {isSubmitting && <Spinner />}
         </button>
       </form>
     </div>
   )
 }
 
-export default PageForm
+export default PlantForm

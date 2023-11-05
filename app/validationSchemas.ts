@@ -18,6 +18,7 @@ export const generaSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string(),
+  changeLog: z.string(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
 
@@ -30,20 +31,21 @@ export const plantSchema = z.object({
   isCultivar: z.boolean().optional(),
   isHybrid: z.boolean().optional(),
 
-  children: z.string().array().optional(),
-  parents: z.string().array().optional(),
+  children: z.string().optional(),
+  parents: z.string().optional(),
 
   genusPageSlug: z.string().min(3).max(20),
 
-  synonyms: z.string().min(3).max(250).optional(),
-  tradeNames: z.string().min(3).max(250).optional(),
-  commonNames: z.string().min(3).max(250).optional(),
-  namedBy: z.string().min(3).max(30).optional(),
-  inventor: z.string().min(3).max(30).optional(),
-  patent: z.string().min(3).max(30).optional(),
-  nativeArea: z.string().min(3).max(250).optional(),
+  synonyms: z.string().min(3).max(250).optional().or(z.literal("")),
+  tradeNames: z.string().min(3).max(250).optional().or(z.literal("")),
+  commonNames: z.string().min(3).max(250).optional().or(z.literal("")),
+  namedBy: z.string().min(3).max(100).optional().or(z.literal("")),
+  inventor: z.string().min(3).max(100).optional().or(z.literal("")),
+  patent: z.string().min(3).max(30).optional().or(z.literal("")),
+  nativeArea: z.string().min(3).max(250).optional().or(z.literal("")),
 
-  imageCredits: z.string().min(3).max(30).optional(),
+  hasImage: z.boolean().optional(),
+  imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
 })
 
 export const plantProfileSchema = z.object({
