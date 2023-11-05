@@ -53,6 +53,8 @@ export async function POST(request: Request) {
       diseases: body.diseases,
       imageCredits: body.imageCredits,
       notes: body.notes,
+
+      published: body.published,
     },
   })
   return Response.json(newPlantProfile, { status: 201 })

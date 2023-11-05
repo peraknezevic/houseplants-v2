@@ -75,6 +75,8 @@ export async function PUT(
       diseases: body.diseases,
       imageCredits: body.imageCredits,
       notes: body.notes,
+
+      published: body.published,
     },
   })
 
