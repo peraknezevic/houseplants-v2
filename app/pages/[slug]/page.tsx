@@ -9,12 +9,12 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   if (!page) notFound()
 
   return (
-    <div className="prose p-10 w-full">
+    <article className="prose p-10 w-full">
       <h1>{page.title}</h1>
       <div>
         <ReactMarkdown>{page.content}</ReactMarkdown>
       </div>
-    </div>
+    </article>
   )
 }
 

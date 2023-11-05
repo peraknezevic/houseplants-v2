@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.CodeMirror,
-.CodeMirror-scroll {
-  min-height: 100px;
+article {
+  max-width: 96rem;
+  margin: 4rem auto;
 }
