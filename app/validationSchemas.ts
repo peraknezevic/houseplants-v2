@@ -50,6 +50,7 @@ export const plantSchema = z.object({
 
 export const plantProfileSchema = z.object({
   slug: z.string().min(3).max(40),
+  title: z.string().min(3).max(40),
   botanicalName: z.string().min(3).max(40),
   synonyms: z.string().min(3).max(250).optional().or(z.literal("")),
   namedBy: z.string().min(3).max(30).optional().or(z.literal("")),

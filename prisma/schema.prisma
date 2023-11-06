@@ -96,7 +96,7 @@ model GenusPage {
 model Plant {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   slug          String  @unique
-  botanicalName String  
+  botanicalName String
   hasProfile    Boolean @default(false)
 
   isSpecies  Boolean @default(true)
@@ -124,6 +124,7 @@ model Plant {
 model PlantProfile {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   slug          String @unique
+  title         String
   botanicalName String @unique
 
   synonyms    String?

@@ -43,6 +43,7 @@ export async function PUT(
     where: { slug: params.slug },
     data: {
       slug: body.slug,
+      title: body.title,
       botanicalName: body.botanicalName,
 
       synonyms: body.synonyms,

@@ -1,6 +1,13 @@
 import prisma from "@/prisma/client"
-import PlantProfileForm from "../_components/PlantProfileForm"
+import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
+
+const PlantProfile = dynamic(
+  () => import("@/app/dashboard/plant-profiles/_components/PlantProfileForm"),
+  {
+    ssr: false,
+  }
+)
 
 interface Props {
   params: { slug: string }
@@ -12,7 +19,7 @@ const EditPlantProfile = async ({ params }: Props) => {
   })
   if (!plantProfile) notFound()
 
-  return <PlantProfileForm plantProfile={plantProfile} />
+  return <PlantProfile plant={plantProfile} />
 }
 
 export default EditPlantProfile

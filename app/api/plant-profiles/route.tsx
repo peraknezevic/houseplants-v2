@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   const newPlantProfile = await prisma.plantProfile.create({
     data: {
       slug: body.slug,
+      title: body.title,
       botanicalName: body.botanicalName,
 
       synonyms: body.synonyms,
