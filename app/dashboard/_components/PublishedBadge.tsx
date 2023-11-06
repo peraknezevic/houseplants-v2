@@ -1,17 +1,13 @@
 const PublishedBadge = ({ published }: { published: String }) => {
   return (
     <div
-      className={`badge
-  ${published === "PUBLISHED" && "badge-success"}
-  ${published === "DRAFT" && "badge-warning"}
-  ${published === "REVIEW" && "badge-info"}
+      className={`mx-auto h-4 w-4 rounded-full
+  ${published === "PUBLISHED" && "btn-success"}
+  ${published === "DRAFT" && "btn-warning"}
+  ${published === "REVIEW" && "btn-info"} 
 `}
-    >
-      {published === "PUBLISHED" && "Published"}
-      {published === "DRAFT" && "Draft"}
-      {published === "REVIEW" && "Review"}
-    </div>
-  )
-}
+    ></div>
+  );
+};
 
-export default PublishedBadge
+export default PublishedBadge;

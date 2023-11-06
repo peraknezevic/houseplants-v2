@@ -1,19 +1,20 @@
-import prisma from "@/prisma/client"
-import PageActions from "../_components/PageActions"
-import DeleteButton from "../_components/DeleteButton"
-import EditButton from "../_components/EditButton"
-import PublishedBadge from "../_components/PublishedBadge"
+import prisma from "@/prisma/client";
+import PageActions from "../_components/PageActions";
+import DeleteButton from "../_components/DeleteButton";
+import EditButton from "../_components/EditButton";
+import PublishedBadge from "../_components/PublishedBadge";
+import ViewPage from "../_components/ViewPage";
 
-const cat = "plant-profiles"
+const cat = "plant-profiles";
 
 const PlantProfiles = async () => {
-  const plantProfiles = await prisma.plantProfile.findMany()
+  const plantProfiles = await prisma.plantProfile.findMany();
 
   return (
     <div className="space-y-2">
       <PageActions cat={cat} />
-      <div className="overflow-x-auto w-full">
-        <table className="table border-gray-200 border">
+      <div className="w-full overflow-x-auto">
+        <table className="table  border border-gray-200">
           <thead>
             <tr className="m-2">
               <th>Botanical Name</th>
@@ -29,6 +30,7 @@ const PlantProfiles = async () => {
                   <PublishedBadge published={plantProfiles.published} />
                 </td>
                 <td className="space-x-2">
+                  <ViewPage cat={cat} slug={plantProfiles.slug} />
                   <EditButton cat={cat} slug={plantProfiles.slug} />
                   <DeleteButton cat={cat} slug={plantProfiles.slug} />
                 </td>
@@ -38,9 +40,9 @@ const PlantProfiles = async () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
-export default PlantProfiles
+export default PlantProfiles;
