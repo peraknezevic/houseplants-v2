@@ -148,9 +148,14 @@ const Genus = async ({ params }: Props) => {
           </section>
         ))}
       </div>
-      <div>
+      <section>
+        <h3>Thanks</h3>
+        <ReactMarkdown>{genusPage.thanks}</ReactMarkdown>
+      </section>
+      <section>
+        <h3>Changelog</h3>
         <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
-      </div>
+      </section>
     </div>
   )
 }

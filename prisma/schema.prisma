@@ -88,7 +88,7 @@ model GenusPage {
   title     String  @unique
   slug      String  @unique
   intro     String
-  thanks    String
+  thanks    String?
   changeLog String
   plants    Plant[]
   published Publish @default(PUBLISHED)

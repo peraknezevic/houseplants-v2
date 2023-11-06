@@ -18,7 +18,7 @@ const DeleteButton = ({ slug, cat }: { slug: string; cat: string }) => {
   }
 
   return (
-    <button className="btn-sm btn-error" onClick={handleClick}>
+    <button className="btn btn-sm btn-error" onClick={handleClick}>
       Delete
     </button>
   )

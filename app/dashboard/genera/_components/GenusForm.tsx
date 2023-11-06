@@ -79,7 +79,7 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
 
         <Controller
           name="thanks"
-          defaultValue={genus?.thanks}
+          defaultValue={genus?.thanks || ""}
           control={control}
           render={({ field }) => <SimpleMDE placeholder="Thanks" {...field} />}
         />

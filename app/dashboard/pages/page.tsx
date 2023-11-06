@@ -3,6 +3,7 @@ import PublishedBadge from "../_components/PublishedBadge"
 import PageActions from "../_components/PageActions"
 import DeleteButton from "../_components/DeleteButton"
 import EditButton from "../_components/EditButton"
+import ViewPage from "../_components/ViewPage"
 
 const cat = "pages"
 
@@ -30,6 +31,8 @@ const Pages = async () => {
                   <PublishedBadge published={page.published} />
                 </td>
                 <td className="space-x-2">
+                  <ViewPage cat={cat} slug={page.slug} />
+
                   <EditButton cat={cat} slug={page.slug} />
                   <DeleteButton cat={cat} slug={page.slug} />
                 </td>
