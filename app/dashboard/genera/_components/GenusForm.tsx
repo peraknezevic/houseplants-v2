@@ -78,6 +78,14 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
         <ErrorMessage>{errors.intro?.message}</ErrorMessage>
 
         <Controller
+          name="thanks"
+          defaultValue={genus?.thanks}
+          control={control}
+          render={({ field }) => <SimpleMDE placeholder="Thanks" {...field} />}
+        />
+        <ErrorMessage>{errors.thanks?.message}</ErrorMessage>
+
+        <Controller
           name="changeLog"
           defaultValue={genus?.changeLog}
           control={control}

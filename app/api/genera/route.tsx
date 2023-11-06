@@ -27,6 +27,7 @@ export async function POST(request: Request) {
       title: body.title,
       slug: body.slug,
       intro: body.intro,
+      thanks: body.thanks,
       changeLog: body.changeLog,
       published: body.published,
     },

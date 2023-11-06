@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <nav>
       <ul className="navbar gap-4 bg-slate-200 px-4 m-0">
-        <h1 className="">Houseplants</h1>
+        <h1 className="text-xl">Houseplants</h1>
         {mainNavItems.map((item) => (
           <li key={item.title}>
             <Link href={item.url}>{item.title}</Link>

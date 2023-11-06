@@ -13,9 +13,9 @@ const Genus = async ({ params }: Props) => {
   const plants = await prisma.plant.findMany({
     where: { genusPageSlug: params.slug },
   })
-  const species = await plants.filter((plant) => plant.isSpecies)
-  const cultivars = await plants.filter((plant) => plant.isCultivar)
-  const hybrids = await plants.filter((plant) => plant.isHybrid)
+  const species = plants.filter((plant) => plant.isSpecies)
+  const cultivars = plants.filter((plant) => plant.isCultivar)
+  const hybrids = plants.filter((plant) => plant.isHybrid)
 
   if (!genusPage) return <p>No genus page found</p>
   if (genusPage.published === "DRAFT")

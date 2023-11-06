@@ -45,6 +45,7 @@ export async function PATCH(
       title: body.title,
       slug: body.slug,
       intro: body.intro,
+      thanks: body.thanks,
       changeLog: body.changeLog,
       published: body.published,
     },

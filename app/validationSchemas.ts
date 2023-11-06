@@ -18,6 +18,7 @@ export const generaSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string(),
+  thanks: z.string(),
   changeLog: z.string(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 })
