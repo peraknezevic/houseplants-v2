@@ -1,43 +1,43 @@
-import { plantProfileSchema } from "@/app/validationSchemas"
-import prisma from "@/prisma/client"
+import { plantProfileSchema } from "@/app/validationSchemas";
+import prisma from "@/prisma/client";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
   const plant = await prisma.plantProfile.findUnique({
     where: { slug: params.slug },
-  })
+  });
   if (!plant)
     return Response.json(
       { error: "There's no profile page for that plant yet" },
-      { status: 404 }
-    )
-  return Response.json(plant)
+      { status: 404 },
+    );
+  return Response.json(plant);
 }
 
-export async function PUT(
+export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
-  const body = await request.json()
+  const body = await request.json();
 
-  const validation = plantProfileSchema.safeParse(body)
+  const validation = plantProfileSchema.safeParse(body);
 
   if (!validation.success)
-    return Response.json(validation.error.errors, { status: 400 })
+    return Response.json(validation.error.errors, { status: 400 });
 
   const plantProfile = await prisma.plantProfile.findUnique({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
   if (!plantProfile)
     return Response.json(
       { error: "There's no profile page for that plant yet" },
-      { status: 400 }
-    )
+      { status: 400 },
+    );
 
   const updatedPlantProfile = await prisma.plantProfile.update({
     where: { slug: params.slug },
@@ -79,16 +79,16 @@ export async function PUT(
 
       published: body.published,
     },
-  })
+  });
 
-  return Response.json(updatedPlantProfile)
+  return Response.json(updatedPlantProfile);
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
-  const body = await request.json()
+  const body = await request.json();
 
-  return Response.json({})
+  return Response.json({});
 }

@@ -16,11 +16,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-pink-50">
       <body className={`${GeistSans.className}`}>
         <AuthProvider>
           <NavBar />
-          <div>{children}</div>
+          <div className="mx-auto max-w-4xl py-10">{children}</div>
         </AuthProvider>
       </body>
     </html>

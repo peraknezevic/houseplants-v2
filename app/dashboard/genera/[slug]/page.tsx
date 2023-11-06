@@ -1,25 +1,24 @@
-import prisma from "@/prisma/client"
-import { notFound } from "next/navigation"
+import prisma from "@/prisma/client";
+import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 interface Props {
-  params: { slug: string }
+  params: { slug: string };
 }
-
-import dynamic from "next/dynamic"
 
 const GenusForm = dynamic(
   () => import("@/app/dashboard/genera/_components/GenusForm"),
   {
     ssr: false,
-  }
-)
+  },
+);
 
 const EditGenus = async ({ params }: Props) => {
   const genus = await prisma.genusPage.findUnique({
     where: { slug: params.slug },
-  })
-  if (!genus) notFound()
+  });
+  if (!genus) notFound();
 
-  return <GenusForm genus={genus} />
-}
+  return <GenusForm genus={genus} />;
+};
 
-export default EditGenus
+export default EditGenus;

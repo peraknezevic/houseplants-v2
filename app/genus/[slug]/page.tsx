@@ -24,8 +24,8 @@ const Genus = async ({ params }: Props) => {
     return <p>This genus page is being reviewed</p>
 
   return (
-    <div className="prose lg:prose-xl mx-auto my-10 w-1/2">
-      <h1>{genusPage.title}</h1>
+    <div className="prose lg:prose-xl">
+      <h1 className="text-center">{genusPage.title}</h1>
       <div>
         <ReactMarkdown>{genusPage.intro}</ReactMarkdown>
       </div>
@@ -63,12 +63,12 @@ const Genus = async ({ params }: Props) => {
         </ul>
       </section>
 
-      <div>
+      <div className=" mx-auto">
         {plants.map((plant) => (
           <section
             id={plant.botanicalName}
             key={plant.slug}
-            className="border-teal-600 border px-5 mb-5 "
+            className="bg-white px-5 py-1 my-5"
           >
             <h3>{plant.botanicalName}</h3>
             {plant.synonyms && (

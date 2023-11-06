@@ -1,21 +1,21 @@
-"use client"
-import ErrorMessage from "@/app/components/ErrorMessage"
-import Spinner from "@/app/components/Spinner"
-import { plantProfileSchema } from "@/app/validationSchemas"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { PlantProfile } from "@prisma/client"
-import axios from "axios"
-import "easymde/dist/easymde.min.css"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
-import SimpleMDE from "react-simplemde-editor"
-import { z } from "zod"
+"use client";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
+import { plantProfileSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PlantProfile } from "@prisma/client";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
+import { z } from "zod";
 
-type PlantProfileData = z.infer<typeof plantProfileSchema>
+type PlantProfileData = z.infer<typeof plantProfileSchema>;
 
 const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     control,
@@ -24,23 +24,22 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
     formState: { errors },
   } = useForm<PlantProfileData>({
     resolver: zodResolver(plantProfileSchema),
-  })
-  const [error, setError] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      setIsSubmitting(true)
-      if (plant) await axios.patch("/api/plant-profiles/" + plant.slug, data)
-      else await axios.post("/api/plant-profiles/", data)
-      console.log(plant)
-      router.push("/dashboard/plant-profiles")
-      router.refresh()
+      setIsSubmitting(true);
+      if (plant) await axios.patch("/api/plant-profiles/" + plant.slug, data);
+      else await axios.post("/api/plant-profiles/", data);
+      router.push("/dashboard/plant-profiles");
+      router.refresh();
     } catch (error) {
-      setIsSubmitting(false)
-      setError("Unexpected error accured")
+      setIsSubmitting(false);
+      setError("Unexpected error accured");
     }
-  })
+  });
 
   return (
     <div className="space-y-4">
@@ -49,7 +48,7 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           <span>{error}</span>
         </div>
       )}
-      <form className="max-w-2xl space-y-4 flex flex-col" onSubmit={onSubmit}>
+      <form className="flex max-w-2xl flex-col space-y-4" onSubmit={onSubmit}>
         <input
           type="text"
           defaultValue={plant?.title}
@@ -97,42 +96,6 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
-          defaultValue={plant?.inventor || ""}
-          placeholder="Inventor"
-          className="input input-bordered w-full"
-          {...register("inventor")}
-        />
-        <ErrorMessage>{errors.inventor?.message}</ErrorMessage>
-
-        <input
-          type="text"
-          defaultValue={plant?.patent || ""}
-          placeholder="Patent"
-          className="input input-bordered w-full"
-          {...register("patent")}
-        />
-        <ErrorMessage>{errors.patent?.message}</ErrorMessage>
-
-        <input
-          type="text"
-          defaultValue={plant?.tradeNames || ""}
-          placeholder="Trade Names"
-          className="input input-bordered w-full"
-          {...register("tradeNames")}
-        />
-        <ErrorMessage>{errors.tradeNames?.message}</ErrorMessage>
-
-        <input
-          type="text"
-          defaultValue={plant?.commonNames || ""}
-          placeholder="Common Names"
-          className="input input-bordered w-full"
-          {...register("commonNames")}
-        />
-        <ErrorMessage>{errors.commonNames?.message}</ErrorMessage>
-
-        <input
-          type="text"
           defaultValue={plant?.family || ""}
           placeholder="Family"
           className="input input-bordered w-full"
@@ -152,7 +115,7 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
         <input
           type="text"
           defaultValue={plant?.genus || ""}
-          placeholder="genus"
+          placeholder="Genus"
           className="input input-bordered w-full"
           {...register("genus")}
         />
@@ -167,12 +130,48 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
         />
         <ErrorMessage>{errors.nativeArea?.message}</ErrorMessage>
 
+        <input
+          type="text"
+          defaultValue={plant?.tradeNames || ""}
+          placeholder="Trade Names"
+          className="input input-bordered w-full"
+          {...register("tradeNames")}
+        />
+        <ErrorMessage>{errors.tradeNames?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.inventor || ""}
+          placeholder="Cultivar Inventor"
+          className="input input-bordered w-full"
+          {...register("inventor")}
+        />
+        <ErrorMessage>{errors.inventor?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.patent || ""}
+          placeholder="Patent"
+          className="input input-bordered w-full"
+          {...register("patent")}
+        />
+        <ErrorMessage>{errors.patent?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.commonNames || ""}
+          placeholder="Common Names"
+          className="input input-bordered w-full"
+          {...register("commonNames")}
+        />
+        <ErrorMessage>{errors.commonNames?.message}</ErrorMessage>
+
         <select
           className="select w-full max-w-xs"
           {...register("care")}
           defaultValue={plant?.care || ""}
         >
-          <option value="">CARE</option>
+          <option value="">CARE DIFFICULTY</option>
           <option value="EASY">Easy</option>
           <option value="AVARAGE">Avarage</option>
           <option value="DIFFICULT">Difficult</option>
@@ -194,6 +193,40 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
         <ErrorMessage>{errors.light?.message}</ErrorMessage>
 
         <input
+          type="number"
+          defaultValue={plant?.minimalT}
+          placeholder="Minimal Temperature"
+          className="input input-bordered w-full"
+          {...register("minimalT", {
+            valueAsNumber: true,
+          })}
+        />
+        <ErrorMessage>{errors.minimalT?.message}</ErrorMessage>
+
+        <input
+          type="number"
+          defaultValue={plant?.optimalT}
+          placeholder="Optimal Temperature"
+          className="input input-bordered w-full"
+          {...register("optimalT", {
+            valueAsNumber: true,
+          })}
+        />
+        <ErrorMessage>{errors.optimalT?.message}</ErrorMessage>
+
+        <select
+          className="select w-full max-w-xs"
+          {...register("humidity")}
+          defaultValue={plant?.humidity || ""}
+        >
+          <option value="">HUMIDITY</option>
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+        </select>
+        <ErrorMessage>{errors.humidity?.message}</ErrorMessage>
+
+        <input
           type="text"
           defaultValue={plant?.watering || ""}
           placeholder="Watering"
@@ -201,6 +234,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           {...register("watering")}
         />
         <ErrorMessage>{errors.watering?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.feeding || ""}
+          placeholder="Feeding"
+          className="input input-bordered w-full"
+          {...register("feeding")}
+        />
+        <ErrorMessage>{errors.feeding?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -222,46 +264,12 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
-          defaultValue={plant?.feeding || ""}
-          placeholder="Feeding"
+          defaultValue={plant?.repotting || ""}
+          placeholder="Repotting"
           className="input input-bordered w-full"
-          {...register("feeding")}
+          {...register("repotting")}
         />
-        <ErrorMessage>{errors.feeding?.message}</ErrorMessage>
-
-        <select
-          className="select w-full max-w-xs"
-          {...register("humidity")}
-          defaultValue={plant?.humidity || ""}
-        >
-          <option value="">HUMIDITY</option>
-          <option value="LOW">Low</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="HIGH">High</option>
-        </select>
-        <ErrorMessage>{errors.humidity?.message}</ErrorMessage>
-
-        <input
-          type="number"
-          defaultValue={plant?.minimalT || ""}
-          placeholder="Minimal Temperature"
-          className="input input-bordered w-full"
-          {...register("minimalT", {
-            valueAsNumber: true,
-          })}
-        />
-        <ErrorMessage>{errors.minimalT?.message}</ErrorMessage>
-
-        <input
-          type="number"
-          defaultValue={plant?.optimalT || ""}
-          placeholder="Optimal Temperature"
-          className="input input-bordered w-full"
-          {...register("optimalT", {
-            valueAsNumber: true,
-          })}
-        />
-        <ErrorMessage>{errors.optimalT?.message}</ErrorMessage>
+        <ErrorMessage>{errors.repotting?.message}</ErrorMessage>
 
         <select
           className="select w-full max-w-xs"
@@ -286,15 +294,6 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
-          defaultValue={plant?.repotting || ""}
-          placeholder="Repotting"
-          className="input input-bordered w-full"
-          {...register("repotting")}
-        />
-        <ErrorMessage>{errors.repotting?.message}</ErrorMessage>
-
-        <input
-          type="text"
           defaultValue={plant?.flower || ""}
           placeholder="Flower"
           className="input input-bordered w-full"
@@ -310,18 +309,6 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           {...register("propagation")}
         />
         <ErrorMessage>{errors.propagation?.message}</ErrorMessage>
-
-        <select
-          className="select w-full max-w-xs"
-          {...register("toxicity")}
-          defaultValue={plant?.toxicity || ""}
-        >
-          <option value="">TOXICITY</option>
-          <option value="TOXIC">Toxic</option>
-          <option value="NOT_TOXIC">Not Toxic</option>
-          <option value="NO_INFO">No Info</option>
-        </select>
-        <ErrorMessage>{errors.toxicity?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -340,6 +327,18 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           {...register("diseases")}
         />
         <ErrorMessage>{errors.diseases?.message}</ErrorMessage>
+
+        <select
+          className="select w-full max-w-xs"
+          {...register("toxicity")}
+          defaultValue={plant?.toxicity || ""}
+        >
+          <option value="">TOXICITY</option>
+          <option value="TOXIC">Toxic</option>
+          <option value="NOT_TOXIC">Not Toxic</option>
+          <option value="NO_INFO">No Info</option>
+        </select>
+        <ErrorMessage>{errors.toxicity?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -375,7 +374,7 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PlantProfileForm
+export default PlantProfileForm;
