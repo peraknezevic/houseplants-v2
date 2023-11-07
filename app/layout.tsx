@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "./NavBar";
 import AuthProvider from "./auth/Provider";
 import { GeistSans } from "geist/font";
+import Header from "./Header";
 import Footer from "./Footer";
-import QueryClientProvider from "./QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Houseplants",
@@ -20,13 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-pink-50">
       <body className={`${GeistSans.className} text-emerald-950`}>
-        <QueryClientProvider>
-          <AuthProvider>
-            <NavBar />
-            <div className="mx-auto max-w-4xl py-10">{children}</div>
-            <Footer />
-          </AuthProvider>
-        </QueryClientProvider>
+        <AuthProvider>
+          <Header />
+          <div className="mx-auto max-w-4xl py-10">{children}</div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

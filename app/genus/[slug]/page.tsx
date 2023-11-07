@@ -1,27 +1,25 @@
-import prisma from "@/prisma/client"
-import Image from "next/image"
-import ReactMarkdown from "react-markdown"
+import { genusPageData, plantsData } from "@/app/hooks/useData";
+import prisma from "@/prisma/client";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
-  params: { slug: string }
+  params: { slug: string };
 }
 
 const Genus = async ({ params }: Props) => {
-  const genusPage = await prisma.genusPage.findUnique({
-    where: { slug: params.slug },
-  })
-  const plants = await prisma.plant.findMany({
-    where: { genusPageSlug: params.slug },
-  })
-  const species = plants.filter((plant) => plant.isSpecies)
-  const cultivars = plants.filter((plant) => plant.isCultivar)
-  const hybrids = plants.filter((plant) => plant.isHybrid)
+  const genusPage = await genusPageData(params.slug);
+  const plants = await plantsData(params.slug);
 
-  if (!genusPage) return <p>No genus page found</p>
+  const species = plants.filter((plant) => plant.isSpecies);
+  const cultivars = plants.filter((plant) => plant.isCultivar);
+  const hybrids = plants.filter((plant) => plant.isHybrid);
+
+  if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
-    return <p>This genus page is not yet published</p>
+    return <p>This genus page is not yet published</p>;
   if (genusPage.published === "REVIEW")
-    return <p>This genus page is being reviewed</p>
+    return <p>This genus page is being reviewed</p>;
 
   return (
     <div className="prose lg:prose-xl">
@@ -68,7 +66,7 @@ const Genus = async ({ params }: Props) => {
           <section
             id={plant.botanicalName}
             key={plant.slug}
-            className="bg-white px-5 py-1 my-5"
+            className="my-5 bg-white px-5 py-1"
           >
             <h3>{plant.botanicalName}</h3>
             {plant.synonyms && (
@@ -157,7 +155,7 @@ const Genus = async ({ params }: Props) => {
         <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Genus
+export default Genus;

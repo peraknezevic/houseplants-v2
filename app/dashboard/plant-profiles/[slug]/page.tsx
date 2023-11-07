@@ -1,3 +1,4 @@
+import { plantProfileData } from "@/app/hooks/useData";
 import prisma from "@/prisma/client";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
@@ -14,9 +15,8 @@ const PlantProfileForm = dynamic(
 );
 
 const EditPlantProfile = async ({ params }: Props) => {
-  const plantProfile = await prisma.plantProfile.findUnique({
-    where: { slug: params.slug },
-  });
+  const plantProfile = await plantProfileData(params.slug);
+
   if (!plantProfile) notFound();
 
   return <PlantProfileForm plant={plantProfile} />;

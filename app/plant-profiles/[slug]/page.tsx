@@ -1,23 +1,20 @@
-import prisma from "@/prisma/client";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import { plantProfileData } from "@/app/hooks/useData";
 
 interface Props {
   params: { slug: string };
 }
 
 const PlantProfile = async ({ params }: Props) => {
-  const plant = await prisma.plantProfile.findUnique({
-    where: {
-      slug: params.slug,
-    },
-  });
+  const plantProfile = await plantProfileData(params.slug);
 
-  if (!plant) return <p>We don&pos;t have a profile page for this plant yet</p>;
-  if (plant.published === "DRAFT")
+  if (!plantProfile)
+    return <p>We don&pos;t have a profile page for this plant yet</p>;
+  if (plantProfile.published === "DRAFT")
     return <p>This profile page is not yet published</p>;
-  if (plant.published === "REVIEW")
+  if (plantProfile.published === "REVIEW")
     return <p>This profile page is being reviewed</p>;
 
   return (
@@ -26,78 +23,78 @@ const PlantProfile = async ({ params }: Props) => {
         Plant profile
       </span>
       <h1 className="leading mb-12 mt-8 text-center text-6xl font-bold">
-        {plant.title}
+        {plantProfile.title}
       </h1>
       <section>
         <div>
           <p>
             <strong>Botanical name: </strong>
-            {plant.botanicalName}
+            {plantProfile.botanicalName}
           </p>
-          {plant.synonyms && (
+          {plantProfile.synonyms && (
             <p>
               <strong>Synonyms: </strong>
-              {plant.synonyms}
+              {plantProfile.synonyms}
             </p>
           )}
-          {plant.namedBy && (
+          {plantProfile.namedBy && (
             <p>
               <strong>Named by: </strong>
-              {plant.namedBy}
+              {plantProfile.namedBy}
             </p>
           )}
-          {plant.family && (
+          {plantProfile.family && (
             <p>
               <strong>Family: </strong>
-              {plant.family}
+              {plantProfile.family}
             </p>
           )}
-          {plant.subFamily && (
+          {plantProfile.subFamily && (
             <p>
               <strong>Subfamily: </strong>
-              {plant.subFamily}
+              {plantProfile.subFamily}
             </p>
           )}
           <p>
             <strong>Genus: </strong>
-            {plant.genus}
+            {plantProfile.genus}
           </p>
-          {plant.nativeArea && (
+          {plantProfile.nativeArea && (
             <p>
               <strong>Native Area: </strong>
-              {plant.nativeArea}
+              {plantProfile.nativeArea}
             </p>
           )}
-          {plant.tradeNames && (
+          {plantProfile.tradeNames && (
             <p>
               <strong>Trade names: </strong>
-              {plant.tradeNames}
+              {plantProfile.tradeNames}
             </p>
           )}
-          {plant.inventor && (
+          {plantProfile.inventor && (
             <p>
               <strong>Cultivar Inventor: </strong>
-              {plant.inventor}
+              {plantProfile.inventor}
             </p>
           )}
-          {plant.patent && (
+          {plantProfile.patent && (
             <p>
               <strong>Patent: </strong>
-              {plant.patent}
+              {plantProfile.patent}
             </p>
           )}
-          {plant.commonNames && (
+          {plantProfile.commonNames && (
             <p>
               <strong>Common Names: </strong>
-              {plant.commonNames}
+              {plantProfile.commonNames}
             </p>
           )}
         </div>
         <Image
-          src={`https://raw.githubusercontent.com/peraknezevic/houseplants-v2/main/public/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
+          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-01.jpg`}
           width={800}
           height={1000}
-          alt={plant.title}
+          alt={plantProfile.title}
         />
       </section>
 
@@ -105,71 +102,73 @@ const PlantProfile = async ({ params }: Props) => {
         <div>
           <p>
             <strong>Care difficulty: </strong>
-            {plant.care === "EASY" && "Easy"}
-            {plant.care === "AVARAGE" && "Avarage"}
-            {plant.care === "DIFFICULT" && "Difficult"}
+            {plantProfile.care === "EASY" && "Easy"}
+            {plantProfile.care === "AVARAGE" && "Avarage"}
+            {plantProfile.care === "DIFFICULT" && "Difficult"}
           </p>
           <p>
             <strong>Light preference: </strong>
-            {plant.light === "LOW_LIGHT" && "Low light"}
-            {plant.light === "PARTIAL_SHADE" && "Partial shade"}
-            {plant.light === "MEDIUM_LIGHT" && "Medium light"}
-            {plant.light === "BRIGHT_LIGHT" && "Bright light"}
-            {plant.light === "FULL_SUN" && "Full sun"}
+            {plantProfile.light === "LOW_LIGHT" && "Low light"}
+            {plantProfile.light === "PARTIAL_SHADE" && "Partial shade"}
+            {plantProfile.light === "MEDIUM_LIGHT" && "Medium light"}
+            {plantProfile.light === "BRIGHT_LIGHT" && "Bright light"}
+            {plantProfile.light === "FULL_SUN" && "Full sun"}
           </p>
           <p>
             <strong>Minimal Temperature: </strong>
-            {plant.minimalT}&deg;C / {Math.round((plant.minimalT * 9) / 5 + 32)}
+            {plantProfile.minimalT}&deg;C /{" "}
+            {Math.round((plantProfile.minimalT * 9) / 5 + 32)}
             &deg;F
           </p>
           <p>
             <strong>Optimal Temperature: </strong>
-            {plant.optimalT}&deg;C / {Math.round((plant.optimalT * 9) / 5 + 32)}
+            {plantProfile.optimalT}&deg;C /{" "}
+            {Math.round((plantProfile.optimalT * 9) / 5 + 32)}
             &deg;F
           </p>
           <p>
             <strong>Humidity: </strong>
-            {plant.humidity === "LOW" && "Low"}
-            {plant.humidity === "MEDIUM" && "Medium"}
-            {plant.humidity === "HIGH" && "High"}
+            {plantProfile.humidity === "LOW" && "Low"}
+            {plantProfile.humidity === "MEDIUM" && "Medium"}
+            {plantProfile.humidity === "HIGH" && "High"}
           </p>
-          {plant.watering && (
+          {plantProfile.watering && (
             <p>
               <strong>Watering: </strong>
-              {plant.watering}
+              {plantProfile.watering}
             </p>
           )}
-          {plant.feeding && (
+          {plantProfile.feeding && (
             <p>
               <strong>Feeding: </strong>
-              {plant.feeding}
+              {plantProfile.feeding}
             </p>
           )}
-          {plant.soil && (
+          {plantProfile.soil && (
             <p>
               <strong>Soil: </strong>
-              {plant.soil}
+              {plantProfile.soil}
             </p>
           )}
-          {plant.soilPH && (
+          {plantProfile.soilPH && (
             <p>
               <strong>Soil PH: </strong>
-              {plant.soilPH}
+              {plantProfile.soilPH}
             </p>
           )}
-          {plant.repotting && (
+          {plantProfile.repotting && (
             <p>
               <strong>Repotting: </strong>
-              {plant.repotting}
+              {plantProfile.repotting}
             </p>
           )}
         </div>
 
         <Image
-          src={`https://raw.githubusercontent.com/peraknezevic/houseplants-v2/main/public/images/plants/${plant.slug}/${plant.slug}-02.jpg`}
+          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-02.jpg`}
           width={800}
           height={1000}
-          alt={plant.title}
+          alt={plantProfile.title}
         />
       </section>
 
@@ -177,62 +176,62 @@ const PlantProfile = async ({ params }: Props) => {
         <div>
           <p>
             <strong>Speed of growth: </strong>
-            {plant.speedOfGrowth === "SLOW" && "Slow"}
-            {plant.speedOfGrowth === "MODERATE" && "Moderate"}
-            {plant.speedOfGrowth === "FAST" && "Fast"}
+            {plantProfile.speedOfGrowth === "SLOW" && "Slow"}
+            {plantProfile.speedOfGrowth === "MODERATE" && "Moderate"}
+            {plantProfile.speedOfGrowth === "FAST" && "Fast"}
           </p>
-          {plant.matureSize && (
+          {plantProfile.matureSize && (
             <p>
               <strong>Mature size: </strong>
-              {plant.matureSize}
+              {plantProfile.matureSize}
             </p>
           )}
-          {plant.flower && (
+          {plantProfile.flower && (
             <p>
               <strong>Flower: </strong>
-              {plant.flower}
+              {plantProfile.flower}
             </p>
           )}
-          {plant.propagation && (
+          {plantProfile.propagation && (
             <p>
               <strong>Propagation: </strong>
-              {plant.propagation}
+              {plantProfile.propagation}
             </p>
           )}
-          {plant.pests && (
+          {plantProfile.pests && (
             <p>
               <strong>Pests: </strong>
-              {plant.pests}
+              {plantProfile.pests}
             </p>
           )}
-          {plant.diseases && (
+          {plantProfile.diseases && (
             <p>
               <strong>Diseases: </strong>
-              {plant.diseases}
+              {plantProfile.diseases}
             </p>
           )}
-          {plant.toxicity && (
+          {plantProfile.toxicity && (
             <p>
               <strong>Toxicity: </strong>
-              {plant.toxicity === "NOT_TOXIC" && "Not Toxic"}
-              {plant.toxicity === "TOXIC" && "Toxic"}
-              {plant.toxicity === "NO_INFO" && "No Info"}
+              {plantProfile.toxicity === "NOT_TOXIC" && "Not Toxic"}
+              {plantProfile.toxicity === "TOXIC" && "Toxic"}
+              {plantProfile.toxicity === "NO_INFO" && "No Info"}
             </p>
           )}
         </div>
         <Image
-          src={`https://raw.githubusercontent.com/peraknezevic/houseplants-v2/main/public/images/plants/${plant.slug}/${plant.slug}-03.jpg`}
+          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-03.jpg`}
           width={800}
           height={1000}
-          alt={plant.title}
+          alt={plantProfile.title}
         />
       </section>
 
-      {plant.notes && (
+      {plantProfile.notes && (
         <section>
           <div>
             <h3>Notes</h3>
-            <ReactMarkdown>{plant.notes}</ReactMarkdown>
+            <ReactMarkdown>{plantProfile.notes}</ReactMarkdown>
           </div>
         </section>
       )}

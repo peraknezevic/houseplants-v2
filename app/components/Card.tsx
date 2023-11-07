@@ -7,14 +7,16 @@ interface Props {
     slug: string;
     title: string;
   };
+  imgFolder: string;
+  pageFolder: string;
 }
 
-const Card = ({ item }: Props) => {
+const Card = ({ item, imgFolder, pageFolder }: Props) => {
   return (
-    <li className="overflow-hidden rounded-xl bg-white text-center shadow-md">
-      <Link href={`/plant-profiles/${item.slug}/`}>
+    <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md">
+      <Link href={`/${pageFolder}/${item.slug}/`}>
         <Image
-          src={`/images/plants/${item.slug}/${item.slug}-01.jpg`}
+          src={`/images/${imgFolder}/${item.slug}/${item.slug}-01.jpg`}
           width={400}
           height={500}
           alt={item.title}

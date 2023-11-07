@@ -1,8 +1,8 @@
-import prisma from "@/prisma/client";
 import Card from "../components/Card";
+import { plantProfilesData } from "../hooks/useData";
 
-const PlantProfiles = async () => {
-  const plantProfiles = await prisma.plantProfile.findMany();
+const PlantProfilesPage = async () => {
+  const data = await plantProfilesData();
 
   return (
     <div>
@@ -10,12 +10,17 @@ const PlantProfiles = async () => {
         Plant profiles
       </h2>
       <ul className="grid grid-cols-3 gap-8 ">
-        {plantProfiles.map((plantProfile) => (
-          <Card key={plantProfile.id} item={plantProfile} />
+        {data.map((item) => (
+          <Card
+            key={item.id}
+            item={item}
+            imgFolder="plants"
+            pageFolder="plant-profiles"
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-export default PlantProfiles;
+export default PlantProfilesPage;

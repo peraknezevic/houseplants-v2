@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 
-const NavBar = () => {
+const Header = () => {
   const mainNavItems = [
     { title: "Home", url: "/" },
     { title: "Genera", url: "/genus" },
@@ -29,4 +29,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Header;
