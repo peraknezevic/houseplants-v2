@@ -1,19 +1,33 @@
-import prisma from "@/prisma/client"
-import PageActions from "../_components/PageActions"
-import DeleteButton from "../_components/DeleteButton"
-import EditButton from "../_components/EditButton"
-import BoolBadge from "../_components/BoolBadge"
+import prisma from "@/prisma/client";
+import PageActions from "../_components/PageActions";
+import DeleteButton from "../_components/DeleteButton";
+import EditButton from "../_components/EditButton";
+import BoolBadge from "../_components/BoolBadge";
+import Pagination from "../_components/Pagination";
 
-const cat = "plants"
+const cat = "plants";
 
-const Plants = async () => {
-  const plants = await prisma.plant.findMany()
+interface Props {
+  searchParams: {
+    page: string;
+  };
+}
+
+const Plants = async ({ searchParams }: Props) => {
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+  const plants = await prisma.plant.findMany({
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const plantCount = await prisma.plant.count();
 
   return (
     <div className="space-y-2">
       <PageActions cat={cat} />
-      <div className="overflow-x-auto w-full">
-        <table className="table border-gray-200 border">
+      <div className="w-full overflow-x-auto">
+        <table className="table border border-gray-200">
           <thead>
             <tr className="m-2">
               <th>Botanical Name</th>
@@ -49,11 +63,16 @@ const Plants = async () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemCount={plantCount}
+          pageSize={pageSize}
+          currentPage={page}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
-export default Plants
+export default Plants;
