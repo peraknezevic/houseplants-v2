@@ -1,5 +1,5 @@
-"use client"
-import Link from "next/link"
+"use client";
+import Link from "next/link";
 
 const NavBar = () => {
   const mainNavItems = [
@@ -7,24 +7,26 @@ const NavBar = () => {
     { title: "Genera", url: "/genus" },
     { title: "Plant Profiles", url: "/plant-profiles" },
     { title: "Articles", url: "/articles" },
-  ]
+  ];
 
   return (
     <header className="py-4">
-      <h1 className="text-8xl font-bold mx-5 my-8 text-center uppercase">
+      <h1 className="mx-5 my-16 text-center text-8xl font-extrabold uppercase">
         Houseplants
       </h1>
       <nav>
-        <ul className="text-2xl flex gap-8 px-4 m-4 justify-center underline underline-offset-8">
+        <ul className="m-4 flex justify-center gap-8 px-4 text-2xl">
           {mainNavItems.map((item) => (
             <li key={item.title}>
-              <Link href={item.url}>{item.title}</Link>
+              <Link href={item.url} className="underline-offset-8">
+                {item.title}
+              </Link>
             </li>
           ))}
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

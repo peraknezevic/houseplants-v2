@@ -2,7 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-article {
-  max-width: 96rem;
-  margin: 4rem auto;
+@layer base {
+  a {
+    @apply text-emerald-900 underline underline-offset-4;
+  }
+  a:hover {
+    @apply text-emerald-700;
+  }
+  footer a {
+    @apply text-white;
+  }
+  footer a:hover {
+    @apply text-emerald-200;
+  }
+  footer {
+    @apply bg-emerald-900 py-8 text-white;
+  }
+  article {
+    @apply mx-auto my-4 max-w-4xl;
+  }
+  section {
+    @apply mb-8 overflow-hidden rounded-xl bg-white shadow-md;
+  }
+  section img {
+    @apply m-0 h-auto w-full;
+  }
+  section div {
+    @apply m-8 flex flex-col gap-6 text-xl;
+  }
 }

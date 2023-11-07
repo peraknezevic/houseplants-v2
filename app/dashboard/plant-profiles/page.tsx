@@ -14,7 +14,7 @@ const PlantProfiles = async () => {
     <div className="space-y-2">
       <PageActions cat={cat} />
       <div className="w-full overflow-x-auto">
-        <table className="table  border border-gray-200">
+        <table className="table border border-gray-200">
           <thead>
             <tr className="m-2">
               <th>Botanical Name</th>
