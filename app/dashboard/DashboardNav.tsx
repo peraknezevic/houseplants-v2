@@ -1,15 +1,15 @@
-"use client"
-import { useSession } from "next-auth/react"
-import Link from "next/link"
+"use client";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const DashboardNav = () => {
-  const { status, data: session } = useSession()
+  const { status, data: session } = useSession();
 
   return (
-    <div className="flex bg-slate-100 w-full h-full justify-start">
-      <h1 className="text-2xl p-3 mx-2 font-bold">Dashboard</h1>
+    <div className="flex h-full w-full justify-start bg-slate-100">
+      <h1 className="mx-2 p-3 text-2xl font-bold">Dashboard</h1>
       <nav>
-        <ul className="flex justify-start gap-6 p-4 underline font-medium">
+        <ul className="flex justify-start gap-6 p-4 font-bold">
           <li>
             <Link href="/dashboard/plants">Plants</Link>
           </li>
@@ -33,7 +33,7 @@ const DashboardNav = () => {
         </ul>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardNav
+export default DashboardNav;

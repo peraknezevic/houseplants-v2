@@ -23,39 +23,42 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-2">
-      <p>
+    <>
+      <div className="mt-8 flex items-center justify-center gap-2">
+        <button
+          onClick={() => changePage(1)}
+          className="btn btn-neutral"
+          disabled={currentPage === 1}
+        >
+          &#x2C2;&#x2C2;
+        </button>
+        <button
+          onClick={() => changePage(currentPage - 1)}
+          className="btn btn-neutral"
+          disabled={currentPage === 1}
+        >
+          &#x2C2;
+        </button>
+        <button
+          onClick={() => changePage(currentPage + 1)}
+          className="btn btn-neutral"
+          disabled={currentPage === pageCount}
+        >
+          &#x2C3;
+        </button>
+        <button
+          onClick={() => changePage(pageCount)}
+          className="btn btn-neutral"
+          disabled={currentPage === pageCount}
+        >
+          &#x2C3;&#x2C3;
+        </button>
+      </div>
+
+      <p className="mt-4 text-center">
         Page {currentPage} of {pageCount}
       </p>
-      <button
-        onClick={() => changePage(1)}
-        className="btn btn-neutral"
-        disabled={currentPage === 1}
-      >
-        &#x2C2;&#x2C2;
-      </button>
-      <button
-        onClick={() => changePage(currentPage - 1)}
-        className="btn btn-neutral"
-        disabled={currentPage === 1}
-      >
-        &#x2C2;
-      </button>
-      <button
-        onClick={() => changePage(currentPage + 1)}
-        className="btn btn-neutral"
-        disabled={currentPage === pageCount}
-      >
-        &#x2C3;
-      </button>
-      <button
-        onClick={() => changePage(pageCount)}
-        className="btn btn-neutral"
-        disabled={currentPage === pageCount}
-      >
-        &#x2C3;&#x2C3;
-      </button>
-    </div>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import BoolBadge from "../_components/BoolBadge";
 import Pagination from "../_components/Pagination";
+import PlantGenusFilter from "./_components/PlantGenusFilter";
 
 const cat = "plants";
 
@@ -27,10 +28,12 @@ const Plants = async ({ searchParams }: Props) => {
     <div className="space-y-2">
       <PageActions cat={cat} />
       <div className="w-full overflow-x-auto">
+        <PlantGenusFilter />
         <table className="table border border-gray-200">
           <thead>
             <tr className="m-2">
               <th>Botanical Name</th>
+              <th>Genus</th>
               <th>Type</th>
               <th>Image</th>
               <th>Image Credits</th>
@@ -42,6 +45,10 @@ const Plants = async ({ searchParams }: Props) => {
             {plants.map((plant) => (
               <tr key={plant.id} className="hover:bg-gray-200">
                 <td>{plant.botanicalName}</td>
+                <td>
+                  {plant.genusPageSlug.charAt(0).toUpperCase() +
+                    plant.genusPageSlug.slice(1)}
+                </td>
                 <td>
                   {plant.isSpecies && "Species"}
                   {plant.isCultivar && "Cultivar"} {plant.isHybrid && "Hybrid"}
