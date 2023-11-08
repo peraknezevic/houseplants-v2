@@ -1,10 +1,10 @@
 "use client";
 
-type Props = {
+interface Props {
   genera: string[];
-};
+}
 
-const Filters = ({ genera }: Props) => {
+const GenusFilters = ({ genera }: Props) => {
   return (
     <form>
       <select>
@@ -19,4 +19,4 @@ const Filters = ({ genera }: Props) => {
   );
 };
 
-export default Filters;
+export default GenusFilters;

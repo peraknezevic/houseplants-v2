@@ -1,20 +1,22 @@
-import prisma from "@/prisma/client"
-import PublishedBadge from "../_components/PublishedBadge"
-import PageActions from "../_components/PageActions"
-import DeleteButton from "../_components/DeleteButton"
-import EditButton from "../_components/EditButton"
-import ViewPage from "../_components/ViewPage"
+import prisma from "@/prisma/client";
+import PublishedBadge from "../_components/PublishedBadge";
+import DeleteButton from "../_components/DeleteButton";
+import EditButton from "../_components/EditButton";
+import ViewPage from "../_components/ViewPage";
+import AddNewButton from "../_components/AddNewButton";
 
-const cat = "pages"
+const cat = "pages";
 
 const Pages = async () => {
-  const pages = await prisma.page.findMany()
+  const pages = await prisma.page.findMany();
 
   return (
     <div className="space-y-2">
-      <PageActions cat={cat} />
-      <div className="overflow-x-auto w-full">
-        <table className="table border-gray-200 border">
+      <div className="mb-4 mt-4 flex justify-between gap-4">
+        <AddNewButton cat={cat} />
+      </div>
+      <div className="w-full overflow-x-auto">
+        <table className="table border border-gray-200">
           <thead>
             <tr className="m-2">
               <th>Page Title</th>
@@ -42,9 +44,9 @@ const Pages = async () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
-export default Pages
+export default Pages;

@@ -4,7 +4,8 @@ import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import BoolBadge from "../_components/BoolBadge";
 import Pagination from "../_components/Pagination";
-import PlantGenusFilter from "./_components/PlantGenusFilter";
+import GenusFilterData from "./_components/GenusFilterData";
+import AddNewButton from "../_components/AddNewButton";
 
 const cat = "plants";
 
@@ -26,9 +27,11 @@ const Plants = async ({ searchParams }: Props) => {
 
   return (
     <div className="space-y-2">
-      <PageActions cat={cat} />
+      <div className="mb-4 mt-4 flex justify-between gap-4">
+        <AddNewButton cat={cat} />
+        <GenusFilterData />
+      </div>
       <div className="w-full overflow-x-auto">
-        <PlantGenusFilter />
         <table className="table border border-gray-200">
           <thead>
             <tr className="m-2">
