@@ -12,6 +12,14 @@ const Genus = async ({ params }: Props) => {
   const pageType = "Genus";
   const genusPage = await genusPageData(params.slug);
   const plants = await plantsData(params.slug);
+  const removeChars = (text: string) =>
+    text
+      .replaceAll("'", "")
+      .replaceAll("‘", "")
+      .replaceAll("’", "")
+      .replaceAll('"', "")
+      .replaceAll(" ", "")
+      .toLowerCase();
 
   if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
@@ -29,28 +37,24 @@ const Genus = async ({ params }: Props) => {
         </div>
       </Section>
 
+      <h2>{genusPage.title} Plants List</h2>
       <Section id="plant-list">
         <div>
-          <h3>{genusPage.title} Plants List</h3>
           <ul className="columns-2">
             {plants.map((plant) => (
               <li key={plant.slug}>
-                <a href={`#${plant.botanicalName}`}>{plant.botanicalName}</a>
+                <a href={"#" + removeChars(plant.botanicalName)}>
+                  {plant.botanicalName}
+                </a>
               </li>
             ))}
           </ul>
         </div>
       </Section>
 
+      <h2>{genusPage.title} Plants</h2>
       {plants.map((plant) => (
-        <Section
-          id={plant.botanicalName
-            .replaceAll(" ", "")
-            .replaceAll('"', "")
-            .replaceAll("'", "")
-            .toLowerCase()}
-          key={plant.slug}
-        >
+        <Section id={removeChars(plant.botanicalName)} key={plant.slug}>
           <div>
             <h3>{plant.botanicalName}</h3>
             {plant.synonyms && (
@@ -92,19 +96,8 @@ const Genus = async ({ params }: Props) => {
               <p>
                 <strong>Parents:</strong>{" "}
                 {plant.parents.split(", ").map((p) => (
-                  <a
-                    key={p}
-                    href={
-                      "#" +
-                      p
-                        .replaceAll('"', "")
-                        .replaceAll("'", "")
-                        .replaceAll(" ", "")
-                        .toLowerCase()
-                    }
-                    className="mr-2"
-                  >
-                    {p}
+                  <a key={p} href={"#" + removeChars(p)} className="mr-2">
+                    {p.replaceAll('"', "")}
                   </a>
                 ))}
               </p>
@@ -112,21 +105,13 @@ const Genus = async ({ params }: Props) => {
             {plant.children && (
               <p>
                 <strong>Children:</strong>{" "}
-                {plant.children.split(", ").map((c) => (
-                  <a
-                    key={c}
-                    href={
-                      "#" +
-                      c
-                        .replaceAll('"', "")
-                        .replaceAll("'", "")
-                        .replaceAll(" ", "")
-                        .toLowerCase()
-                    }
-                    className="mr-2"
-                  >
-                    {c}
-                  </a>
+                {plant.children.split(", ").map((c, i) => (
+                  <>
+                    {i > 0 && ", "}
+                    <a key={c} href={"#" + removeChars(c)} className="mr-2">
+                      {c.replaceAll('"', "")}
+                    </a>
+                  </>
                 ))}
               </p>
             )}

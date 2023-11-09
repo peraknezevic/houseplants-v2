@@ -21,8 +21,11 @@
   article {
     @apply mx-auto my-4 max-w-4xl;
   }
+  h2 {
+    @apply mb-8 text-4xl font-bold uppercase;
+  }
   h3 {
-    @apply text-3xl font-bold;
+    @apply mb-4 text-3xl font-bold;
   }
   section img {
     @apply m-0 h-auto w-full;
