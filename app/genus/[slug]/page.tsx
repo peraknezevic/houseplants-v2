@@ -95,9 +95,13 @@ const Genus = async ({ params }: Props) => {
             {plant.parents && (
               <p>
                 <strong>Parents:</strong>{" "}
-                {plant.parents.split(", ").map((p) => (
-                  <a key={p} href={"#" + removeChars(p)} className="mr-2">
-                    {p.replaceAll('"', "")}
+                {plant.parents.split(", ").map((parent) => (
+                  <a
+                    key={parent}
+                    href={"#" + removeChars(parent)}
+                    className="mr-2"
+                  >
+                    {parent.replaceAll('"', "")}
                   </a>
                 ))}
               </p>
@@ -105,11 +109,15 @@ const Genus = async ({ params }: Props) => {
             {plant.children && (
               <p>
                 <strong>Children:</strong>{" "}
-                {plant.children.split(", ").map((c, i) => (
+                {plant.children.split(", ").map((child, i) => (
                   <>
                     {i > 0 && ", "}
-                    <a key={c} href={"#" + removeChars(c)} className="mr-2">
-                      {c.replaceAll('"', "")}
+                    <a
+                      key={child}
+                      href={"#" + removeChars(child)}
+                      className="mr-2"
+                    >
+                      {child.replaceAll('"', "")}
                     </a>
                   </>
                 ))}
