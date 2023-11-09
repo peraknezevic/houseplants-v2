@@ -21,13 +21,23 @@
   article {
     @apply mx-auto my-4 max-w-4xl;
   }
-  section {
-    @apply mb-8 overflow-hidden rounded-xl bg-white shadow-md;
+  h3 {
+    @apply text-3xl font-bold;
   }
   section img {
     @apply m-0 h-auto w-full;
   }
   section div {
-    @apply m-8 flex flex-col gap-6 text-xl;
+    @apply m-8 flex flex-col gap-4 text-xl;
+  }
+
+  section div p {
+    @apply border-b-2 border-gray-100 pb-3;
+  }
+  figcaption {
+    @apply -mt-20 p-4 text-right text-white drop-shadow-lg;
+  }
+  figcaption a {
+    @apply text-white;
   }
 }

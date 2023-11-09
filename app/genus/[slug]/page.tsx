@@ -1,5 +1,6 @@
+import PageHead from "@/app/components/PageHead";
+import Section from "@/app/components/Section";
 import { genusPageData, plantsData } from "@/app/hooks/useData";
-import prisma from "@/prisma/client";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
@@ -8,12 +9,9 @@ interface Props {
 }
 
 const Genus = async ({ params }: Props) => {
+  const pageType = "Genus";
   const genusPage = await genusPageData(params.slug);
   const plants = await plantsData(params.slug);
-
-  const species = plants.filter((plant) => plant.isSpecies);
-  const cultivars = plants.filter((plant) => plant.isCultivar);
-  const hybrids = plants.filter((plant) => plant.isHybrid);
 
   if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
@@ -22,52 +20,38 @@ const Genus = async ({ params }: Props) => {
     return <p>This genus page is being reviewed</p>;
 
   return (
-    <div className="prose lg:prose-xl">
-      <h1 className="text-center">{genusPage.title}</h1>
-      <div>
-        <ReactMarkdown>{genusPage.intro}</ReactMarkdown>
-      </div>
+    <article>
+      <PageHead title={genusPage.title} pageType={pageType} />
 
-      <section>
-        <h3>{genusPage.title} Species</h3>
-        <ul>
-          {species.map((plant) => (
-            <li key={plant.slug}>
-              <a href={`#${plant.botanicalName}`}>{plant.botanicalName}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Section id="intro">
+        <div>
+          <ReactMarkdown>{genusPage.intro}</ReactMarkdown>
+        </div>
+      </Section>
 
-      <section>
-        <h3>{genusPage.title} Cultivars</h3>
-        <ul>
-          {cultivars.map((plant) => (
-            <li key={plant.slug}>
-              <a href={`#${plant.botanicalName}`}>{plant.botanicalName}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Section id="plant-list">
+        <div>
+          <h3>{genusPage.title} Plants List</h3>
+          <ul className="columns-2">
+            {plants.map((plant) => (
+              <li key={plant.slug}>
+                <a href={`#${plant.botanicalName}`}>{plant.botanicalName}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
 
-      <section>
-        <h3>{genusPage.title} Hybrids</h3>
-        <ul>
-          {hybrids.map((plant) => (
-            <li key={plant.slug}>
-              <a href={`#${plant.botanicalName}`}>{plant.botanicalName}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <div className=" mx-auto">
-        {plants.map((plant) => (
-          <section
-            id={plant.botanicalName}
-            key={plant.slug}
-            className="my-5 bg-white px-5 py-1"
-          >
+      {plants.map((plant) => (
+        <Section
+          id={plant.botanicalName
+            .replaceAll(" ", "")
+            .replaceAll('"', "")
+            .replaceAll("'", "")
+            .toLowerCase()}
+          key={plant.slug}
+        >
+          <div>
             <h3>{plant.botanicalName}</h3>
             {plant.synonyms && (
               <p>
@@ -108,7 +92,18 @@ const Genus = async ({ params }: Props) => {
               <p>
                 <strong>Parents:</strong>{" "}
                 {plant.parents.split(", ").map((p) => (
-                  <a key={p} href={`#${p}`} className="mr-2">
+                  <a
+                    key={p}
+                    href={
+                      "#" +
+                      p
+                        .replaceAll('"', "")
+                        .replaceAll("'", "")
+                        .replaceAll(" ", "")
+                        .toLowerCase()
+                    }
+                    className="mr-2"
+                  >
                     {p}
                   </a>
                 ))}
@@ -118,43 +113,55 @@ const Genus = async ({ params }: Props) => {
               <p>
                 <strong>Children:</strong>{" "}
                 {plant.children.split(", ").map((c) => (
-                  <a key={c} href={`#${c}`} className="mr-2">
+                  <a
+                    key={c}
+                    href={
+                      "#" +
+                      c
+                        .replaceAll('"', "")
+                        .replaceAll("'", "")
+                        .replaceAll(" ", "")
+                        .toLowerCase()
+                    }
+                    className="mr-2"
+                  >
                     {c}
                   </a>
                 ))}
               </p>
             )}
-            {plant.hasImage && (
-              <figure className="relative">
-                <Image
-                  src={`/images/genus/${genusPage.slug}/${plant.slug}.jpg`}
-                  sizes="100vw"
-                  width={1080}
-                  height={1080}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                  }}
-                  alt={plant.botanicalName}
-                />
-                <figcaption>
-                  {plant.botanicalName}
-                  <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
-                </figcaption>
-              </figure>
-            )}
-          </section>
-        ))}
-      </div>
-      <section>
-        <h3>Thanks</h3>
-        <ReactMarkdown>{genusPage.thanks}</ReactMarkdown>
-      </section>
-      <section>
-        <h3>Changelog</h3>
-        <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
-      </section>
-    </div>
+          </div>
+          {plant.hasImage && (
+            <figure>
+              <Image
+                src={`/images/genus/${genusPage.slug}/${plant.slug}.jpg`}
+                width={800}
+                height={1000}
+                alt={plant.botanicalName}
+              />
+              <figcaption>
+                {plant.botanicalName}
+                <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
+              </figcaption>
+            </figure>
+          )}
+        </Section>
+      ))}
+      {genusPage.thanks && (
+        <Section id="thanks">
+          <div>
+            <h3>Thanks</h3>
+            <ReactMarkdown>{genusPage.thanks}</ReactMarkdown>
+          </div>
+        </Section>
+      )}
+      <Section id="changelog">
+        <div>
+          <h3>Changelog</h3>
+          <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
+        </div>
+      </Section>
+    </article>
   );
 };
 

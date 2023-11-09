@@ -2,12 +2,15 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { plantProfileData } from "@/app/hooks/useData";
+import Section from "@/app/components/Section";
+import PageHead from "@/app/components/PageHead";
 
 interface Props {
   params: { slug: string };
 }
 
 const PlantProfile = async ({ params }: Props) => {
+  const pageType = "Plant Profile";
   const plantProfile = await plantProfileData(params.slug);
 
   if (!plantProfile)
@@ -19,13 +22,8 @@ const PlantProfile = async ({ params }: Props) => {
 
   return (
     <article>
-      <span className="block text-center font-bold uppercase tracking-wider">
-        Plant profile
-      </span>
-      <h1 className="leading mb-12 mt-8 text-center text-6xl font-bold">
-        {plantProfile.title}
-      </h1>
-      <section>
+      <PageHead title={plantProfile.title} pageType={pageType} />
+      <Section>
         <div>
           <p>
             <strong>Botanical name: </strong>
@@ -90,15 +88,21 @@ const PlantProfile = async ({ params }: Props) => {
             </p>
           )}
         </div>
-        <Image
-          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-01.jpg`}
-          width={800}
-          height={1000}
-          alt={plantProfile.title}
-        />
-      </section>
+        <figure>
+          <Image
+            src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-01.jpg`}
+            width={800}
+            height={1000}
+            alt={plantProfile.title}
+          />
+          <figcaption>
+            {plantProfile.botanicalName}
+            <ReactMarkdown>{plantProfile.imageCredits}</ReactMarkdown>
+          </figcaption>
+        </figure>
+      </Section>
 
-      <section>
+      <Section>
         <div>
           <p>
             <strong>Care difficulty: </strong>
@@ -163,16 +167,21 @@ const PlantProfile = async ({ params }: Props) => {
             </p>
           )}
         </div>
+        <figure>
+          <Image
+            src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-02.jpg`}
+            width={800}
+            height={1000}
+            alt={plantProfile.title}
+          />
+          <figcaption>
+            {plantProfile.botanicalName}
+            <ReactMarkdown>{plantProfile.imageCredits}</ReactMarkdown>
+          </figcaption>
+        </figure>
+      </Section>
 
-        <Image
-          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-02.jpg`}
-          width={800}
-          height={1000}
-          alt={plantProfile.title}
-        />
-      </section>
-
-      <section>
+      <Section>
         <div>
           <p>
             <strong>Speed of growth: </strong>
@@ -219,21 +228,27 @@ const PlantProfile = async ({ params }: Props) => {
             </p>
           )}
         </div>
-        <Image
-          src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-03.jpg`}
-          width={800}
-          height={1000}
-          alt={plantProfile.title}
-        />
-      </section>
+        <figure>
+          <Image
+            src={`/images/plants/${plantProfile.slug}/${plantProfile.slug}-03.jpg`}
+            width={800}
+            height={1000}
+            alt={plantProfile.title}
+          />
+          <figcaption>
+            {plantProfile.botanicalName}
+            <ReactMarkdown>{plantProfile.imageCredits}</ReactMarkdown>
+          </figcaption>
+        </figure>
+      </Section>
 
       {plantProfile.notes && (
-        <section>
+        <Section id="notes">
           <div>
             <h3>Notes</h3>
             <ReactMarkdown>{plantProfile.notes}</ReactMarkdown>
           </div>
-        </section>
+        </Section>
       )}
     </article>
   );
