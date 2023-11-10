@@ -40,9 +40,17 @@ const Genus = async ({ params }: Props) => {
       <h2>{genusPage.title} Plants List</h2>
       <Section id="plant-list">
         <div>
-          <ul className="columns-2">
+          <ul className="list-disc columns-2 space-y-3 pl-5">
             {plants.map((plant) => (
-              <li key={plant.slug}>
+              <li
+                key={plant.slug}
+                className={
+                  (plant.isSpecies && "species") ||
+                  (plant.isCultivar && "cultivar") ||
+                  (plant.isHybrid && "hybrid") ||
+                  ""
+                }
+              >
                 <a href={"#" + removeChars(plant.botanicalName)}>
                   {plant.botanicalName}
                 </a>

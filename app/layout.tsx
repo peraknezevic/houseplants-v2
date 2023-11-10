@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import AuthProvider from "./auth/Provider";
+import { Analytics } from "@vercel/analytics/react";
 import { GeistSans } from "geist/font";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -21,6 +22,7 @@ export default function RootLayout({
         <AuthProvider>
           <Header />
           <div className="mx-auto max-w-4xl py-10">{children}</div>
+          <Analytics />
           <Footer />
         </AuthProvider>
       </body>
