@@ -14,7 +14,7 @@ import { z } from "zod";
 
 type ArticleData = z.infer<typeof articlesSchema>;
 
-const PageForm = ({ article }: { article?: Article }) => {
+const ArticleForm = ({ article }: { article?: Article }) => {
   const router = useRouter();
   const {
     register,
@@ -32,7 +32,7 @@ const PageForm = ({ article }: { article?: Article }) => {
     try {
       setIsSubmitting(true);
       if (article) await axios.patch("/api/articles/" + article.slug, data);
-      else await axios.post("/api/articles", data);
+      else await axios.post("/api/articles/", data);
       router.push("/dashboard/articles");
       router.refresh();
     } catch (error) {
@@ -71,7 +71,7 @@ const PageForm = ({ article }: { article?: Article }) => {
           name="intro"
           defaultValue={article?.intro || ""}
           control={control}
-          render={({ field }) => <SimpleMDE placeholder="Content" {...field} />}
+          render={({ field }) => <SimpleMDE placeholder="Intro" {...field} />}
         />
         <ErrorMessage>{errors.intro?.message}</ErrorMessage>
 
@@ -83,6 +83,15 @@ const PageForm = ({ article }: { article?: Article }) => {
         />
         <ErrorMessage>{errors.content?.message}</ErrorMessage>
 
+        <input
+          type="text"
+          defaultValue={article?.imageCredits || ""}
+          placeholder="Image Credits"
+          className="input input-bordered w-full"
+          {...register("imageCredits")}
+        />
+        <ErrorMessage>{errors.imageCredits?.message}</ErrorMessage>
+
         <select className="select w-full max-w-xs" {...register("published")}>
           <option value="PUBLISHED">Published</option>
           <option value="DRAFT">Draft</option>
@@ -91,7 +100,7 @@ const PageForm = ({ article }: { article?: Article }) => {
         <ErrorMessage>{errors.published?.message}</ErrorMessage>
 
         <button className="btn" disabled={isSubmitting}>
-          {article ? "Update Article" : "Add New article"}{" "}
+          {article ? "Update Article" : "Add New Article"}{" "}
           {isSubmitting && <Spinner />}
         </button>
       </form>
@@ -99,4 +108,4 @@ const PageForm = ({ article }: { article?: Article }) => {
   );
 };
 
-export default PageForm;
+export default ArticleForm;

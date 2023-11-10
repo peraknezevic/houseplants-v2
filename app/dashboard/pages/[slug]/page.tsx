@@ -1,18 +1,24 @@
-import prisma from "@/prisma/client"
-import PageForm from "../_components/PageForm"
-import { notFound } from "next/navigation"
+import { pageData } from "@/app/hooks/useData";
+import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
 interface Props {
-  params: { slug: string }
+  params: { slug: string };
 }
+
+const PageForm = dynamic(
+  () => import("@/app/dashboard/pages/_components/PageForm"),
+  {
+    ssr: false,
+  },
+);
 
 const EditPage = async ({ params }: Props) => {
-  const page = await prisma.page.findUnique({
-    where: { slug: params.slug },
-  })
-  if (!page) notFound()
+  const page = await pageData(params.slug);
 
-  return <PageForm page={page} />
-}
+  if (!page) notFound();
 
-export default EditPage
+  return <PageForm page={page} />;
+};
+
+export default EditPage;

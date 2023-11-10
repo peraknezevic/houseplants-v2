@@ -16,7 +16,7 @@ export async function GET(
   return Response.json(article);
 }
 
-export async function PUT(
+export async function PATCH(
   request: Request,
   { params }: { params: { slug: string } },
 ) {
@@ -46,6 +46,8 @@ export async function PUT(
       slug: body.slug,
       intro: body.intro,
       content: body.content,
+      imageCredits: body.imageCredits,
+      published: body.published,
     },
   });
 

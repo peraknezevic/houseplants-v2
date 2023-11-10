@@ -12,6 +12,7 @@ export const articlesSchema = z.object({
   slug: z.string().min(3).max(150),
   intro: z.string().min(50).optional().or(z.literal("")),
   content: z.string().min(100),
+  imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 

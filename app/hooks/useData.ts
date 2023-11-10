@@ -20,7 +20,21 @@ export async function articlesData() {
 }
 
 export async function articleData(slug: string) {
-  const data = await prisma.article.findMany({
+  const data = await prisma.article.findUnique({
+    where: {
+      slug: slug,
+    },
+  });
+  return data;
+}
+
+export async function pagesData() {
+  const data = await prisma.page.findMany();
+  return data;
+}
+
+export async function pageData(slug: string) {
+  const data = await prisma.page.findUnique({
     where: {
       slug: slug,
     },

@@ -28,6 +28,8 @@ export async function POST(request: Request) {
       slug: body.slug,
       intro: body.intro,
       content: body.content,
+      imageCredits: body.imageCredits,
+      published: body.published,
     },
   });
   return Response.json(newArticle, { status: 201 });

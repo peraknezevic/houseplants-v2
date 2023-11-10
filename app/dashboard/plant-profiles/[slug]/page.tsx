@@ -1,5 +1,4 @@
 import { plantProfileData } from "@/app/hooks/useData";
-import prisma from "@/prisma/client";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
