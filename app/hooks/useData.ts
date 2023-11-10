@@ -14,6 +14,20 @@ export async function plantProfileData(slug: string) {
   return data;
 }
 
+export async function articlesData() {
+  const data = await prisma.article.findMany();
+  return data;
+}
+
+export async function articleData(slug: string) {
+  const data = await prisma.article.findMany({
+    where: {
+      slug: slug,
+    },
+  });
+  return data;
+}
+
 export async function plantsData(slug: string) {
   const data = await prisma.plant.findMany({
     where: {

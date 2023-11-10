@@ -1,11 +1,26 @@
-import { Metadata } from "next"
+import Card from "../components/Card";
+import { articlesData } from "../hooks/useData";
 
-const ArticlesPage = () => {
-  return <h1>Articles</h1>
-}
+const ArticlesPage = async () => {
+  const data = await articlesData();
 
-export default ArticlesPage
+  return (
+    <div>
+      <h2 className="mb-8 border-y-2 py-4 text-center text-4xl font-bold">
+        Articles
+      </h2>
+      <ul className="grid grid-cols-3 gap-8 ">
+        {data.map((item) => (
+          <Card
+            key={item.id}
+            item={item}
+            imgFolder="articles"
+            pageFolder="articles"
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export const metadata: Metadata = {
-  title: "Articles Archive",
-}
+export default ArticlesPage;

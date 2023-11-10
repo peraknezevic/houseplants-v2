@@ -16,7 +16,7 @@ const Card = ({ item, imgFolder, pageFolder }: Props) => {
     <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md">
       <Link href={`/${pageFolder}/${item.slug}/`}>
         <Image
-          src={`/images/${imgFolder}/${item.slug}/${item.slug}-01.jpg`}
+          src={`/images/${imgFolder}/${item.slug}/${item.slug}.jpg`}
           width={400}
           height={500}
           alt={item.title}
