@@ -92,9 +92,14 @@ const Genus = async ({ params }: Props) => {
                 <strong>Native to:</strong> {plant.nativeArea}
               </p>
             )}
+            {plant.note && (
+              <p>
+                <strong>*</strong> {plant.note}
+              </p>
+            )}
             {plant.parents && (
               <p>
-                <strong>Parents:</strong>{" "}
+                <strong>Plant parent(s):</strong>{" "}
                 {plant.parents.split(", ").map((parent) => (
                   <a
                     key={parent}
@@ -108,7 +113,7 @@ const Genus = async ({ params }: Props) => {
             )}
             {plant.children && (
               <p>
-                <strong>Children:</strong>{" "}
+                <strong>Cultivars and Hybrids:</strong>{" "}
                 {plant.children.split(", ").map((child, i) => (
                   <>
                     {i > 0 && ", "}

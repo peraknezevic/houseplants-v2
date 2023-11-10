@@ -43,7 +43,8 @@ export const plantSchema = z.object({
   namedBy: z.string().min(3).max(100).optional().or(z.literal("")),
   inventor: z.string().min(3).max(100).optional().or(z.literal("")),
   patent: z.string().min(3).max(30).optional().or(z.literal("")),
-  nativeArea: z.string().min(3).max(250).optional().or(z.literal("")),
+  nativeArea: z.string().min(3).max(500).optional().or(z.literal("")),
+  note: z.string().min(3).max(250).optional().or(z.literal("")),
 
   hasImage: z.boolean().optional(),
   imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),

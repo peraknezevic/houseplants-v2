@@ -1,43 +1,43 @@
-import { plantSchema } from "@/app/validationSchemas"
-import prisma from "@/prisma/client"
+import { plantSchema } from "@/app/validationSchemas";
+import prisma from "@/prisma/client";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
   const plant = await prisma.plant.findUnique({
     where: { slug: params.slug },
-  })
+  });
   if (!plant)
     return Response.json(
       { error: "There's no profile page for that plant" },
-      { status: 404 }
-    )
-  return Response.json(plant)
+      { status: 404 },
+    );
+  return Response.json(plant);
 }
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
-  const body = await request.json()
+  const body = await request.json();
 
-  const validation = plantSchema.safeParse(body)
+  const validation = plantSchema.safeParse(body);
 
   if (!validation.success)
-    return Response.json(validation.error.errors, { status: 400 })
+    return Response.json(validation.error.errors, { status: 400 });
 
   const plant = await prisma.plant.findUnique({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
   if (!plant)
     return Response.json(
       { error: "This plant could not be found" },
-      { status: 404 }
-    )
+      { status: 404 },
+    );
 
   const updatedPlant = await prisma.plant.update({
     where: { slug: plant.slug },
@@ -58,35 +58,36 @@ export async function PATCH(
       inventor: body.inventor,
       patent: body.patent,
       nativeArea: body.nativeArea,
+      note: body.note,
       hasImage: body.hasImage,
       imageCredits: body.imageCredits,
     },
-  })
+  });
 
-  return Response.json(updatedPlant)
+  return Response.json(updatedPlant);
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
   const plant = await prisma.plant.findUnique({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
   if (!plant)
     return Response.json(
       { error: "This plant could not be found." },
-      { status: 404 }
-    )
+      { status: 404 },
+    );
 
   await prisma.plant.delete({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
-  return Response.json({})
+  return Response.json({});
 }

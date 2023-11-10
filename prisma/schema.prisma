@@ -117,6 +117,7 @@ model Plant {
   inventor    String?
   patent      String?
   nativeArea  String?
+  note        String?
 
   hasImage     Boolean @default(true)
   imageCredits String?

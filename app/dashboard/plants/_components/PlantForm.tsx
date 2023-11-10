@@ -1,19 +1,19 @@
-"use client"
-import ErrorMessage from "@/app/components/ErrorMessage"
-import Spinner from "@/app/components/Spinner"
-import { plantSchema } from "@/app/validationSchemas"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Plant } from "@prisma/client"
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+"use client";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
+import { plantSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Plant } from "@prisma/client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-type PlantData = z.infer<typeof plantSchema>
+type PlantData = z.infer<typeof plantSchema>;
 
 const PlantForm = ({ plant }: { plant?: Plant }) => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     control,
@@ -22,22 +22,22 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
     formState: { errors },
   } = useForm<PlantData>({
     resolver: zodResolver(plantSchema),
-  })
-  const [error, setError] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      setIsSubmitting(true)
-      if (plant) await axios.patch("/api/plants/" + plant.slug, data)
-      else await axios.post("/api/plants/", data)
-      router.push("/dashboard/plants")
-      router.refresh()
+      setIsSubmitting(true);
+      if (plant) await axios.patch("/api/plants/" + plant.slug, data);
+      else await axios.post("/api/plants/", data);
+      router.push("/dashboard/plants");
+      router.refresh();
     } catch (error) {
-      setIsSubmitting(false)
-      setError("Unexpected error accured")
+      setIsSubmitting(false);
+      setError("Unexpected error accured");
     }
-  })
+  });
 
   return (
     <div className="space-y-4">
@@ -46,7 +46,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
           <span>{error}</span>
         </div>
       )}
-      <form className="max-w-2xl space-y-4 flex flex-col" onSubmit={onSubmit}>
+      <form className="flex max-w-2xl flex-col space-y-4" onSubmit={onSubmit}>
         <input
           type="text"
           defaultValue={plant?.botanicalName}
@@ -182,6 +182,15 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.nativeArea?.message}</ErrorMessage>
 
+        <input
+          type="text"
+          defaultValue={plant?.note || ""}
+          placeholder="Note"
+          className="input input-bordered w-full"
+          {...register("note")}
+        />
+        <ErrorMessage>{errors.note?.message}</ErrorMessage>
+
         <label>
           <input
             defaultChecked={plant?.hasProfile}
@@ -216,7 +225,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PlantForm
+export default PlantForm;
