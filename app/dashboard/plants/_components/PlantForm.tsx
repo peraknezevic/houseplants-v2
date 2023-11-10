@@ -31,7 +31,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
       setIsSubmitting(true);
       if (plant) await axios.patch("/api/plants/" + plant.slug, data);
       else await axios.post("/api/plants/", data);
-      router.push("/dashboard/plants");
+      router.push("/dashboard/plants/");
       router.refresh();
     } catch (error) {
       setIsSubmitting(false);
