@@ -1,5 +1,4 @@
 import prisma from "@/prisma/client";
-import PageActions from "../_components/PageActions";
 import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import BoolBadge from "../_components/BoolBadge";
@@ -27,12 +26,12 @@ const Plants = async ({ searchParams }: Props) => {
 
   return (
     <div className="space-y-2">
-      <div className="mb-4 mt-4 flex justify-between gap-4">
+      <div className="mx-auto mb-4 mt-4 flex justify-between gap-4">
         <AddNewButton cat={cat} />
         <GenusFilterData />
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table border border-gray-200">
+        <table className="table w-full border border-gray-200 text-left">
           <thead>
             <tr className="m-2">
               <th>Botanical Name</th>
@@ -46,7 +45,7 @@ const Plants = async ({ searchParams }: Props) => {
           </thead>
           <tbody>
             {plants.map((plant) => (
-              <tr key={plant.id} className="hover:bg-gray-200">
+              <tr key={plant.id}>
                 <td>{plant.botanicalName}</td>
                 <td>
                   {plant.genusPageSlug.charAt(0).toUpperCase() +

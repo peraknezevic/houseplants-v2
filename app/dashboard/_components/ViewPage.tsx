@@ -1,11 +1,11 @@
-import Link from "next/link"
+import Link from "next/link";
 
 const ViewPage = ({ slug, cat }: { slug: string; cat: string }) => {
   return (
-    <button className="btn btn-sm btn-neutral">
-      <Link href={`/${cat === "genera" ? "genus" : cat}/${slug}`}>View</Link>
-    </button>
-  )
-}
+    <Link href={`/${cat === "genera" ? "genus" : cat}/${slug}`}>
+      <button className="btn btn-neutral btn-sm">View</button>
+    </Link>
+  );
+};
 
-export default ViewPage
+export default ViewPage;

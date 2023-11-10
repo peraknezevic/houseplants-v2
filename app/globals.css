@@ -27,6 +27,9 @@
   h3 {
     @apply mb-4 text-3xl font-bold;
   }
+  img {
+    @apply h-auto w-full object-fill;
+  }
   section img {
     @apply m-0 h-auto w-full;
   }
@@ -42,5 +45,21 @@
   }
   figcaption a {
     @apply text-white;
+  }
+  .btn {
+    @apply inline-block border-2 border-gray-800 px-2 py-1 text-sm font-medium uppercase text-gray-800 no-underline;
+  }
+  .badge {
+    @apply inline-block px-2 py-2;
+  }
+  table {
+    @apply w-full;
+  }
+  td,
+  th {
+    @apply px-2 py-2;
+  }
+  tr {
+    @apply border-2 hover:bg-gray-200;
   }
 }

@@ -1,11 +1,11 @@
-import Link from "next/link"
+import Link from "next/link";
 
 const EditButton = ({ slug, cat }: { slug: string; cat: string }) => {
   return (
-    <button className="btn btn-sm btn-secondary">
-      <Link href={`/dashboard/${cat}/${slug}`}>Edit</Link>
-    </button>
-  )
-}
+    <Link href={`/dashboard/${cat}/${slug}`} className="no-underline">
+      <button className="btn btn-secondary btn-sm">Edit</button>
+    </Link>
+  );
+};
 
-export default EditButton
+export default EditButton;

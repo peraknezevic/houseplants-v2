@@ -16,9 +16,9 @@ const PlantProfiles = async () => {
         <AddNewButton cat={cat} />
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table border border-gray-200">
+        <table>
           <thead>
-            <tr className="m-2">
+            <tr>
               <th>Botanical Name</th>
               <th>Published</th>
               <th>Actions</th>
@@ -26,12 +26,12 @@ const PlantProfiles = async () => {
           </thead>
           <tbody>
             {plantProfiles.map((plantProfiles) => (
-              <tr key={plantProfiles.id} className="hover:bg-gray-200">
+              <tr key={plantProfiles.id}>
                 <td>{plantProfiles.botanicalName}</td>
                 <td>
                   <PublishedBadge published={plantProfiles.published} />
                 </td>
-                <td className="space-x-2">
+                <td>
                   <ViewPage cat={cat} slug={plantProfiles.slug} />
                   <EditButton cat={cat} slug={plantProfiles.slug} />
                   <DeleteButton cat={cat} slug={plantProfiles.slug} />

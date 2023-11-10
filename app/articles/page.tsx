@@ -1,4 +1,6 @@
 import Card from "../components/Card";
+import CardGrid from "../components/CardGrid";
+import CategoryHead from "../components/CategoryHead";
 import { articlesData } from "../hooks/useData";
 
 const ArticlesPage = async () => {
@@ -6,10 +8,8 @@ const ArticlesPage = async () => {
 
   return (
     <div>
-      <h2 className="mb-8 border-y-2 py-4 text-center text-4xl font-bold">
-        Articles
-      </h2>
-      <ul className="grid grid-cols-3 gap-8 ">
+      <CategoryHead title="Articles" />
+      <CardGrid>
         {data.map((item) => (
           <Card
             key={item.id}
@@ -18,7 +18,7 @@ const ArticlesPage = async () => {
             pageFolder="articles"
           />
         ))}
-      </ul>
+      </CardGrid>
     </div>
   );
 };

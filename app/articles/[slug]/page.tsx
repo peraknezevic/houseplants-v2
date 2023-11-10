@@ -3,6 +3,7 @@ import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import Section from "@/app/components/Section";
 
 const Article = async ({ params }: { params: { slug: string } }) => {
   const article = await prisma.article.findUnique({
@@ -14,28 +15,29 @@ const Article = async ({ params }: { params: { slug: string } }) => {
     <article>
       <PageHead title={article.title} pageType="article" />
 
-      <figure>
-        <Image
-          src={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
-          width={800}
-          height={1000}
-          alt={article.title}
-        />
-        <figcaption>
-          {/* <ReactMarkdown>{plant.imageCredits}</ReactMarkdown> */}
-        </figcaption>
-      </figure>
-
       {article.intro && (
-        <section>
+        <Section>
           <div>
             <ReactMarkdown>{article.intro}</ReactMarkdown>
           </div>
-        </section>
+        </Section>
       )}
-      <div>
-        <ReactMarkdown>{article.content}</ReactMarkdown>
-      </div>
+      <Section>
+        <div>
+          <ReactMarkdown>{article.content}</ReactMarkdown>
+        </div>
+        <figure>
+          <Image
+            src={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
+            width={800}
+            height={1000}
+            alt={article.title}
+          />
+          <figcaption>
+            <ReactMarkdown>{article.imageCredits}</ReactMarkdown>
+          </figcaption>
+        </figure>
+      </Section>
     </article>
   );
 };
