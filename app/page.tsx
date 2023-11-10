@@ -1,5 +1,7 @@
+import HelloWorld from "./components/HelloWorld";
+
 const Home = () => {
-  return <>Hello</>;
+  return <HelloWorld />;
 };
 
 export default Home;
