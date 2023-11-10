@@ -1,9 +1,10 @@
-import { z } from "zod"
+import { z } from "zod";
 
 const schema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
+  intro: z.string().min(50),
   content: z.string().min(100),
-})
+});
 
-export default schema
+export default schema;

@@ -10,6 +10,7 @@ export const pagesSchema = z.object({
 export const articlesSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
+  intro: z.string().min(50).optional().or(z.literal("")),
   content: z.string().min(100),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });

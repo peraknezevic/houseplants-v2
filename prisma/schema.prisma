@@ -67,6 +67,7 @@ model Article {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String   @unique
   slug      String   @unique
+  intro     String?
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
