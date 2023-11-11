@@ -16,7 +16,7 @@ interface Props {
 
 const Plants = async ({ searchParams }: Props) => {
   const page = parseInt(searchParams.page) || 1;
-  const pageSize = 10;
+  const pageSize = 50;
   const plants = await prisma.plant.findMany({
     skip: (page - 1) * pageSize,
     take: pageSize,
@@ -31,15 +31,12 @@ const Plants = async ({ searchParams }: Props) => {
         <GenusFilterData />
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table w-full border border-gray-200 text-left">
+        <table>
           <thead>
-            <tr className="m-2">
+            <tr>
               <th>Botanical Name</th>
-              <th>Genus</th>
               <th>Type</th>
               <th>Image</th>
-              <th>Image Credits</th>
-              <th>Profile</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -48,10 +45,6 @@ const Plants = async ({ searchParams }: Props) => {
               <tr key={plant.id}>
                 <td>{plant.botanicalName}</td>
                 <td>
-                  {plant.genusPageSlug.charAt(0).toUpperCase() +
-                    plant.genusPageSlug.slice(1)}
-                </td>
-                <td>
                   {plant.isSpecies && "Species"}
                   {plant.isCultivar && "Cultivar"} {plant.isHybrid && "Hybrid"}
                 </td>
@@ -59,12 +52,6 @@ const Plants = async ({ searchParams }: Props) => {
                   <BoolBadge bool={plant.hasImage} />
                 </td>
                 <td>
-                  <BoolBadge bool={plant.imageCredits !== ""} />
-                </td>
-                <td>
-                  <BoolBadge bool={plant.hasProfile} />
-                </td>
-                <td className="space-x-2">
                   <EditButton cat={cat} slug={plant.slug} />
                   <DeleteButton cat={cat} slug={plant.slug} />
                 </td>

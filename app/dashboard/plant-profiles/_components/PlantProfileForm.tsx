@@ -368,7 +368,7 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
         />
         <ErrorMessage>{errors.notes?.message}</ErrorMessage>
 
-        <button className="btn" disabled={isSubmitting}>
+        <button className="btn btn-black" disabled={isSubmitting}>
           {plant ? "Update Plant Profile" : "Add New Plant Profile"}{" "}
           {isSubmitting && <Spinner />}
         </button>

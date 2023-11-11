@@ -7,7 +7,7 @@ const PlantProfilesPage = async () => {
   const data = await plantProfilesData();
 
   return (
-    <div>
+    <>
       <CategoryHead title="Plant profiles" />
       <CardGrid>
         {data.map((item) => (
@@ -19,7 +19,7 @@ const PlantProfilesPage = async () => {
           />
         ))}
       </CardGrid>
-    </div>
+    </>
   );
 };
 

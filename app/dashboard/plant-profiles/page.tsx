@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import PublishedBadge from "../_components/PublishedBadge";
-import ViewPage from "../_components/ViewPage";
+import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
 
 const cat = "plant-profiles";
@@ -32,7 +32,7 @@ const PlantProfiles = async () => {
                   <PublishedBadge published={plantProfiles.published} />
                 </td>
                 <td>
-                  <ViewPage cat={cat} slug={plantProfiles.slug} />
+                  <ViewButton cat={cat} slug={plantProfiles.slug} />
                   <EditButton cat={cat} slug={plantProfiles.slug} />
                   <DeleteButton cat={cat} slug={plantProfiles.slug} />
                 </td>

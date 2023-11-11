@@ -7,7 +7,7 @@ const DashboardNav = () => {
 
   return (
     <div className="flex h-full w-full justify-start bg-slate-100">
-      <h1 className="mx-2 p-3 text-2xl font-bold">Dashboard</h1>
+      <h1 className="mx-2 p-3 text-2xl font-bold">Admin</h1>
       <nav>
         <ul className="flex justify-start gap-6 p-4 font-bold">
           <li>

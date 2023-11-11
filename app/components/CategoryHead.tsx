@@ -1,5 +1,5 @@
 const CategoryHead = ({ title }: { title: string }) => {
-  return <h2 className="mb-8 py-4 text-center text-4xl font-bold">{title}</h2>;
+  return <h1>{title}</h1>;
 };
 
 export default CategoryHead;

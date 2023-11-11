@@ -10,12 +10,12 @@ const Header = () => {
   ];
 
   return (
-    <header className="py-4">
-      <h1 className="mx-5 my-16 text-center text-8xl font-extrabold uppercase">
+    <header className="mt-4">
+      <div className="my-8 text-center text-4xl font-extrabold uppercase md:my-12 md:text-6xl lg:my-16 lg:text-8xl">
         Houseplants
-      </h1>
+      </div>
       <nav>
-        <ul className="m-4 flex justify-center gap-8 px-4 text-2xl">
+        <ul className="m-4 flex justify-center gap-6 md:m-8 md:gap-8 md:text-2xl">
           {mainNavItems.map((item) => (
             <li key={item.title}>
               <Link href={item.url} className="underline-offset-8">

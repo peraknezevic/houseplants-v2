@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={`${GeistSans.className} text-emerald-950`}>
         <AuthProvider>
           <Header />
-          <div className="mx-auto max-w-4xl py-10">{children}</div>
+          <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
           <Analytics />
           <Footer />
         </AuthProvider>

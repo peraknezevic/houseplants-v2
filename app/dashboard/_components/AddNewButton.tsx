@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const AddNewButton = ({ cat }: { cat: string }) => {
   return (
-    <Link href={`/dashboard/${cat}/new`}>
-      <button className="btn btn-neutral btn-sm">Add New</button>
-    </Link>
+    <button className="btn-black btn">
+      <Link href={`/dashboard/${cat}/new`}>Add New</Link>
+    </button>
   );
 };
 

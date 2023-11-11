@@ -8,7 +8,7 @@ interface Props {
 const Section = ({ children, id }: Props) => {
   return (
     <section
-      className="mb-16 overflow-hidden rounded-xl bg-white drop-shadow-md"
+      className="mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md md:mb-16"
       id={id}
     >
       {children}

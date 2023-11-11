@@ -19,16 +19,22 @@
     @apply bg-emerald-900 py-8 text-white;
   }
   article {
-    @apply mx-auto my-4 max-w-4xl;
+    @apply mx-auto my-4 max-w-4xl px-4;
+  }
+  h1 {
+    @apply mb-8 text-center text-4xl font-bold leading-relaxed md:mb-16 md:mt-8 md:text-6xl;
   }
   h2 {
-    @apply mb-8 text-4xl font-bold uppercase;
+    @apply mb-4 text-3xl font-bold;
   }
   h3 {
-    @apply mb-4 text-3xl font-bold;
+    @apply mb-4 text-2xl font-bold;
   }
   img {
     @apply h-auto w-full object-fill;
+  }
+  section {
+    @apply mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md md:mb-16;
   }
   section img {
     @apply m-0 h-auto w-full;
@@ -50,7 +56,22 @@
     @apply border border-gray-400 px-2 py-1;
   }
   .btn {
-    @apply inline-block border-2 border-gray-800 px-2 py-1 text-sm font-medium uppercase text-gray-800 no-underline;
+    @apply inline-block px-2 py-1 text-sm font-medium uppercase text-white no-underline hover:opacity-75;
+  }
+  .btn a {
+    @apply text-white no-underline;
+  }
+  .btn-black {
+    @apply bg-black;
+  }
+  .btn-red {
+    @apply bg-red-800;
+  }
+  .btn-neutral {
+    @apply bg-gray-600;
+  }
+  .btn-green {
+    @apply bg-green-800;
   }
   .badge {
     @apply inline-block px-2 py-2;
@@ -58,11 +79,26 @@
   table {
     @apply w-full;
   }
+  thead {
+    @apply bg-gray-200;
+  }
   td,
   th {
     @apply px-2 py-2;
   }
+  th {
+    @apply text-left text-sm uppercase;
+  }
   tr {
-    @apply border-2 hover:bg-gray-200;
+    @apply flex justify-between border-2 hover:bg-gray-200;
+  }
+  .isPublished {
+    @apply font-bold text-green-700;
+  }
+  .isDraft {
+    @apply font-bold text-red-700;
+  }
+  .isReview {
+    @apply font-bold text-yellow-700;
   }
 }

@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import PublishedBadge from "../_components/PublishedBadge";
 import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
-import ViewPage from "../_components/ViewPage";
+import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
 
 const Pages = async () => {
@@ -32,7 +32,7 @@ const Pages = async () => {
                   <PublishedBadge published={genus.published} />
                 </td>
                 <td className="space-x-2">
-                  <ViewPage cat={cat} slug={genus.slug} />
+                  <ViewButton cat={cat} slug={genus.slug} />
                   <EditButton cat={cat} slug={genus.slug} />
                   <DeleteButton cat={cat} slug={genus.slug} />
                 </td>

@@ -40,7 +40,7 @@ const Genus = async ({ params }: Props) => {
       <h2>{genusPage.title} Plants List</h2>
       <Section id="plant-list">
         <div>
-          <ul className="list-disc columns-2 space-y-3 pl-5">
+          <ul className="list-disc space-y-3 pl-5 sm:columns-2">
             {plants.map((plant) => (
               <li
                 key={plant.slug}

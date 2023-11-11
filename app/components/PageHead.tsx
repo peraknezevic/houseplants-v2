@@ -13,9 +13,7 @@ const PageHead = ({ title, pageType }: Props) => {
           {pageType}
         </span>
       )}
-      <h1 className="leading mb-16 mt-8 text-center text-6xl font-bold">
-        {title}
-      </h1>
+      <h1>{title}</h1>
     </div>
   );
 };
