@@ -219,7 +219,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.imageCredits?.message}</ErrorMessage>
 
-        <button className="btn" disabled={isSubmitting}>
+        <button className="btn btn-black" disabled={isSubmitting}>
           {plant ? "Update Plant" : "Add New Plant"}{" "}
           {isSubmitting && <Spinner />}
         </button>

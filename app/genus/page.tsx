@@ -7,7 +7,7 @@ const GenerasPage = async () => {
   const data = await genusPagesData();
   return (
     <div>
-      <CategoryHead title="Genera Pages" />
+      <h1>Genus Pages</h1>
       <CardGrid>
         {data.map((item) => (
           <Card
