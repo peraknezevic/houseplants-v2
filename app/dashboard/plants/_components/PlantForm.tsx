@@ -46,7 +46,10 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
           <span>{error}</span>
         </div>
       )}
-      <form className="flex max-w-2xl flex-col space-y-4" onSubmit={onSubmit}>
+      <form
+        className="mx-auto my-8 flex max-w-2xl flex-col space-y-4"
+        onSubmit={onSubmit}
+      >
         <input
           type="text"
           defaultValue={plant?.botanicalName}
@@ -74,50 +77,43 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.genusPageSlug?.message}</ErrorMessage>
 
-        <label>
-          <input
-            defaultChecked={plant?.isSpecies}
-            type="checkbox"
-            {...register("isSpecies")}
-          />{" "}
-          Species
-        </label>
+        <div className="flex justify-around">
+          <label>
+            <input
+              defaultChecked={plant?.isSpecies || true}
+              type="checkbox"
+              {...register("isSpecies")}
+            />{" "}
+            Species
+          </label>
 
-        <label>
-          <input
-            defaultChecked={plant?.isCultivar}
-            type="checkbox"
-            {...register("isCultivar")}
-          />{" "}
-          Cultivar
-        </label>
+          <label>
+            <input
+              defaultChecked={plant?.isCultivar}
+              type="checkbox"
+              {...register("isCultivar")}
+            />{" "}
+            Cultivar
+          </label>
 
-        <label>
-          <input
-            defaultChecked={plant?.isHybrid}
-            type="checkbox"
-            {...register("isHybrid")}
-          />{" "}
-          Hybrid
-        </label>
+          <label>
+            <input
+              defaultChecked={plant?.isHybrid}
+              type="checkbox"
+              {...register("isHybrid")}
+            />{" "}
+            Hybrid
+          </label>
 
-        <input
-          type="text"
-          defaultValue={plant?.children || ""}
-          placeholder="Children"
-          className="input input-bordered w-full"
-          {...register("children")}
-        />
-        <ErrorMessage>{errors.children?.message}</ErrorMessage>
-
-        <input
-          type="text"
-          defaultValue={plant?.parents || ""}
-          placeholder="Parents"
-          className="input input-bordered w-full"
-          {...register("parents")}
-        />
-        <ErrorMessage>{errors.parents?.message}</ErrorMessage>
+          <label>
+            <input
+              defaultChecked={plant?.isUnsorted}
+              type="checkbox"
+              {...register("isUnsorted")}
+            />{" "}
+            Unsorted
+          </label>
+        </div>
 
         <input
           type="text"
@@ -190,6 +186,24 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
           {...register("note")}
         />
         <ErrorMessage>{errors.note?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.children || ""}
+          placeholder="Children"
+          className="input input-bordered w-full"
+          {...register("children")}
+        />
+        <ErrorMessage>{errors.children?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.parents || ""}
+          placeholder="Parents"
+          className="input input-bordered w-full"
+          {...register("parents")}
+        />
+        <ErrorMessage>{errors.parents?.message}</ErrorMessage>
 
         <label>
           <input

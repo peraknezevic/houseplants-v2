@@ -33,13 +33,14 @@ export const plantSchema = z.object({
   isSpecies: z.boolean().optional(),
   isCultivar: z.boolean().optional(),
   isHybrid: z.boolean().optional(),
+  isUnsorted: z.boolean().optional(),
 
   children: z.string().optional(),
   parents: z.string().optional(),
 
   genusPageSlug: z.string().min(3).max(20),
 
-  synonyms: z.string().min(3).max(250).optional().or(z.literal("")),
+  synonyms: z.string().min(3).max(500).optional().or(z.literal("")),
   tradeNames: z.string().min(3).max(250).optional().or(z.literal("")),
   commonNames: z.string().min(3).max(250).optional().or(z.literal("")),
   namedBy: z.string().min(3).max(100).optional().or(z.literal("")),

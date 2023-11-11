@@ -105,6 +105,7 @@ model Plant {
   isSpecies  Boolean @default(true)
   isCultivar Boolean @default(false)
   isHybrid   Boolean @default(false)
+  isUnsorted Boolean @default(false)
 
   children String?
   parents  String?

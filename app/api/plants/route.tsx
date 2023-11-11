@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       isSpecies: body.isSpecies,
       isCultivar: body.isCultivar,
       isHybrid: body.isHybrid,
+      isUnsorted: body.isUnsorted,
       children: body.children,
       parents: body.parents,
       genusPageSlug: body.genusPageSlug,
