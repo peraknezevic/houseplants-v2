@@ -26,8 +26,8 @@ export const generaSchema = z.object({
 });
 
 export const plantSchema = z.object({
-  slug: z.string().min(3).max(40),
-  botanicalName: z.string().min(3).max(40),
+  slug: z.string().min(3).max(80),
+  botanicalName: z.string().min(3).max(80),
   hasProfile: z.boolean().optional(),
 
   isSpecies: z.boolean().optional(),
