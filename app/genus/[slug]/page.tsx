@@ -108,14 +108,17 @@ const Genus = async ({ params }: Props) => {
             {plant.parents && (
               <p>
                 <strong>Plant parent(s):</strong>{" "}
-                {plant.parents.split(", ").map((parent) => (
-                  <a
-                    key={parent}
-                    href={"#" + removeChars(parent)}
-                    className="mr-2"
-                  >
-                    {parent.replaceAll('"', "")}
-                  </a>
+                {plant.parents.split(", ").map((parent, i) => (
+                  <>
+                    {i > 0 && ", "}
+                    <a
+                      key={parent}
+                      href={"#" + removeChars(parent)}
+                      className="mr-2"
+                    >
+                      {parent.replaceAll('"', "")}
+                    </a>
+                  </>
                 ))}
               </p>
             )}

@@ -1,14 +1,14 @@
-import DashboardNav from "./DashboardNav"
+import DashboardNav from "./DashboardNav";
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <DashboardNav />
-      <main className="p-5 w-full">{children}</main>
+      <main className="w-full p-5">{children}</main>
     </div>
-  )
+  );
 }
