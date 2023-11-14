@@ -1,11 +1,9 @@
-import prisma from "@/prisma/client";
 import GenusFilters from "./GenusFilters";
+import { genusPagesData } from "@/app/hooks/useData";
 
 const GenusFilterData = async () => {
-  const genera = await prisma.genusPage.findMany();
-  const generaSlugs = genera.map((g) => g.slug);
-
-  return <GenusFilters genera={generaSlugs} />;
+  const genera = await genusPagesData();
+  return <GenusFilters genera={genera} />;
 };
 
 export default GenusFilterData;

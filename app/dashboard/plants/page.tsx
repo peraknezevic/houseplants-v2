@@ -24,45 +24,61 @@ const Plants = async ({ searchParams }: Props) => {
   const plantCount = await prisma.plant.count();
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-6">
       <div className="mx-auto mb-4 mt-4 flex justify-between gap-4">
         <AddNewButton cat={cat} />
         <GenusFilterData />
       </div>
-      <div className="w-full overflow-x-auto">
-        <table>
-          <thead>
-            <tr>
-              <th>Botanical Name</th>
-              <th>Type</th>
-              <th>Image</th>
-              <th>Actions</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Botanical Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {plants.map((plant) => (
+            <tr key={plant.id}>
+              <td>
+                <div
+                  className={`${
+                    (plant.isSpecies && "bg-emerald-800") ||
+                    (plant.isCultivar && "bg-violet-800") ||
+                    (plant.isHybrid && "bg-blue-800") ||
+                    (plant.isUnsorted && "bg-gray-800")
+                  } mr-2
+                  inline-block h-4 w-4
+                  `}
+                ></div>
+              </td>
+              <td>{plant.botanicalName}</td>
+              <td>
+                <BoolBadge bool={plant.hasImage} />
+              </td>
+              <td className="space-x-2">
+                <Actions cat={cat} slug={plant.slug} />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {plants.map((plant) => (
-              <tr key={plant.id}>
-                <td>{plant.botanicalName}</td>
-                <td>
-                  {plant.isSpecies && "Species"}
-                  {plant.isCultivar && "Cultivar"} {plant.isHybrid && "Hybrid"}
-                </td>
-                <td>
-                  <BoolBadge bool={plant.hasImage} />
-                </td>
-                <td className="space-x-2">
-                  <Actions cat={cat} slug={plant.slug} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          itemCount={plantCount}
-          pageSize={pageSize}
-          currentPage={page}
-        />
-      </div>
+          ))}
+        </tbody>
+        <caption className="caption-bottom pt-4">
+          <div className="mx-4 inline-block h-4 w-4 bg-emerald-800"></div>{" "}
+          Species
+          <div className="mx-4 inline-block h-4 w-4 bg-violet-800"></div>
+          Cultivar
+          <div className="mx-4 inline-block h-4 w-4 bg-blue-800"></div>
+          Hybrid
+          <div className="mx-4 inline-block h-4 w-4 bg-gray-800"></div>
+          Unsorted
+        </caption>
+      </table>
+      <Pagination
+        itemCount={plantCount}
+        pageSize={pageSize}
+        currentPage={page}
+      />
     </div>
   );
 };

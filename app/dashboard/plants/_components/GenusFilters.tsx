@@ -1,7 +1,9 @@
 "use client";
 
+import { GenusPage } from "@prisma/client";
+
 interface Props {
-  genera: string[];
+  genera: GenusPage[];
 }
 
 const GenusFilters = ({ genera }: Props) => {
@@ -9,9 +11,9 @@ const GenusFilters = ({ genera }: Props) => {
     <form>
       <select>
         <option value="">Filter by genus</option>
-        {genera.map((s) => (
-          <option key={s} value={s}>
-            {s}
+        {genera.map((genus) => (
+          <option key={genus.id} value={genus.slug}>
+            {genus.title}
           </option>
         ))}
       </select>

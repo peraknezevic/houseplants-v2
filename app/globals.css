@@ -77,7 +77,7 @@
     @apply inline-block px-2 py-2;
   }
   table {
-    @apply w-full;
+    @apply w-full table-auto;
   }
   thead {
     @apply bg-gray-200;
@@ -90,7 +90,7 @@
     @apply text-left text-sm uppercase;
   }
   tr {
-    @apply flex justify-between border-2 hover:bg-gray-200;
+    @apply border-2 text-left hover:bg-gray-200;
   }
   .isPublished {
     @apply font-bold text-green-700;
