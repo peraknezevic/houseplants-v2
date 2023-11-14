@@ -1,21 +1,21 @@
-"use client"
-import ErrorMessage from "@/app/components/ErrorMessage"
-import Spinner from "@/app/components/Spinner"
-import { generaSchema } from "@/app/validationSchemas"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
-import "easymde/dist/easymde.min.css"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
-import { z } from "zod"
-import { GenusPage } from "@prisma/client"
-import SimpleMDE from "react-simplemde-editor"
+"use client";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
+import { generaSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+import { GenusPage } from "@prisma/client";
+import SimpleMDE from "react-simplemde-editor";
 
-type PageData = z.infer<typeof generaSchema>
+type PageData = z.infer<typeof generaSchema>;
 
 const GenusForm = ({ genus }: { genus?: GenusPage }) => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     control,
@@ -24,22 +24,22 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
     formState: { errors },
   } = useForm<PageData>({
     resolver: zodResolver(generaSchema),
-  })
-  const [error, setError] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      setIsSubmitting(true)
-      if (genus) await axios.patch("/api/genera/" + genus.slug, data)
-      else await axios.post("/api/genera", data)
-      router.push("/dashboard/genera")
-      router.refresh()
+      setIsSubmitting(true);
+      if (genus) await axios.patch("/api/genera/" + genus.slug, data);
+      else await axios.post("/api/genera", data);
+      router.push("/dashboard/genera");
+      router.refresh();
     } catch (error) {
-      setIsSubmitting(false)
-      setError("Unexpected error accured")
+      setIsSubmitting(false);
+      setError("Unexpected error accured");
     }
-  })
+  });
 
   return (
     <div className="space-y-4">
@@ -48,7 +48,7 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
           <span>{error}</span>
         </div>
       )}
-      <form className="max-w-2xl space-y-4 flex flex-col" onSubmit={onSubmit}>
+      <form className="flex max-w-2xl flex-col space-y-4" onSubmit={onSubmit}>
         <input
           type="text"
           defaultValue={genus?.title}
@@ -102,13 +102,13 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
         </select>
         <ErrorMessage>{errors.published?.message}</ErrorMessage>
 
-        <button className="btn" disabled={isSubmitting}>
+        <button className="btn btn-black" disabled={isSubmitting}>
           {genus ? "Update Genus" : "Add New Genus"}{" "}
           {isSubmitting && <Spinner />}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default GenusForm
+export default GenusForm;

@@ -99,7 +99,7 @@ const ArticleForm = ({ article }: { article?: Article }) => {
         </select>
         <ErrorMessage>{errors.published?.message}</ErrorMessage>
 
-        <button className="btn" disabled={isSubmitting}>
+        <button className="btn btn-black" disabled={isSubmitting}>
           {article ? "Update Article" : "Add New Article"}{" "}
           {isSubmitting && <Spinner />}
         </button>
