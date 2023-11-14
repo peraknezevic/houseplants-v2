@@ -3,6 +3,7 @@ import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
+import Actions from "../_components/Actions";
 
 const cat = "pages";
 
@@ -34,10 +35,9 @@ const Pages = async () => {
               >
                 {page.title}
               </td>
+
               <td className="space-x-2">
-                <ViewButton cat={cat} slug={page.slug} />
-                <EditButton cat={cat} slug={page.slug} />
-                <DeleteButton cat={cat} slug={page.slug} />
+                <Actions cat={cat} slug={page.slug} />
               </td>
             </tr>
           ))}

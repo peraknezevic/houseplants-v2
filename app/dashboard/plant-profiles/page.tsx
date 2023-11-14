@@ -4,6 +4,7 @@ import EditButton from "../_components/EditButton";
 import PublishedBadge from "../_components/PublishedBadge";
 import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
+import Actions from "../_components/Actions";
 
 const cat = "plant-profiles";
 
@@ -25,16 +26,14 @@ const PlantProfiles = async () => {
             </tr>
           </thead>
           <tbody>
-            {plantProfiles.map((plantProfiles) => (
-              <tr key={plantProfiles.id}>
-                <td>{plantProfiles.botanicalName}</td>
+            {plantProfiles.map((profile) => (
+              <tr key={profile.id}>
+                <td>{profile.botanicalName}</td>
                 <td>
-                  <PublishedBadge published={plantProfiles.published} />
+                  <PublishedBadge published={profile.published} />
                 </td>
-                <td>
-                  <ViewButton cat={cat} slug={plantProfiles.slug} />
-                  <EditButton cat={cat} slug={plantProfiles.slug} />
-                  <DeleteButton cat={cat} slug={plantProfiles.slug} />
+                <td className="space-x-2">
+                  <Actions cat={cat} slug={profile.slug} />
                 </td>
               </tr>
             ))}

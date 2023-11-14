@@ -1,10 +1,9 @@
 import prisma from "@/prisma/client";
-import DeleteButton from "../_components/DeleteButton";
-import EditButton from "../_components/EditButton";
 import BoolBadge from "../_components/BoolBadge";
 import Pagination from "../_components/Pagination";
 import GenusFilterData from "./_components/GenusFilterData";
 import AddNewButton from "../_components/AddNewButton";
+import Actions from "../_components/Actions";
 
 const cat = "plants";
 
@@ -51,9 +50,8 @@ const Plants = async ({ searchParams }: Props) => {
                 <td>
                   <BoolBadge bool={plant.hasImage} />
                 </td>
-                <td>
-                  <EditButton cat={cat} slug={plant.slug} />
-                  <DeleteButton cat={cat} slug={plant.slug} />
+                <td className="space-x-2">
+                  <Actions cat={cat} slug={plant.slug} />
                 </td>
               </tr>
             ))}

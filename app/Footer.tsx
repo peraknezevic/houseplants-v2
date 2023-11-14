@@ -2,16 +2,16 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center gap-8 px-6 py-12">
-      <div className="flex gap-8">
-        <span>Follow us on:</span>
+    <footer className="flex flex-col items-center justify-center gap-6 px-4 py-6 md:gap-8 md:px-6 md:py-12">
+      <div className="flex flex-wrap gap-4 md:flex-nowrap md:gap-8">
+        <span className="w-full md:w-auto">Follow us on:</span>
         <a href="https://www.facebook.com/houseplants.xyz">Facebook</a>
         <a href="https://www.instagram.com/houseplants.xyz">Instagram</a>
         <a href="https://www.pinterest.com/houseplantsxyz">Pinterest</a>
         <a href="https://www.patreon.com/houseplants">Patreon</a>
       </div>
       <nav>
-        <ul className="flex gap-8">
+        <ul className="flex gap-4 md:gap-8">
           <li>
             <Link href="/pages/privacy-policy">Privacy policy</Link>
           </li>

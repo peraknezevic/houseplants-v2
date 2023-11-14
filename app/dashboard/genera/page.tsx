@@ -4,6 +4,7 @@ import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
+import Actions from "../_components/Actions";
 
 const Pages = async () => {
   const cat = "genera";
@@ -20,7 +21,7 @@ const Pages = async () => {
             <tr className="m-2">
               <th>Genus Title</th>
               <th>Genus Slug</th>
-              <th>Published</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -32,9 +33,7 @@ const Pages = async () => {
                   <PublishedBadge published={genus.published} />
                 </td>
                 <td className="space-x-2">
-                  <ViewButton cat={cat} slug={genus.slug} />
-                  <EditButton cat={cat} slug={genus.slug} />
-                  <DeleteButton cat={cat} slug={genus.slug} />
+                  <Actions cat={cat} slug={genus.slug} />
                 </td>
               </tr>
             ))}

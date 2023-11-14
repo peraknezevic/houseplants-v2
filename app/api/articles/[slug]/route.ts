@@ -58,7 +58,23 @@ export async function DELETE(
   request: Request,
   { params }: { params: { slug: string } },
 ) {
-  const body = await request.json();
+  const article = await prisma.article.findUnique({
+    where: {
+      slug: params.slug,
+    },
+  });
+
+  if (!article)
+    return Response.json(
+      { error: "This article could not be found." },
+      { status: 404 },
+    );
+
+  await prisma.article.delete({
+    where: {
+      slug: params.slug,
+    },
+  });
 
   return Response.json({});
 }

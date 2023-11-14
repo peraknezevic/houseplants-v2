@@ -68,13 +68,18 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         />
         <ErrorMessage>{errors.slug?.message}</ErrorMessage>
 
-        <input
-          type="text"
+        <select
+          className="select w-full max-w-xs"
           defaultValue={plant?.genusPageSlug}
-          placeholder="Genus Page Slug"
-          className="input input-bordered w-full"
           {...register("genusPageSlug")}
-        />
+        >
+          <option value="alocasia">Alocasia</option>
+          <option value="calathea-goeppertia">Calathea</option>
+          <option value="ctenanthe">Ctenanthe</option>
+          <option value="maranta">Maranta</option>
+          <option value="peperomia">Peperomia</option>
+          <option value="pilea">Pilea</option>
+        </select>
         <ErrorMessage>{errors.genusPageSlug?.message}</ErrorMessage>
 
         <div className="flex justify-around">

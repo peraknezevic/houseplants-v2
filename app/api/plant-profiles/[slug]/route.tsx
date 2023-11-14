@@ -88,7 +88,23 @@ export async function DELETE(
   request: Request,
   { params }: { params: { slug: string } },
 ) {
-  const body = await request.json();
+  const plantProfile = await prisma.plantProfile.findUnique({
+    where: {
+      slug: params.slug,
+    },
+  });
+
+  if (!plantProfile)
+    return Response.json(
+      { error: "This plant profile could not be found." },
+      { status: 404 },
+    );
+
+  await prisma.plantProfile.delete({
+    where: {
+      slug: params.slug,
+    },
+  });
 
   return Response.json({});
 }
