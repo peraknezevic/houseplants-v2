@@ -4,19 +4,34 @@ import Pagination from "../_components/Pagination";
 import GenusFilterData from "./_components/GenusFilterData";
 import AddNewButton from "../_components/AddNewButton";
 import Actions from "../_components/Actions";
+import Link from "next/link";
 
 const cat = "plants";
 
 interface Props {
   searchParams: {
     page: string;
+    genus: string;
+    orderBy: string;
   };
 }
 
 const Plants = async ({ searchParams }: Props) => {
+  const columns: { label: string; value: string }[] = [
+    { label: "Type", value: "type" },
+    { label: "Plant Name", value: "plantName" },
+    { label: "Image", value: "image" },
+    { label: "Actions", value: "actions" },
+  ];
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 50;
   const plants = await prisma.plant.findMany({
+    where: {
+      genusPageSlug: searchParams.genus,
+    },
+    orderBy: {
+      slug: "asc",
+    },
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
@@ -32,10 +47,17 @@ const Plants = async ({ searchParams }: Props) => {
       <table>
         <thead>
           <tr>
-            <th>Type</th>
-            <th>Botanical Name</th>
-            <th>Image</th>
-            <th>Actions</th>
+            {columns.map((column) => (
+              <th key={column.value}>
+                <Link
+                  href={{
+                    query: { ...searchParams, orderBy: column.value },
+                  }}
+                >
+                  {column.label}
+                </Link>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>

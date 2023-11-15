@@ -1,7 +1,11 @@
 import prisma from "@/prisma/client";
 
 export async function plantProfilesData() {
-  const data = await prisma.plantProfile.findMany();
+  const data = await prisma.plantProfile.findMany({
+    orderBy: {
+      slug: "asc",
+    },
+  });
   return data;
 }
 
@@ -46,6 +50,9 @@ export async function plantsData(slug: string) {
   const data = await prisma.plant.findMany({
     where: {
       genusPageSlug: slug,
+    },
+    orderBy: {
+      slug: "asc",
     },
   });
   return data;
