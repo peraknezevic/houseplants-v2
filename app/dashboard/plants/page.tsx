@@ -12,17 +12,11 @@ interface Props {
   searchParams: {
     page: string;
     genus: string;
-    orderBy: string;
   };
 }
 
 const Plants = async ({ searchParams }: Props) => {
-  const columns: { label: string; value: string }[] = [
-    { label: "Type", value: "type" },
-    { label: "Plant Name", value: "plantName" },
-    { label: "Image", value: "image" },
-    { label: "Actions", value: "actions" },
-  ];
+  const columns: string[] = ["Type", "Plant Name", "Image", "Actions"];
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 50;
   const plants = await prisma.plant.findMany({
@@ -48,15 +42,7 @@ const Plants = async ({ searchParams }: Props) => {
         <thead>
           <tr>
             {columns.map((column) => (
-              <th key={column.value}>
-                <Link
-                  href={{
-                    query: { ...searchParams, orderBy: column.value },
-                  }}
-                >
-                  {column.label}
-                </Link>
-              </th>
+              <th key={column}>{column}</th>
             ))}
           </tr>
         </thead>

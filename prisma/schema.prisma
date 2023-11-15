@@ -86,14 +86,16 @@ model Page {
 }
 
 model GenusPage {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  title     String  @unique
-  slug      String  @unique
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String   @unique
+  slug      String   @unique
   intro     String
   thanks    String?
   changeLog String
   plants    Plant[]
-  published Publish @default(PUBLISHED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Publish  @default(PUBLISHED)
 }
 
 model Plant {
@@ -163,7 +165,9 @@ model PlantProfile {
   imageCredits  String?
   notes         String?
 
-  published Publish @default(PUBLISHED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Publish  @default(PUBLISHED)
 }
 
 enum Role {
