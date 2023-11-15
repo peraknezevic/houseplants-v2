@@ -164,9 +164,7 @@ model PlantProfile {
   imageCredits  String?
   notes         String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Publish  @default(PUBLISHED)
+  published Publish @default(PUBLISHED)
 }
 
 enum Role {
