@@ -51,6 +51,7 @@ export const plantSchema = z.object({
 
   hasImage: z.boolean().optional(),
   imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
+  imagesForApproval: z.string().min(3).optional().or(z.literal("")),
 });
 
 export const plantProfileSchema = z.object({

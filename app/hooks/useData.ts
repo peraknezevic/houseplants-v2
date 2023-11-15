@@ -58,6 +58,15 @@ export async function plantsData(slug: string) {
   return data;
 }
 
+export async function plantData(slug: string) {
+  const data = await prisma.plant.findUnique({
+    where: {
+      slug: slug,
+    },
+  });
+  return data;
+}
+
 export async function genusPagesData() {
   const data = await prisma.genusPage.findMany();
   return data;

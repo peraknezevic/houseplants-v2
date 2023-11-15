@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       note: body.note,
       hasImage: body.hasImage,
       imageCredits: body.imageCredits,
+      imagesForApproval: body.imagesForApproval,
     },
   });
   return Response.json(newPlant, { status: 201 });

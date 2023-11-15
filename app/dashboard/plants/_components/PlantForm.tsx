@@ -85,7 +85,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         <div className="flex justify-around">
           <label>
             <input
-              defaultChecked={plant?.isSpecies || true}
+              defaultChecked={plant?.isSpecies}
               type="checkbox"
               {...register("isSpecies")}
             />{" "}
@@ -222,7 +222,7 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
         <label>
           Has Image:{" "}
           <input
-            defaultChecked={true}
+            defaultChecked={plant?.hasImage}
             type="checkbox"
             {...register("hasImage")}
           />
@@ -237,6 +237,15 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
           {...register("imageCredits")}
         />
         <ErrorMessage>{errors.imageCredits?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.imagesForApproval || ""}
+          placeholder="image for approval"
+          className="input input-bordered w-full"
+          {...register("imagesForApproval")}
+        />
+        <ErrorMessage>{errors.imagesForApproval?.message}</ErrorMessage>
 
         <button className="btn btn-black" disabled={isSubmitting}>
           {plant ? "Update Plant" : "Add New Plant"}{" "}

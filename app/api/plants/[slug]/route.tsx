@@ -62,6 +62,7 @@ export async function PATCH(
       note: body.note,
       hasImage: body.hasImage,
       imageCredits: body.imageCredits,
+      imagesForApproval: body.imagesForApproval,
     },
   });
 

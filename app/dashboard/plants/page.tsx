@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Plants = async ({ searchParams }: Props) => {
-  const columns: string[] = ["Type", "Plant Name", "Image", "Actions"];
+  const columns: string[] = ["Plant Name", "Type", "Image", "Actions"];
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 50;
   const plants = await prisma.plant.findMany({
@@ -51,19 +51,13 @@ const Plants = async ({ searchParams }: Props) => {
         <tbody>
           {plants.map((plant) => (
             <tr key={plant.id}>
-              <td>
-                <div
-                  className={`${
-                    (plant.isSpecies && "bg-emerald-800") ||
-                    (plant.isCultivar && "bg-violet-800") ||
-                    (plant.isHybrid && "bg-blue-800") ||
-                    (plant.isUnsorted && "bg-gray-800")
-                  } mr-2
-                  inline-block h-4 w-4
-                  `}
-                ></div>
-              </td>
               <td>{plant.botanicalName}</td>
+              <td className="text-center text-sm font-medium uppercase">
+                {(plant.isSpecies && "S") ||
+                  (plant.isCultivar && "C") ||
+                  (plant.isHybrid && "H") ||
+                  (plant.isUnsorted && "U")}
+              </td>
               <td>
                 <BoolBadge bool={plant.hasImage} />
               </td>
@@ -73,15 +67,8 @@ const Plants = async ({ searchParams }: Props) => {
             </tr>
           ))}
         </tbody>
-        <caption className="caption-bottom pt-4">
-          <div className="mx-4 inline-block h-4 w-4 bg-emerald-800"></div>{" "}
-          Species
-          <div className="mx-4 inline-block h-4 w-4 bg-violet-800"></div>
-          Cultivar
-          <div className="mx-4 inline-block h-4 w-4 bg-blue-800"></div>
-          Hybrid
-          <div className="mx-4 inline-block h-4 w-4 bg-gray-800"></div>
-          Unsorted
+        <caption className="caption-bottom pt-4 text-sm font-medium uppercase">
+          S - Species, C - Cultivar, H - Hybrid, U - Unsorted
         </caption>
       </table>
       <Pagination
