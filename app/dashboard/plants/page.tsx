@@ -30,7 +30,9 @@ const Plants = async ({ searchParams }: Props) => {
     take: pageSize,
   });
 
-  const plantCount = await prisma.plant.count();
+  const plantCount = await prisma.plant.count({
+    where: { genusPageSlug: searchParams.genus || undefined },
+  });
 
   return (
     <div className="space-y-6">
