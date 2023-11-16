@@ -6,11 +6,6 @@ import { GeistSans } from "geist/font";
 import Header from "./Header";
 import Footer from "./Footer";
 
-export const metadata: Metadata = {
-  title: "Houseplants",
-  description: "All about your indoor plants",
-};
-
 export default function RootLayout({
   children,
 }: {

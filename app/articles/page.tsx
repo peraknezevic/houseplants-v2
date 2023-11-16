@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
 import CategoryHead from "../components/CategoryHead";
@@ -21,6 +22,11 @@ const ArticlesPage = async () => {
       </CardGrid>
     </div>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Articles - Houseplants",
+  description: "Articles about your indoor plants",
 };
 
 export default ArticlesPage;

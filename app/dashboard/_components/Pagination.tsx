@@ -54,7 +54,8 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
       </div>
 
       <p className="mt-4 text-center">
-        Page {currentPage} of {pageCount}
+        Page {currentPage} of {pageCount} <br />
+        Total items: {itemCount}
       </p>
     </>
   );

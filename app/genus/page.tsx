@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
 import CategoryHead from "../components/CategoryHead";
@@ -20,6 +21,12 @@ const GenerasPage = async () => {
       </CardGrid>
     </div>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Genus Pages - Houseplants",
+  description:
+    "Pages dedicated to various Plant genera, listing all the species, cultivars and hybrids",
 };
 
 export default GenerasPage;

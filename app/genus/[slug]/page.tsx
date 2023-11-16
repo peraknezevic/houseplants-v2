@@ -69,7 +69,7 @@ const Genus = async ({ params }: Props) => {
     return <p>This genus page is being reviewed</p>;
 
   return (
-    <article>
+    <article id="top">
       <PageHead title={genusPage.title} pageType={pageType} />
 
       <Section id="intro">

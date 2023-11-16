@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
 import CategoryHead from "../components/CategoryHead";
@@ -21,6 +22,11 @@ const PlantProfilesPage = async () => {
       </CardGrid>
     </>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Plant Profiles - Houseplants",
+  description: "Care guides for your indoor plants",
 };
 
 export default PlantProfilesPage;
