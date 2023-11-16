@@ -3,11 +3,50 @@ import Section from "@/app/components/Section";
 import { genusPageData, plantsData } from "@/app/hooks/useData";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
-
+import type { Metadata } from "next";
 interface Props {
   params: { slug: string };
 }
 
+export async function generateMetadata({ params }: Props) {
+  const url = "https://houseplants.xyz";
+  const pageUrl = `${url}/genus/{params,slug}`;
+  const pageTitle = params.slug[0].toUpperCase() + params.slug.slice(1);
+  const title = `${pageTitle} species, cultivars and hybrids - genus ${pageTitle}`;
+  const description = `List of all the ${pageTitle} plant varieties in cultivation`;
+  const keywords = `${pageTitle}, ${pageTitle} varieties, ${pageTitle} species, ${pageTitle} cultivars, ${pageTitle} hybrids`;
+  return {
+    title: title,
+    description: description,
+    keywords: keywords,
+    openGraph: {
+      title: title,
+      description: description,
+      url: pageUrl,
+      siteName: "Houseplants",
+      images: [
+        {
+          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`,
+          width: 1200,
+          height: 630,
+        },
+        {
+          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-1600x900.jpg`,
+          width: 1600,
+          height: 900,
+        },
+        {
+          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-pinterest-en.jpg`,
+          width: 1000,
+          height: 1500,
+        },
+      ],
+      type: "article",
+      authors: ["Pera Knezevic / Houseplants.xyz"],
+      locale: "en_US",
+    },
+  };
+}
 export const revalidate = 3600;
 
 const Genus = async ({ params }: Props) => {
@@ -186,5 +225,4 @@ const Genus = async ({ params }: Props) => {
     </article>
   );
 };
-
 export default Genus;
