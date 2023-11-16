@@ -40,3 +40,5 @@ next-env.d.ts
 /db
 /dump
 /wp
+# Sentry Config File
+.sentryclirc
