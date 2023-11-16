@@ -8,6 +8,8 @@ interface Props {
   params: { slug: string };
 }
 
+export const revalidate = 3600;
+
 const Genus = async ({ params }: Props) => {
   const pageType = "Genus";
   const genusPage = await genusPageData(params.slug);
@@ -135,7 +137,7 @@ const Genus = async ({ params }: Props) => {
               </p>
             )}
           </div>
-          {plant.hasImage && (
+          {plant.hasImage ? (
             <figure>
               <Image
                 src={`/images/genus/${genusPage.slug}/${plant.slug}.jpg`}
@@ -148,6 +150,22 @@ const Genus = async ({ params }: Props) => {
                 <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
               </figcaption>
             </figure>
+          ) : (
+            <div className="text-sm">
+              <p>
+                We don&apos;t have an image for this plant yet. Would you like
+                to share yours?
+              </p>
+              <p>
+                Send it via e-mail at{" "}
+                <a
+                  href={`mailto:houseplants.xyz@gmail.com?subject=${plant.botanicalName} photo`}
+                >
+                  houseplants.xyz@gmail.com
+                </a>{" "}
+                or via instagram at @houseplants.xyz
+              </p>
+            </div>
           )}
         </Section>
       ))}
