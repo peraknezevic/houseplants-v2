@@ -40,16 +40,11 @@ const Genus = async ({ params }: Props) => {
       <h2>{genusPage.title} Plants List</h2>
       <Section id="plant-list">
         <div>
-          <ul className="list-disc space-y-3 pl-5 sm:columns-2">
+          <ul className="space-y-2 text-base font-medium sm:columns-2">
             {plants.map((plant) => (
               <li
                 key={plant.slug}
-                className={
-                  (plant.isSpecies && "species") ||
-                  (plant.isCultivar && "cultivar") ||
-                  (plant.isHybrid && "hybrid") ||
-                  ""
-                }
+                className="before:mb before:mr-2 before:inline-block before:content-['▸']"
               >
                 <a href={"#" + removeChars(plant.botanicalName)}>
                   {plant.botanicalName}
@@ -165,7 +160,7 @@ const Genus = async ({ params }: Props) => {
         </Section>
       )}
       <Section id="changelog">
-        <div>
+        <div className="list-disc">
           <h3>Changelog</h3>
           <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
         </div>

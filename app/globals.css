@@ -101,4 +101,10 @@
   .isReview {
     @apply font-bold text-yellow-700;
   }
+  #changelog ul {
+    @apply mb-6 list-disc pl-4;
+  }
+  #changelog h4 {
+    @apply font-bold;
+  }
 }
