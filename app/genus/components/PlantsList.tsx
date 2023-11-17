@@ -17,7 +17,7 @@ const PlantsList = ({ plants, genusTitle }: Props) => {
             {plants.map((plant) => (
               <li
                 key={plant.slug}
-                className="block before:mr-2 before:inline-block before:content-['▸']"
+                className="flex before:mr-2 before:content-['▸']"
               >
                 <a href={"#" + removeChars(plant.botanicalName)}>
                   {plant.botanicalName}

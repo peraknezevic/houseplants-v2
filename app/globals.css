@@ -49,13 +49,13 @@
     @apply text-white no-underline;
   }
   .btn-black {
-    @apply bg-black;
+    @apply bg-zinc-950;
   }
   .btn-red {
     @apply bg-red-800;
   }
   .btn-neutral {
-    @apply bg-gray-600 hover:bg-gray-500;
+    @apply bg-zinc-600 hover:bg-zinc-500;
   }
   .btn-green {
     @apply bg-green-800;
