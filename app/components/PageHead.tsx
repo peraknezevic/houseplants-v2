@@ -9,11 +9,13 @@ const PageHead = ({ title, pageType }: Props) => {
   return (
     <div>
       {pageType && (
-        <span className="block text-center font-bold uppercase tracking-wider">
+        <div className="text-center font-bold uppercase tracking-wider">
           {pageType}
-        </span>
+        </div>
       )}
-      <h1>{title}</h1>
+      <h1 className="mb-8 text-center text-4xl font-bold leading-relaxed md:mb-16 md:mt-8 md:text-6xl">
+        {title}
+      </h1>
     </div>
   );
 };

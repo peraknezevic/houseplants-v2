@@ -10,11 +10,11 @@ type Props = {
 
 const Actions = ({ cat, slug }: Props) => {
   return (
-    <>
+    <td className="space-x-2 lg:w-1/4">
       <ViewButton cat={cat} slug={slug} />
       <EditButton cat={cat} slug={slug} />
       <DeleteButton cat={cat} slug={slug} />
-    </>
+    </td>
   );
 };
 

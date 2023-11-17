@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center gap-6 px-4 py-6 md:gap-8 md:px-6 md:py-12">
+    <footer className="flex flex-col items-center justify-center gap-6 bg-pink-950 px-4 py-6 text-white dark:bg-emerald-950 md:gap-8 md:px-6 md:py-12">
       <div className="flex flex-wrap gap-4 md:flex-nowrap md:gap-8">
         <span className="w-full md:w-auto">Follow us on:</span>
         <a href="https://www.facebook.com/houseplants.xyz">Facebook</a>

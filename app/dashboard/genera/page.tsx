@@ -1,8 +1,4 @@
 import prisma from "@/prisma/client";
-import PublishedBadge from "../_components/PublishedBadge";
-import DeleteButton from "../_components/DeleteButton";
-import EditButton from "../_components/EditButton";
-import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
 import Actions from "../_components/Actions";
 
@@ -16,25 +12,33 @@ const Pages = async () => {
         <AddNewButton cat={cat} />
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table border border-gray-200">
+        <table>
           <thead>
             <tr className="m-2">
               <th>Genus Title</th>
-              <th>Genus Slug</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {genera.map((genus) => (
-              <tr key={genus.id} className="hover:bg-gray-200">
-                <td>{genus.title}</td>
-                <td>{genus.slug}</td>
-                <td>
-                  <PublishedBadge published={genus.published} />
+              <tr key={genus.id}>
+                <td className="lg:w-3/4">
+                  <div
+                    className={
+                      (genus.published === "PUBLISHED" &&
+                        "font-bold text-emerald-800") ||
+                      (genus.published === "DRAFT" &&
+                        "font-bold text-gray-800") ||
+                      (genus.published === "REVIEW" &&
+                        "font-bold text-rose-800") ||
+                      ""
+                    }
+                  >
+                    {genus.title}
+                  </div>
+                  <div>{genus.slug}</div>
                 </td>
-                <td className="space-x-2">
-                  <Actions cat={cat} slug={genus.slug} />
-                </td>
+                <Actions cat={cat} slug={genus.slug} />
               </tr>
             ))}
           </tbody>

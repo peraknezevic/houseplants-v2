@@ -25,15 +25,20 @@ const Pages = async () => {
         <tbody>
           {pages.map((page) => (
             <tr key={page.id}>
-              <td
-                className={
-                  (page.published === "PUBLISHED" && "isPublished") ||
-                  (page.published === "DRAFT" && "isDraft") ||
-                  (page.published === "REVIEW" && "isReview") ||
-                  ""
-                }
-              >
-                {page.title}
+              <td>
+                <div
+                  className={
+                    (page.published === "PUBLISHED" &&
+                      "font-bold text-emerald-800") ||
+                    (page.published === "DRAFT" && "font-bold text-gray-800") ||
+                    (page.published === "REVIEW" &&
+                      "font-bold text-rose-800") ||
+                    ""
+                  }
+                >
+                  {page.title}
+                </div>
+                <div>{page.slug}</div>
               </td>
 
               <td className="space-x-2">

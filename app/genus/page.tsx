@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
-import CategoryHead from "../components/CategoryHead";
 import { genusPagesData } from "../hooks/useData";
+import PageHead from "../components/PageHead";
 
 const GenerasPage = async () => {
   const data = await genusPagesData();
   return (
     <div>
-      <h1>Genus Pages</h1>
+      <PageHead title="Genera Pages" />
       <CardGrid>
         {data.map((item) => (
           <Card
@@ -24,7 +24,7 @@ const GenerasPage = async () => {
 };
 
 export const metadata: Metadata = {
-  title: "Genus Pages - Houseplants",
+  title: "Genera Pages - Houseplants",
   description:
     "Pages dedicated to various Plant genera, listing all the species, cultivars and hybrids",
 };

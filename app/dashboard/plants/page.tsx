@@ -1,10 +1,8 @@
 import prisma from "@/prisma/client";
-import BoolBadge from "../_components/BoolBadge";
 import Pagination from "../_components/Pagination";
 import GenusFilterData from "./_components/GenusFilterData";
 import AddNewButton from "../_components/AddNewButton";
 import Actions from "../_components/Actions";
-import Link from "next/link";
 
 const cat = "plants";
 
@@ -16,7 +14,6 @@ interface Props {
 }
 
 const Plants = async ({ searchParams }: Props) => {
-  const columns: string[] = ["Plant Name", "Type", "Image", "Actions"];
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 50;
   const plants = await prisma.plant.findMany({
@@ -43,27 +40,34 @@ const Plants = async ({ searchParams }: Props) => {
       <table>
         <thead>
           <tr>
-            {columns.map((column) => (
-              <th key={column}>{column}</th>
-            ))}
+            <th>Plant Name</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {plants.map((plant) => (
             <tr key={plant.id}>
-              <td>{plant.botanicalName}</td>
-              <td className="text-center text-sm font-medium uppercase">
-                {(plant.isSpecies && "S") ||
-                  (plant.isCultivar && "C") ||
-                  (plant.isHybrid && "H") ||
-                  (plant.isUnsorted && "U")}
+              <td className="lg:w-3/4">
+                <div>
+                  <span
+                    className={
+                      plant.hasImage
+                        ? "font-bold text-emerald-800"
+                        : "font-bold"
+                    }
+                  >
+                    {plant.botanicalName}
+                  </span>{" "}
+                  <span className="ml-4 bg-gray-900 px-1 text-xs font-bold text-white">
+                    {(plant.isSpecies && "S") ||
+                      (plant.isCultivar && "C") ||
+                      (plant.isHybrid && "H") ||
+                      (plant.isUnsorted && "U")}
+                  </span>
+                </div>
+                <div>{plant.slug}</div>
               </td>
-              <td>
-                <BoolBadge bool={plant.hasImage} />
-              </td>
-              <td className="space-x-2">
-                <Actions cat={cat} slug={plant.slug} />
-              </td>
+              <Actions cat={cat} slug={plant.slug} />
             </tr>
           ))}
         </tbody>

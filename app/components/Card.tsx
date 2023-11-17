@@ -13,7 +13,7 @@ interface Props {
 
 const Card = ({ item, imgFolder, pageFolder }: Props) => {
   return (
-    <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md">
+    <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md dark:bg-zinc-900">
       <Link href={`/${pageFolder}/${item.slug}/`}>
         <Image
           src={`/images/${imgFolder}/${item.slug}/${item.slug}.jpg`}

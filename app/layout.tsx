@@ -12,8 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-pink-50">
-      <body className={`${GeistSans.className} text-emerald-950`}>
+    <html lang="en">
+      <body
+        className={`${GeistSans.className} bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-pink-50`}
+      >
         <AuthProvider>
           <Header />
           <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
@@ -24,3 +26,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Houseplants",
+  description: "All about your indoor plants",
+};

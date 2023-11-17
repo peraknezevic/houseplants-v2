@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
-import CategoryHead from "../components/CategoryHead";
+import PageHead from "../components/PageHead";
 import { plantProfilesData } from "../hooks/useData";
 
 const PlantProfilesPage = async () => {
@@ -9,7 +9,7 @@ const PlantProfilesPage = async () => {
 
   return (
     <>
-      <CategoryHead title="Plant profiles" />
+      <PageHead title="Plant Profiles" />
       <CardGrid>
         {data.map((item) => (
           <Card

@@ -4,25 +4,19 @@
 
 @layer base {
   a {
-    @apply text-emerald-900 underline underline-offset-4;
+    @apply text-emerald-900 underline underline-offset-4 dark:text-white;
   }
   a:hover {
-    @apply text-emerald-700;
+    @apply opacity-80;
   }
   footer a {
     @apply text-white;
   }
   footer a:hover {
-    @apply text-emerald-200;
-  }
-  footer {
-    @apply bg-emerald-900 py-8 text-white;
+    @apply text-white opacity-80;
   }
   article {
     @apply mx-auto my-4 max-w-4xl px-4;
-  }
-  h1 {
-    @apply mb-8 text-center text-4xl font-bold leading-relaxed md:mb-16 md:mt-8 md:text-6xl;
   }
   h2 {
     @apply mb-4 text-3xl font-bold;
@@ -33,16 +27,9 @@
   img {
     @apply h-auto w-full object-fill;
   }
-  section {
-    @apply mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md md:mb-16;
-  }
-  section img {
-    @apply m-0 h-auto w-full;
-  }
   section div {
     @apply m-8 flex flex-col gap-4 text-xl;
   }
-
   section div p {
     @apply border-b-2 border-gray-100 pb-3;
   }
@@ -73,35 +60,24 @@
   .btn-green {
     @apply bg-green-800;
   }
-  .badge {
-    @apply inline-block px-2 py-2;
-  }
   table {
-    @apply w-full table-auto;
+    @apply w-full text-left;
   }
   thead {
-    @apply bg-gray-200;
+    @apply bg-slate-200;
   }
   td,
   th {
-    @apply px-2 py-2;
+    @apply px-3 py-3;
+  }
+  tbody > tr {
+    @apply border hover:bg-slate-100;
   }
   th {
-    @apply text-left text-sm uppercase;
+    @apply text-sm uppercase;
   }
-  tr {
-    @apply border-2 text-left hover:bg-gray-200;
-  }
-  .isPublished {
-    @apply font-bold text-green-700;
-  }
-  .isDraft {
-    @apply font-bold text-red-700;
-  }
-  .isReview {
-    @apply font-bold text-yellow-700;
-  }
-  #changelog ul {
+  #changelog ul,
+  #notes ul {
     @apply mb-6 list-disc pl-4;
   }
   #changelog h4 {

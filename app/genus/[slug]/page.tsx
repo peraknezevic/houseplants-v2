@@ -1,9 +1,10 @@
 import PageHead from "@/app/components/PageHead";
 import Section from "@/app/components/Section";
 import { genusPageData, plantsData } from "@/app/hooks/useData";
-import Image from "next/image";
 import ReactMarkdown from "react-markdown";
-import type { Metadata } from "next";
+import { Plant } from "@prisma/client";
+import PlantsList from "../components/PlantsList";
+import PlantCards from "../components/PlantCards";
 interface Props {
   params: { slug: string };
 }
@@ -47,30 +48,31 @@ export async function generateMetadata({ params }: Props) {
     },
   };
 }
+
 export const revalidate = 3600;
 
+export const removeChars = (text: string) =>
+  text
+    .replaceAll("'", "")
+    .replaceAll("‘", "")
+    .replaceAll("’", "")
+    .replaceAll('"', "")
+    .replaceAll(" ", "")
+    .toLowerCase();
+
 const Genus = async ({ params }: Props) => {
-  const pageType = "Genus";
   const genusPage = await genusPageData(params.slug);
-  const plants = await plantsData(params.slug);
-  const removeChars = (text: string) =>
-    text
-      .replaceAll("'", "")
-      .replaceAll("‘", "")
-      .replaceAll("’", "")
-      .replaceAll('"', "")
-      .replaceAll(" ", "")
-      .toLowerCase();
+  const plants: Plant[] = await plantsData(params.slug);
 
   if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
-    return <p>This genus page is not yet published</p>;
+    return <p>This genus page has not yet been published</p>;
   if (genusPage.published === "REVIEW")
     return <p>This genus page is being reviewed</p>;
 
   return (
     <article id="top">
-      <PageHead title={genusPage.title} pageType={pageType} />
+      <PageHead title={genusPage.title} pageType="Genus" />
 
       <Section id="intro">
         <div>
@@ -78,136 +80,14 @@ const Genus = async ({ params }: Props) => {
         </div>
       </Section>
 
-      <h2>{genusPage.title} Plants List</h2>
-      <Section id="plant-list">
-        <div>
-          <ul className="space-y-2 text-base font-medium sm:columns-2">
-            {plants.map((plant) => (
-              <li
-                key={plant.slug}
-                className="before:mb before:mr-2 before:inline-block before:content-['▸']"
-              >
-                <a href={"#" + removeChars(plant.botanicalName)}>
-                  {plant.botanicalName}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
+      <PlantsList plants={plants} genusTitle={genusPage.title} />
 
-      <h2>{genusPage.title} Plants</h2>
-      {plants.map((plant) => (
-        <Section id={removeChars(plant.botanicalName)} key={plant.slug}>
-          <div>
-            <h3>{plant.botanicalName}</h3>
-            {plant.synonyms && (
-              <p>
-                <strong>Synonyms:</strong> {plant.synonyms}
-              </p>
-            )}
-            {plant.tradeNames && (
-              <p>
-                <strong>Trade Names:</strong> {plant.tradeNames}
-              </p>
-            )}
-            {plant.commonNames && (
-              <p>
-                <strong>Common Names:</strong> {plant.commonNames}
-              </p>
-            )}
-            {plant.namedBy && (
-              <p>
-                <strong>Described by:</strong> {plant.namedBy}
-              </p>
-            )}
-            {plant.inventor && (
-              <p>
-                <strong>Inventor:</strong> {plant.inventor}
-              </p>
-            )}
-            {plant.patent && (
-              <p>
-                <strong>Patent:</strong> {plant.patent}
-              </p>
-            )}
-            {plant.nativeArea && (
-              <p>
-                <strong>Native to:</strong> {plant.nativeArea}
-              </p>
-            )}
-            {plant.note && (
-              <p>
-                <strong>*</strong> {plant.note}
-              </p>
-            )}
-            {plant.parents && (
-              <p>
-                <strong>Plant parent(s):</strong>{" "}
-                {plant.parents.split(", ").map((parent, i) => (
-                  <>
-                    {i > 0 && ", "}
-                    <a
-                      key={parent}
-                      href={"#" + removeChars(parent)}
-                      className="mr-2"
-                    >
-                      {parent.replaceAll('"', "")}
-                    </a>
-                  </>
-                ))}
-              </p>
-            )}
-            {plant.children && (
-              <p>
-                <strong>Cultivars and Hybrids:</strong>{" "}
-                {plant.children.split(", ").map((child, i) => (
-                  <>
-                    {i > 0 && ", "}
-                    <a
-                      key={child}
-                      href={"#" + removeChars(child)}
-                      className="mr-2"
-                    >
-                      {child.replaceAll('"', "")}
-                    </a>
-                  </>
-                ))}
-              </p>
-            )}
-          </div>
-          {plant.hasImage ? (
-            <figure>
-              <Image
-                src={`/images/genus/${genusPage.slug}/${plant.slug}.jpg`}
-                width={800}
-                height={1000}
-                alt={plant.botanicalName}
-              />
-              <figcaption>
-                {plant.botanicalName}
-                <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
-              </figcaption>
-            </figure>
-          ) : (
-            <div className="text-sm">
-              <p>
-                We don&apos;t have an image for this plant yet. Would you like
-                to share yours?
-              </p>
-              <p>
-                Send it via e-mail at{" "}
-                <a
-                  href={`mailto:houseplants.xyz@gmail.com?subject=${plant.botanicalName} photo`}
-                >
-                  houseplants.xyz@gmail.com
-                </a>{" "}
-                or via instagram at @houseplants.xyz
-              </p>
-            </div>
-          )}
-        </Section>
-      ))}
+      <PlantCards
+        plants={plants}
+        genusSlug={genusPage.slug}
+        genusTitle={genusPage.title}
+      />
+
       {genusPage.thanks && (
         <Section id="thanks">
           <div>
@@ -216,6 +96,7 @@ const Genus = async ({ params }: Props) => {
           </div>
         </Section>
       )}
+
       <Section id="changelog">
         <div className="list-disc">
           <h3>Changelog</h3>

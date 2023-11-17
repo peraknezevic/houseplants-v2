@@ -1,8 +1,4 @@
 import prisma from "@/prisma/client";
-import DeleteButton from "../_components/DeleteButton";
-import EditButton from "../_components/EditButton";
-import PublishedBadge from "../_components/PublishedBadge";
-import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
 import Actions from "../_components/Actions";
 
@@ -21,20 +17,29 @@ const PlantProfiles = async () => {
           <thead>
             <tr>
               <th>Botanical Name</th>
-              <th>Published</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {plantProfiles.map((profile) => (
               <tr key={profile.id}>
-                <td>{profile.botanicalName}</td>
-                <td>
-                  <PublishedBadge published={profile.published} />
+                <td className="lg:w-3/4">
+                  <div
+                    className={
+                      (profile.published === "PUBLISHED" &&
+                        "font-bold text-emerald-800") ||
+                      (profile.published === "DRAFT" &&
+                        "font-bold text-gray-800") ||
+                      (profile.published === "REVIEW" &&
+                        "font-bold text-rose-800") ||
+                      ""
+                    }
+                  >
+                    {profile.botanicalName}
+                  </div>
+                  <div>{profile.slug}</div>
                 </td>
-                <td className="space-x-2">
-                  <Actions cat={cat} slug={profile.slug} />
-                </td>
+                <Actions cat={cat} slug={profile.slug} />
               </tr>
             ))}
           </tbody>
