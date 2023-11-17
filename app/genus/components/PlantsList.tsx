@@ -1,6 +1,5 @@
 import Section from "@/app/components/Section";
 import { Plant } from "@prisma/client";
-import { removeChars } from "../[slug]/page";
 
 interface Props {
   plants: Plant[];
@@ -8,6 +7,14 @@ interface Props {
 }
 
 const PlantsList = ({ plants, genusTitle }: Props) => {
+  const removeChars = (text: string) =>
+    text
+      .replaceAll("'", "")
+      .replaceAll("‘", "")
+      .replaceAll("’", "")
+      .replaceAll('"', "")
+      .replaceAll(" ", "")
+      .toLowerCase();
   return (
     <>
       <h2>{genusTitle} Plants List</h2>

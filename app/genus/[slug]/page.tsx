@@ -51,15 +51,6 @@ export async function generateMetadata({ params }: Props) {
 
 export const revalidate = 3600;
 
-export const removeChars = (text: string) =>
-  text
-    .replaceAll("'", "")
-    .replaceAll("‘", "")
-    .replaceAll("’", "")
-    .replaceAll('"', "")
-    .replaceAll(" ", "")
-    .toLowerCase();
-
 const Genus = async ({ params }: Props) => {
   const genusPage = await genusPageData(params.slug);
   const plants: Plant[] = await plantsData(params.slug);

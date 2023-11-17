@@ -3,7 +3,6 @@ import { Plant } from "@prisma/client";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
-import { removeChars } from "../[slug]/page";
 
 interface Props {
   plant: Plant;
@@ -11,6 +10,14 @@ interface Props {
 }
 
 const PlantCard = ({ plant, genusSlug }: Props) => {
+  const removeChars = (text: string) =>
+    text
+      .replaceAll("'", "")
+      .replaceAll("‘", "")
+      .replaceAll("’", "")
+      .replaceAll('"', "")
+      .replaceAll(" ", "")
+      .toLowerCase();
   return (
     <Section id={removeChars(plant.botanicalName)} key={plant.slug}>
       <div>
