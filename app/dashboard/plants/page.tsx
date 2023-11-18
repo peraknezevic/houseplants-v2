@@ -52,7 +52,7 @@ const Plants = async ({ searchParams }: Props) => {
                   <span
                     className={
                       plant.hasImage
-                        ? "font-bold text-emerald-800"
+                        ? "font-bold text-emerald-800 dark:text-emerald-600"
                         : "font-bold"
                     }
                   >

@@ -1,10 +1,6 @@
 import prisma from "@/prisma/client";
-import DeleteButton from "../_components/DeleteButton";
-import EditButton from "../_components/EditButton";
-import ViewButton from "../_components/ViewButton";
 import AddNewButton from "../_components/AddNewButton";
 import Actions from "../_components/Actions";
-import { profile } from "console";
 
 const cat = "articles";
 
@@ -13,7 +9,7 @@ const Pages = async () => {
 
   return (
     <div className="space-y-2">
-      <div className="mb-4 mt-4 flex justify-between gap-4">
+      <div className="my-4 flex justify-between gap-4">
         <AddNewButton cat={cat} />
       </div>
       <table>

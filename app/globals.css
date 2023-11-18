@@ -37,19 +37,24 @@
     @apply -mt-20 p-4 text-right text-white drop-shadow-lg;
   }
   figcaption a {
-    @apply text-white;
+    @apply text-zinc-100;
   }
-  input {
-    @apply border border-gray-400 px-2 py-1;
+  input,
+  select {
+    @apply border border-zinc-400 px-2 py-1 dark:bg-zinc-900 dark:text-zinc-100;
+  }
+
+  label {
+    @apply px-2 py-1 dark:text-zinc-100;
   }
   .btn {
-    @apply inline-block px-2 py-1 text-sm font-medium uppercase text-white no-underline hover:opacity-75;
+    @apply inline-block px-2 py-1 text-sm font-medium uppercase text-zinc-100 no-underline hover:opacity-75;
   }
   .btn a {
-    @apply text-white no-underline;
+    @apply text-zinc-100 no-underline;
   }
   .btn-black {
-    @apply bg-zinc-950;
+    @apply dark:bg-zinc-950;
   }
   .btn-red {
     @apply bg-red-800;
@@ -64,14 +69,14 @@
     @apply w-full text-left;
   }
   thead {
-    @apply bg-slate-200;
+    @apply bg-slate-200 dark:bg-zinc-800;
   }
   td,
   th {
     @apply px-3 py-3;
   }
   tbody > tr {
-    @apply border hover:bg-slate-100;
+    @apply border hover:bg-slate-100 dark:border-zinc-800 dark:hover:bg-zinc-700;
   }
   th {
     @apply text-sm uppercase;

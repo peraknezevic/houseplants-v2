@@ -29,10 +29,11 @@ const Pages = async () => {
                 <div
                   className={
                     (page.published === "PUBLISHED" &&
-                      "font-bold text-emerald-800") ||
-                    (page.published === "DRAFT" && "font-bold text-gray-800") ||
+                      "font-bold text-emerald-800 dark:text-emerald-600") ||
+                    (page.published === "DRAFT" &&
+                      "dark:text-grey-400 font-bold text-gray-600") ||
                     (page.published === "REVIEW" &&
-                      "font-bold text-rose-800") ||
+                      "font-bold text-rose-800 dark:text-rose-600") ||
                     ""
                   }
                 >
@@ -41,9 +42,7 @@ const Pages = async () => {
                 <div>{page.slug}</div>
               </td>
 
-              <td className="space-x-2">
-                <Actions cat={cat} slug={page.slug} />
-              </td>
+              <Actions cat={cat} slug={page.slug} />
             </tr>
           ))}
         </tbody>

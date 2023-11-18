@@ -27,11 +27,11 @@ const PlantProfiles = async () => {
                   <div
                     className={
                       (profile.published === "PUBLISHED" &&
-                        "font-bold text-emerald-800") ||
+                        "font-bold text-emerald-800 dark:text-emerald-600") ||
                       (profile.published === "DRAFT" &&
-                        "font-bold text-gray-800") ||
+                        "font-bold text-gray-800 dark:text-gray-600") ||
                       (profile.published === "REVIEW" &&
-                        "font-bold text-rose-800") ||
+                        "font-bold text-rose-800 dark:text-rose-600") ||
                       ""
                     }
                   >
