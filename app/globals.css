@@ -40,7 +40,8 @@
     @apply text-zinc-100;
   }
   input,
-  select {
+  select,
+  textarea {
     @apply border border-zinc-400 px-2 py-1 dark:bg-zinc-900 dark:text-zinc-100;
   }
 
@@ -54,7 +55,7 @@
     @apply text-zinc-100 no-underline;
   }
   .btn-black {
-    @apply dark:bg-zinc-950;
+    @apply bg-zinc-950 px-4 py-2 text-base font-bold dark:bg-zinc-700;
   }
   .btn-red {
     @apply bg-red-800;

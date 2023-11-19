@@ -27,6 +27,15 @@ const ArticleForm = ({ article }: { article?: Article }) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [slugSuggestion, setSlugSuggestion] = useState("");
+
+  const makeSlug = (text: string) => {
+    return text
+      .replaceAll(" ", "-")
+      .replaceAll("'", "")
+      .replaceAll('"', "")
+      .toLowerCase();
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -42,25 +51,30 @@ const ArticleForm = ({ article }: { article?: Article }) => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className=" space-y-4 ">
       {error && (
         <div className="alert alert-error">
           <span>{error}</span>
         </div>
       )}
-      <form className="flex max-w-2xl flex-col space-y-4" onSubmit={onSubmit}>
+      <form
+        className="mx-auto flex max-w-2xl flex-col space-y-4"
+        onSubmit={onSubmit}
+      >
         <input
           type="text"
           defaultValue={article?.title}
           placeholder="Title"
           className="input input-bordered w-full"
-          {...register("title")}
+          {...register("title", {
+            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
+          })}
         />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         <input
           type="text"
-          defaultValue={article?.slug}
+          defaultValue={article?.slug || slugSuggestion}
           placeholder="Slug"
           className="input input-bordered w-full"
           {...register("slug")}

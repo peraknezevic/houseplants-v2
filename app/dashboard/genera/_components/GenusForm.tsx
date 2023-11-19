@@ -28,6 +28,16 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [slugSuggestion, setSlugSuggestion] = useState("");
+
+  const makeSlug = (text: string) => {
+    return text
+      .replaceAll(" ", "-")
+      .replaceAll("'", "")
+      .replaceAll('"', "")
+      .toLowerCase();
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
@@ -54,13 +64,15 @@ const GenusForm = ({ genus }: { genus?: GenusPage }) => {
           defaultValue={genus?.title}
           placeholder="Title"
           className="input input-bordered w-full"
-          {...register("title")}
+          {...register("title", {
+            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
+          })}
         />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         <input
           type="text"
-          defaultValue={genus?.slug}
+          defaultValue={genus?.slug || slugSuggestion}
           placeholder="Slug"
           className="input input-bordered w-full"
           {...register("slug")}

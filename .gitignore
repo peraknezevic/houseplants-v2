@@ -37,9 +37,8 @@ next-env.d.ts
 
 /prisma/migrations/
 
-app/db
-app/dump
-app/wp
+/db
+/dump
+/wp
 # Sentry Config File
 .sentryclirc
-app/wp/peperomia.html

@@ -25,6 +25,15 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [slugSuggestion, setSlugSuggestion] = useState("");
+
+  const makeSlug = (text: string) => {
+    return text
+      .replaceAll(" ", "-")
+      .replaceAll("'", "")
+      .replaceAll('"', "")
+      .toLowerCase();
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -55,13 +64,15 @@ const PlantForm = ({ plant }: { plant?: Plant }) => {
           defaultValue={plant?.botanicalName}
           placeholder="Botanical name"
           className="input input-bordered w-full"
-          {...register("botanicalName")}
+          {...register("botanicalName", {
+            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
+          })}
         />
         <ErrorMessage>{errors.botanicalName?.message}</ErrorMessage>
 
         <input
           type="text"
-          defaultValue={plant?.slug}
+          defaultValue={plant?.slug || slugSuggestion}
           placeholder="Slug"
           className="input input-bordered w-full"
           {...register("slug")}

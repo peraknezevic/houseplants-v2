@@ -1,10 +1,10 @@
 import PageHead from "@/app/components/PageHead";
 import Section from "@/app/components/Section";
 import { genusPageData, plantsData } from "@/app/hooks/useData";
-import ReactMarkdown from "react-markdown";
 import { Plant } from "@prisma/client";
-import PlantsList from "../components/PlantsList";
+import ReactMarkdown from "react-markdown";
 import PlantCards from "../components/PlantCards";
+import PlantsList from "../components/PlantsList";
 interface Props {
   params: { slug: string };
 }

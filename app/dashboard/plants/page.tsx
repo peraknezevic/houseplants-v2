@@ -58,7 +58,7 @@ const Plants = async ({ searchParams }: Props) => {
                   >
                     {plant.botanicalName}
                   </span>{" "}
-                  <span className="ml-4 bg-gray-900 px-1 text-xs font-bold text-white">
+                  <span className="ml-4 bg-gray-900 px-1 text-xs font-bold text-zinc-100 dark:bg-zinc-100 dark:text-zinc-950">
                     {(plant.isSpecies && "S") ||
                       (plant.isCultivar && "C") ||
                       (plant.isHybrid && "H") ||

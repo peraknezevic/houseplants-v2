@@ -75,14 +75,16 @@ model Article {
   user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?  @db.ObjectId
   published    Publish  @default(PUBLISHED)
+  language     Language @default(ENGLISH)
 }
 
 model Page {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  title     String  @unique
-  slug      String  @unique
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String    @unique
+  slug      String    @unique
   content   String
-  published Publish @default(PUBLISHED)
+  published Publish   @default(PUBLISHED)
+  language  Language? @default(ENGLISH)
 }
 
 model GenusPage {
@@ -133,36 +135,48 @@ model PlantProfile {
   title         String
   botanicalName String @unique
 
-  synonyms    String?
-  namedBy     String?
-  inventor    String?
-  patent      String?
-  tradeNames  String?
-  commonNames String?
-  family      String?
-  subFamily   String?
-  genus       String
-  nativeArea  String?
+  synonyms        String?
+  namedBy         String?
+  inventor        String?
+  patent          String?
+  tradeNames      String?
+  commonNames     String?
+  narodniNaziv    String? //
+  family          String?
+  subFamily       String?
+  genus           String
+  nativeArea      String?
+  podrucjePorekla String?
 
   care          Care          @default(EASY)
   light         Light         @default(BRIGHT_LIGHT)
   watering      String
+  zalivanje     String? //
   soil          String
+  supstrat      String? //
   soilPH        String
   humidity      Humidity      @default(MEDIUM)
   feeding       String
+  prihrana      String? //
   minimalT      Int
   optimalT      Int
   speedOfGrowth SpeedOfGrowth @default(MODERATE)
   matureSize    String
+  velicina      String? //
   repotting     String
+  presadjivanje String? //
   flower        String
+  cvet          String? //
   propagation   String
+  razmnozavanje String? //
   toxicity      Toxicity      @default(TOXIC)
   pests         String
+  stetocine     String? //
   diseases      String
+  bolesti       String? //
   imageCredits  String?
   notes         String?
+  beleske       String? //
 
   published Publish @default(PUBLISHED)
 }
@@ -170,6 +184,11 @@ model PlantProfile {
 enum Role {
   USER
   ADMIN
+}
+
+enum Language {
+  ENGLISH
+  SRPSKI
 }
 
 enum Care {

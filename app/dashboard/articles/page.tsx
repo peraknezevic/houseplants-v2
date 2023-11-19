@@ -21,7 +21,7 @@ const Pages = async () => {
         </thead>
         <tbody>
           {articles.map((article) => (
-            <tr key={article.id} className="hover:bg-gray-200">
+            <tr key={article.id}>
               <td className="lg:w-3/4">
                 <div
                   className={

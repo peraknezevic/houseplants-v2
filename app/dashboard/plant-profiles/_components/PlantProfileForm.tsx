@@ -28,6 +28,16 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [slugSuggestion, setSlugSuggestion] = useState("");
+
+  const makeSlug = (text: string) => {
+    return text
+      .replaceAll(" ", "-")
+      .replaceAll("'", "")
+      .replaceAll('"', "")
+      .toLowerCase();
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
@@ -54,7 +64,9 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           defaultValue={plant?.title}
           placeholder="Title"
           className="input input-bordered w-full"
-          {...register("title")}
+          {...register("title", {
+            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
+          })}
         />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
@@ -69,7 +81,7 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
-          defaultValue={plant?.slug}
+          defaultValue={plant?.slug || slugSuggestion}
           placeholder="Slug"
           className="input input-bordered w-full"
           {...register("slug")}
@@ -132,6 +144,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.podrucjePorekla || ""}
+          placeholder="Podrucje porekla"
+          className="input input-bordered w-full"
+          {...register("podrucjePorekla")}
+        />
+        <ErrorMessage>{errors.podrucjePorekla?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.tradeNames || ""}
           placeholder="Trade Names"
           className="input input-bordered w-full"
@@ -165,6 +186,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           {...register("commonNames")}
         />
         <ErrorMessage>{errors.commonNames?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.narodniNaziv || ""}
+          placeholder="Narodni Naziv"
+          className="input input-bordered w-full"
+          {...register("narodniNaziv")}
+        />
+        <ErrorMessage>{errors.narodniNaziv?.message}</ErrorMessage>
 
         <select
           className="select w-full max-w-xs"
@@ -237,6 +267,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.zalivanje || ""}
+          placeholder="Zalivanje"
+          className="input input-bordered w-full"
+          {...register("zalivanje")}
+        />
+        <ErrorMessage>{errors.zalivanje?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.feeding || ""}
           placeholder="Feeding"
           className="input input-bordered w-full"
@@ -246,12 +285,30 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.prihrana || ""}
+          placeholder="Prihrana"
+          className="input input-bordered w-full"
+          {...register("prihrana")}
+        />
+        <ErrorMessage>{errors.prihrana?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.soil || ""}
           placeholder="Soil"
           className="input input-bordered w-full"
           {...register("soil")}
         />
         <ErrorMessage>{errors.soil?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.supstrat || ""}
+          placeholder="Supstrat"
+          className="input input-bordered w-full"
+          {...register("supstrat")}
+        />
+        <ErrorMessage>{errors.supstrat?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -270,6 +327,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           {...register("repotting")}
         />
         <ErrorMessage>{errors.repotting?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.presadjivanje || ""}
+          placeholder="Presadjivanje"
+          className="input input-bordered w-full"
+          {...register("presadjivanje")}
+        />
+        <ErrorMessage>{errors.presadjivanje?.message}</ErrorMessage>
 
         <select
           className="select w-full max-w-xs"
@@ -294,12 +360,30 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.velicina || ""}
+          placeholder="Velicina"
+          className="input input-bordered w-full"
+          {...register("velicina")}
+        />
+        <ErrorMessage>{errors.velicina?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.flower || ""}
           placeholder="Flower"
           className="input input-bordered w-full"
           {...register("flower")}
         />
         <ErrorMessage>{errors.flower?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.cvet || ""}
+          placeholder="Cvet"
+          className="input input-bordered w-full"
+          {...register("cvet")}
+        />
+        <ErrorMessage>{errors.cvet?.message}</ErrorMessage>
 
         <input
           type="text"
@@ -312,6 +396,15 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.razmnozavanje || ""}
+          placeholder="Razmnozavanje"
+          className="input input-bordered w-full"
+          {...register("razmnozavanje")}
+        />
+        <ErrorMessage>{errors.razmnozavanje?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.pests || ""}
           placeholder="Pests"
           className="input input-bordered w-full"
@@ -321,12 +414,30 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
 
         <input
           type="text"
+          defaultValue={plant?.stetocine || ""}
+          placeholder="Stetocine"
+          className="input input-bordered w-full"
+          {...register("stetocine")}
+        />
+        <ErrorMessage>{errors.stetocine?.message}</ErrorMessage>
+
+        <input
+          type="text"
           defaultValue={plant?.diseases || ""}
           placeholder="Diseases"
           className="input input-bordered w-full"
           {...register("diseases")}
         />
         <ErrorMessage>{errors.diseases?.message}</ErrorMessage>
+
+        <input
+          type="text"
+          defaultValue={plant?.bolesti || ""}
+          placeholder="Bolesti"
+          className="input input-bordered w-full"
+          {...register("bolesti")}
+        />
+        <ErrorMessage>{errors.bolesti?.message}</ErrorMessage>
 
         <select
           className="select w-full max-w-xs"
@@ -367,6 +478,14 @@ const PlantProfileForm = ({ plant }: { plant?: PlantProfile }) => {
           render={({ field }) => <SimpleMDE placeholder="Notes" {...field} />}
         />
         <ErrorMessage>{errors.notes?.message}</ErrorMessage>
+
+        <Controller
+          name="beleske"
+          defaultValue={plant?.beleske || ""}
+          control={control}
+          render={({ field }) => <SimpleMDE placeholder="Beleske" {...field} />}
+        />
+        <ErrorMessage>{errors.beleske?.message}</ErrorMessage>
 
         <button className="btn btn-black" disabled={isSubmitting}>
           {plant ? "Update Plant Profile" : "Add New Plant Profile"}{" "}
