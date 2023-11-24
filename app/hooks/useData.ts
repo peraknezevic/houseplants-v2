@@ -68,7 +68,11 @@ export async function plantData(slug: string) {
 }
 
 export async function genusPagesData() {
-  const data = await prisma.genusPage.findMany();
+  const data = await prisma.genusPage.findMany({
+    where: {
+      published: "PUBLISHED",
+    },
+  });
   return data;
 }
 
