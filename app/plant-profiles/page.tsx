@@ -4,6 +4,11 @@ import CardGrid from "../components/CardGrid";
 import PageHead from "../components/PageHead";
 import { plantProfilesData } from "../hooks/useData";
 
+export const metadata: Metadata = {
+  title: "Plant Profiles - Houseplants",
+  description: "Care guides for your indoor plants",
+};
+
 const PlantProfilesPage = async () => {
   const data = await plantProfilesData();
 
@@ -22,11 +27,6 @@ const PlantProfilesPage = async () => {
       </CardGrid>
     </>
   );
-};
-
-export const metadata: Metadata = {
-  title: "Plant Profiles - Houseplants",
-  description: "Care guides for your indoor plants",
 };
 
 export default PlantProfilesPage;

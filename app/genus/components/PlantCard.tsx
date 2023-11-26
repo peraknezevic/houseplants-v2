@@ -68,7 +68,7 @@ const PlantCard = ({ plant, genusSlug }: Props) => {
           <p>
             <strong>Plant parent(s):</strong>{" "}
             {plant.parents.split(", ").map((parent, i) => (
-              <>
+              <span key="child">
                 {i > 0 && ", "}
                 <a
                   key={parent}
@@ -77,7 +77,7 @@ const PlantCard = ({ plant, genusSlug }: Props) => {
                 >
                   {parent.replaceAll('"', "")}
                 </a>
-              </>
+              </span>
             ))}
           </p>
         )}
@@ -85,12 +85,12 @@ const PlantCard = ({ plant, genusSlug }: Props) => {
           <p>
             <strong>Cultivars and Hybrids:</strong>{" "}
             {plant.children.split(", ").map((child, i) => (
-              <>
+              <span key={child}>
                 {i > 0 && ", "}
                 <a key={child} href={"#" + removeChars(child)} className="mr-2">
                   {child.replaceAll('"', "")}
                 </a>
-              </>
+              </span>
             ))}
           </p>
         )}
