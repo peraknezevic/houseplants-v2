@@ -1,7 +1,7 @@
-interface Props {
+type Props = {
   title: string;
   pageType?: string;
-}
+};
 
 const PageHead = ({ title, pageType }: Props) => {
   return (
