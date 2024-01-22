@@ -2,7 +2,7 @@ import Section from "@/app/components/Section";
 import { Plant } from "@prisma/client";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import Image from "next/image";
+import CldImage from "@/app/components/Cloudinary";
 
 interface Props {
   plant: Plant;
@@ -97,7 +97,7 @@ const PlantCard = ({ plant, genusSlug }: Props) => {
       </div>
       {plant.hasImage ? (
         <figure>
-          <Image
+          <CldImage
             src={`/images/genus/${genusSlug}/${plant.slug}.jpg`}
             width={800}
             height={1000}

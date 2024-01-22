@@ -2,7 +2,7 @@ import PageHead from "@/app/components/PageHead";
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import Image from "next/image";
+import CldImage from "@/app/components/Cloudinary";
 import Section from "@/app/components/Section";
 
 const Article = async ({ params }: { params: { slug: string } }) => {
@@ -27,7 +27,7 @@ const Article = async ({ params }: { params: { slug: string } }) => {
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </div>
         <figure>
-          <Image
+          <CldImage
             src={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
             width={800}
             height={1000}

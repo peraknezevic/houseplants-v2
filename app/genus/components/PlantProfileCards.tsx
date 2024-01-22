@@ -1,6 +1,6 @@
 import Section from "@/app/components/Section";
 import { PlantProfile } from "@prisma/client";
-import Image from "next/image";
+import CldImage from "@/app/components/Cloudinary";
 import ReactMarkdown from "react-markdown";
 
 interface Props {
@@ -76,7 +76,7 @@ const PlantProfileCards = ({ plant }: Props) => {
           )}
         </div>
         <figure>
-          <Image
+          <CldImage
             src={`/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
             width={800}
             height={1000}
@@ -153,7 +153,7 @@ const PlantProfileCards = ({ plant }: Props) => {
           )}
         </div>
         <figure>
-          <Image
+          <CldImage
             src={`/images/plants/${plant.slug}/${plant.slug}-02.jpg`}
             width={800}
             height={1000}
@@ -214,7 +214,7 @@ const PlantProfileCards = ({ plant }: Props) => {
           )}
         </div>
         <figure>
-          <Image
+          <CldImage
             src={`/images/plants/${plant.slug}/${plant.slug}-03.jpg`}
             width={800}
             height={1000}

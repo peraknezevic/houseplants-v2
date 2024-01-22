@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import Image from "next/image";
+import CldImage from "@/app/components/Cloudinary";
 import { plantData } from "@/app/hooks/useData";
 import Section from "@/app/components/Section";
 import PageHead from "@/app/components/PageHead";
@@ -73,7 +73,7 @@ const PlantProfile = async ({ params }: Props) => {
         </div>
         {plant.hasImage && (
           <figure>
-            <Image
+            <CldImage
               src={`/images/genus/${plant.genusPageSlug}/${plant.slug}.jpg`}
               width={800}
               height={1000}

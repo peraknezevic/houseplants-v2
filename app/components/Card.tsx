@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import CldImage from "@/app/components/Cloudinary";
 
 interface Props {
   item: {
@@ -15,7 +15,7 @@ const Card = ({ item, imgFolder, pageFolder }: Props) => {
   return (
     <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md dark:bg-zinc-900">
       <Link href={`/${pageFolder}/${item.slug}/`}>
-        <Image
+        <CldImage
           src={`/images/${imgFolder}/${item.slug}/${item.slug}.jpg`}
           width={400}
           height={500}
