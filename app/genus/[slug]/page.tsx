@@ -5,11 +5,13 @@ import { Plant } from "@prisma/client";
 import ReactMarkdown from "react-markdown";
 import PlantCards from "../components/PlantCards";
 import PlantsList from "../components/PlantsList";
+import { getCldOgImageUrl } from "next-cloudinary";
 interface Props {
   params: { slug: string };
 }
 
 export async function generateMetadata({ params }: Props) {
+  const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`;
   const url = "https://houseplants.xyz";
   const pageUrl = `${url}/genus/{params,slug}`;
   const pageTitle = params.slug[0].toUpperCase() + params.slug.slice(1);
@@ -26,20 +28,62 @@ export async function generateMetadata({ params }: Props) {
       url: pageUrl,
       siteName: "Houseplants",
       images: [
+        // {
+        //   url: cloudinaryUrl,
+        //   width: 1200,
+        //   height: 630,
+        // },
         {
-          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`,
+          // Prefer a different size? Be sure to update the width and height of the
+          // metadata as well as the image configuration of getCldOgImageUrl
           width: 1200,
-          height: 630,
-        },
-        {
-          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-1600x900.jpg`,
-          width: 1600,
-          height: 900,
-        },
-        {
-          url: `${url}/images/genus/${params.slug}/genus-${params.slug}-pinterest-en.jpg`,
-          width: 1000,
-          height: 1500,
+          height: 627,
+          url: getCldOgImageUrl({
+            src: publicId,
+            effects: [{ colorize: "100,co_black" }],
+            overlays: [
+              {
+                publicId,
+                width: 2400,
+                height: 1254,
+                crop: "fill",
+                effects: [
+                  {
+                    opacity: 60,
+                  },
+                ],
+              },
+              {
+                width: 1400,
+                crop: "fit",
+                text: {
+                  alignment: "center",
+                  color: "white",
+                  fontFamily: "Source Sans Pro",
+                  fontSize: 160,
+                  fontWeight: "bold",
+                  text: pageTitle,
+                },
+                position: {
+                  y: -100,
+                },
+              },
+              {
+                width: 1400,
+                crop: "fit",
+                text: {
+                  alignment: "center",
+                  color: "white",
+                  fontFamily: "Source Sans Pro",
+                  fontSize: 74,
+                  text: description,
+                },
+                position: {
+                  y: 100,
+                },
+              },
+            ],
+          }),
         },
       ],
       type: "article",
