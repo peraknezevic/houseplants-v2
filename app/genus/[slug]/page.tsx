@@ -13,7 +13,7 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`;
   const url = "https://houseplants.xyz";
-  const pageUrl = `${url}/genus/{params,slug}`;
+  const pageUrl = `${url}/genus/${params.slug}`;
   const pageTitle = params.slug[0].toUpperCase() + params.slug.slice(1);
   const title = `${pageTitle} species, cultivars and hybrids - genus ${pageTitle}`;
   const description = `List of all the ${pageTitle} plant varieties in cultivation`;
@@ -28,11 +28,6 @@ export async function generateMetadata({ params }: Props) {
       url: pageUrl,
       siteName: "Houseplants",
       images: [
-        // {
-        //   url: cloudinaryUrl,
-        //   width: 1200,
-        //   height: 630,
-        // },
         {
           // Prefer a different size? Be sure to update the width and height of the
           // metadata as well as the image configuration of getCldOgImageUrl
@@ -49,7 +44,7 @@ export async function generateMetadata({ params }: Props) {
                 crop: "fill",
                 effects: [
                   {
-                    opacity: 60,
+                    opacity: 30,
                   },
                 ],
               },

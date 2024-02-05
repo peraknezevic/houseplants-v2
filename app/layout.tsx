@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import { ReactNode, Suspense } from "react";
+
 import { PHProvider, PostHogPageview } from "./providers";
+import { ReactNode, Suspense } from "react";
+
 import AuthProvider from "./auth/Provider";
-import { Analytics } from "@vercel/analytics/react";
+import Footer from "./Footer";
 import { GeistSans } from "geist/font";
 import Header from "./Header";
-import Footer from "./Footer";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Houseplants",
@@ -26,7 +27,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AuthProvider>
             <Header />
             <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
-            <Analytics />
             <Footer />
           </AuthProvider>
         </body>
