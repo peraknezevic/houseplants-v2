@@ -1,14 +1,15 @@
 "use client";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
-import { plantSchema } from "@/app/validationSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import ErrorMessage from "@/components/error-message";
 import { Plant } from "@prisma/client";
+import Spinner from "@/components/spinner";
 import axios from "axios";
+import { plantSchema } from "@/lib/validations";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type PlantData = z.infer<typeof plantSchema>;
 

@@ -1,20 +1,16 @@
 import "./globals.css";
 
 import { PHProvider, PostHogPageview } from "./providers";
-import { ReactNode, Suspense } from "react";
 
 import AuthProvider from "./auth/Provider";
-import Footer from "./Footer";
+import Footer from "../components/footer";
 import { GeistSans } from "geist/font";
-import Header from "./Header";
+import Header from "../components/header";
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { TNode } from "@/lib/types";
 
-export const metadata: Metadata = {
-  title: "Houseplants",
-  description: "All about your indoor plants",
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: TNode) {
   return (
     <html lang="en">
       <Suspense>
@@ -34,3 +30,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Houseplants",
+  description: "All about your indoor plants",
+};

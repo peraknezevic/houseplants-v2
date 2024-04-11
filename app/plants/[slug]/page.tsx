@@ -1,23 +1,21 @@
-import React from "react";
+import CldImage from "@/components/cloudinary";
+import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
-import CldImage from "@/app/components/Cloudinary";
-import { plantData } from "@/app/hooks/useData";
-import Section from "@/app/components/Section";
-import PageHead from "@/app/components/PageHead";
+import Section from "@/components/section";
+import { TSlug } from "@/lib/types";
+import { getPlantBySlug } from "@/lib/server-utils";
+import { DAILY } from "@/lib/constants";
 
-interface Props {
-  params: { slug: string };
-}
+export const revalidate = DAILY;
 
-const PlantProfile = async ({ params }: Props) => {
-  const pageType = "Plant";
-  const plant = await plantData(params.slug);
+export default async function PlantProfile({ params }: TSlug) {
+  const plant = await getPlantBySlug(params.slug);
 
   if (!plant) return <p>We don&pos;t have a page for this plant yet</p>;
 
   return (
     <article>
-      <PageHead title={plant.botanicalName} pageType={pageType} />
+      <PageHead title={plant.botanicalName} pageType="Plant" />
       <Section>
         <div>
           {plant.synonyms && (
@@ -88,6 +86,4 @@ const PlantProfile = async ({ params }: Props) => {
       </Section>
     </article>
   );
-};
-
-export default PlantProfile;
+}

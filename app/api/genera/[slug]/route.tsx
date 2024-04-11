@@ -1,4 +1,4 @@
-import { generaSchema } from "@/app/validationSchemas";
+import { generaSchema } from "@/lib/validations";
 import prisma from "@/prisma/client";
 
 export async function GET(

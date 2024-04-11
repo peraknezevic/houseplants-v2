@@ -1,12 +1,14 @@
-import PageHead from "@/app/components/PageHead";
-import prisma from "@/prisma/client";
-import { notFound } from "next/navigation";
+import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
+import { TSlug } from "@/lib/types";
+import { getPageBySlug } from "@/lib/server-utils";
+import { notFound } from "next/navigation";
+import { DAILY } from "@/lib/constants";
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const page = await prisma.page.findUnique({
-    where: { slug: params.slug },
-  });
+export const revalidate = DAILY;
+
+export default async function Page({ params }: TSlug) {
+  const page = await getPageBySlug(params.slug);
   if (!page) notFound();
 
   return (
@@ -17,6 +19,4 @@ const Page = async ({ params }: { params: { slug: string } }) => {
       </div>
     </article>
   );
-};
-
-export default Page;
+}

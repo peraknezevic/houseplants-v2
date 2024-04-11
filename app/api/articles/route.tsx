@@ -1,4 +1,4 @@
-import { articlesSchema } from "@/app/validationSchemas";
+import { articlesSchema } from "@/lib/validations";
 import prisma from "@/prisma/client";
 
 export async function GET(request: Request) {

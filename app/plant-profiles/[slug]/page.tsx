@@ -1,14 +1,14 @@
+import PageHead from "@/components/page-head";
+import PlantProfileContent from "@/components/plant-profile-content";
 import React from "react";
-import { plantProfileData } from "@/app/hooks/useData";
-import PageHead from "@/app/components/PageHead";
-import PlantProfileCards from "@/app/genus/components/PlantProfileCards";
+import { TSlug } from "@/lib/types";
+import { getPlantProfileBySlug } from "@/lib/server-utils";
+import { DAILY } from "@/lib/constants";
 
-interface Props {
-  params: { slug: string };
-}
+export const revalidate = DAILY;
 
-const PlantProfile = async ({ params }: Props) => {
-  const plantProfile = await plantProfileData(params.slug);
+export default async function PlantProfilePage({ params }: TSlug) {
+  const plantProfile = await getPlantProfileBySlug(params.slug);
 
   if (!plantProfile)
     return <p>We don&pos;t have a profile page for this plant yet</p>;
@@ -20,9 +20,7 @@ const PlantProfile = async ({ params }: Props) => {
   return (
     <article>
       <PageHead title={plantProfile.title} pageType="Plant Profile" />
-      <PlantProfileCards plant={plantProfile} />
+      <PlantProfileContent plant={plantProfile} />
     </article>
   );
-};
-
-export default PlantProfile;
+}

@@ -1,43 +1,43 @@
-import { pagesSchema } from "@/app/validationSchemas"
-import prisma from "@/prisma/client"
+import { pagesSchema } from "@/lib/validations";
+import prisma from "@/prisma/client";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
   const page = await prisma.page.findUnique({
     where: { slug: params.slug },
-  })
+  });
   if (!page)
     return Response.json(
       { error: "This page could not be found" },
-      { status: 404 }
-    )
-  return Response.json(page)
+      { status: 404 },
+    );
+  return Response.json(page);
 }
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
-  const body = await request.json()
+  const body = await request.json();
 
-  const validation = pagesSchema.safeParse(body)
+  const validation = pagesSchema.safeParse(body);
 
   if (!validation.success)
-    return Response.json(validation.error.errors, { status: 400 })
+    return Response.json(validation.error.errors, { status: 400 });
 
   const page = await prisma.page.findUnique({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
   if (!page)
     return Response.json(
       { error: "This page could not be found." },
-      { status: 404 }
-    )
+      { status: 404 },
+    );
 
   const pageUpdate = await prisma.page.update({
     where: { slug: params.slug },
@@ -47,32 +47,32 @@ export async function PATCH(
       content: body.content,
       published: body.published,
     },
-  })
+  });
 
-  return Response.json(pageUpdate)
+  return Response.json(pageUpdate);
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { slug: string } },
 ) {
   const page = await prisma.page.findUnique({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
   if (!page)
     return Response.json(
       { error: "This page could not be found." },
-      { status: 404 }
-    )
+      { status: 404 },
+    );
 
   await prisma.page.delete({
     where: {
       slug: params.slug,
     },
-  })
+  });
 
-  return Response.json({})
+  return Response.json({});
 }

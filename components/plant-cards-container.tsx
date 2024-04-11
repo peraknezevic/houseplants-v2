@@ -1,13 +1,17 @@
 import { Plant } from "@prisma/client";
-import PlantCard from "./PlantCard";
+import PlantCard from "./plant-card";
 
-interface Props {
+interface PlantCardsContainerProps {
   plants: Plant[];
   genusSlug: string;
   genusTitle: string;
 }
 
-const PlantCards = ({ plants, genusSlug, genusTitle }: Props) => {
+export default function PlantCardsContainer({
+  plants,
+  genusSlug,
+  genusTitle,
+}: PlantCardsContainerProps) {
   return (
     <>
       <h2>{genusTitle} Plants</h2>
@@ -16,6 +20,4 @@ const PlantCards = ({ plants, genusSlug, genusTitle }: Props) => {
       ))}
     </>
   );
-};
-
-export default PlantCards;
+}

@@ -1,13 +1,13 @@
-import Section from "@/app/components/Section";
+import CldImage from "@/components/cloudinary";
 import { PlantProfile } from "@prisma/client";
-import CldImage from "@/app/components/Cloudinary";
 import ReactMarkdown from "react-markdown";
+import Section from "@/components/section";
 
-interface Props {
+interface PlantProfileProps {
   plant: PlantProfile;
 }
 
-const PlantProfileCards = ({ plant }: Props) => {
+export default function PlantProfileContent({ plant }: PlantProfileProps) {
   return (
     <>
       <Section>
@@ -237,6 +237,4 @@ const PlantProfileCards = ({ plant }: Props) => {
       )}
     </>
   );
-};
-
-export default PlantProfileCards;
+}

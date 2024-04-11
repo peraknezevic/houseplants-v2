@@ -1,11 +1,9 @@
+import HelloWorld from "@/components/hello-world";
 import { Metadata } from "next";
-import HelloWorld from "./components/HelloWorld";
 
-const Home = () => {
+export default function Home() {
   return <HelloWorld />;
-};
-
-export default Home;
+}
 
 export const metadata: Metadata = {
   title: "Houseplants",

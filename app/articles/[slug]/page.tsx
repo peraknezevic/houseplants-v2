@@ -1,10 +1,13 @@
-import CldImage from "@/app/components/Cloudinary";
-import PageHead from "@/app/components/PageHead";
+import CldImage from "@/components/cloudinary";
+import { DAILY } from "@/lib/constants";
+import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
-import Section from "@/app/components/Section";
+import Section from "@/components/section";
 import { TSlug } from "@/lib/types";
 import { getArticleBySlug } from "@/lib/server-utils";
 import { notFound } from "next/navigation";
+
+export const revalidate = DAILY;
 
 export default async function Article({ params }: TSlug) {
   const article = await getArticleBySlug(params.slug);

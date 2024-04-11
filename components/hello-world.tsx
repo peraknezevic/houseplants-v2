@@ -1,7 +1,7 @@
-import PageHead from "./PageHead";
-import Section from "./Section";
+import PageHead from "./page-head";
+import Section from "./section";
 
-const HelloWorld = () => {
+export default function HelloWorld() {
   return (
     <article>
       <PageHead title="Hi everyone" />
@@ -17,6 +17,4 @@ const HelloWorld = () => {
       </Section>
     </article>
   );
-};
-
-export default HelloWorld;
+}

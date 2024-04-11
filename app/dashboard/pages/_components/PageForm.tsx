@@ -1,16 +1,19 @@
 "use client";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
-import { pagesSchema } from "@/app/validationSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+
 import "easymde/dist/easymde.min.css";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+
+import ErrorMessage from "@/components/error-message";
 import { Page } from "@prisma/client";
 import SimpleMDE from "react-simplemde-editor";
+import Spinner from "@/components/spinner";
+import axios from "axios";
+import { pagesSchema } from "@/lib/validations";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type PageData = z.infer<typeof pagesSchema>;
 

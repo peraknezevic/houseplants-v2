@@ -1,8 +1,11 @@
-import Card from "../components/Card";
-import CardGrid from "../components/CardGrid";
+import Card from "@/components/card";
+import CardGrid from "@/components/cards-grid";
+import { DAILY } from "@/lib/constants";
 import { Metadata } from "next";
-import PageHead from "../components/PageHead";
+import PageHead from "@/components/page-head";
 import { getArticles } from "@/lib/server-utils";
+
+export const revalidate = DAILY;
 
 export default async function ArticlesPage() {
   const data = await getArticles();

@@ -1,15 +1,15 @@
-import Section from "@/app/components/Section";
-import { Plant } from "@prisma/client";
+import CldImage from "@/components/cloudinary";
 import Link from "next/link";
+import { Plant } from "@prisma/client";
 import ReactMarkdown from "react-markdown";
-import CldImage from "@/app/components/Cloudinary";
+import Section from "@/components/section";
 
-interface Props {
+interface PlantCardProps {
   plant: Plant;
   genusSlug: string;
 }
 
-const PlantCard = ({ plant, genusSlug }: Props) => {
+export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
   const removeChars = (text: string) =>
     text
       .replaceAll("'", "")
@@ -127,6 +127,4 @@ const PlantCard = ({ plant, genusSlug }: Props) => {
       )}
     </Section>
   );
-};
-
-export default PlantCard;
+}

@@ -1,4 +1,4 @@
-import CldImage from "@/app/components/Cloudinary";
+import CldImage from "@/components/cloudinary";
 import Link from "next/link";
 
 type CardProps = {

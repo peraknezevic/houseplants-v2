@@ -1,16 +1,19 @@
 "use client";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
-import { articlesSchema } from "@/app/validationSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Article } from "@prisma/client";
-import axios from "axios";
+
 import "easymde/dist/easymde.min.css";
+
+import { Controller, useForm } from "react-hook-form";
+
+import { Article } from "@prisma/client";
+import ErrorMessage from "@/components/error-message";
+import SimpleMDE from "react-simplemde-editor";
+import Spinner from "@/components/spinner";
+import { articlesSchema } from "@/lib/validations";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import SimpleMDE from "react-simplemde-editor";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type ArticleData = z.infer<typeof articlesSchema>;
 

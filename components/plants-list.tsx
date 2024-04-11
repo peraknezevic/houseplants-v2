@@ -1,12 +1,12 @@
-import Section from "@/app/components/Section";
 import { Plant } from "@prisma/client";
+import Section from "@/components/section";
 
-interface Props {
+interface PlantsListProps {
   plants: Plant[];
   genusTitle: string;
 }
 
-const PlantsList = ({ plants, genusTitle }: Props) => {
+export default function PlantsList({ plants, genusTitle }: PlantsListProps) {
   const removeChars = (text: string) =>
     text
       .replaceAll("'", "")
@@ -36,6 +36,4 @@ const PlantsList = ({ plants, genusTitle }: Props) => {
       </Section>
     </>
   );
-};
-
-export default PlantsList;
+}
