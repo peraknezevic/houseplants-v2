@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 
-interface Props {
+type SectionProps = {
   children: ReactNode;
   id?: string;
-}
+};
 
-const Section = ({ children, id }: Props) => {
+const Section = ({ children, id = "" }: SectionProps) => {
   return (
     <section
-      className="mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md dark:bg-zinc-950 md:mb-16"
+      className="mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md md:mb-16 dark:bg-zinc-950"
       id={id}
     >
       {children}

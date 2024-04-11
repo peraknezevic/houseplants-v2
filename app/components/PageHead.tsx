@@ -1,9 +1,9 @@
-type Props = {
+type PageHeadProps = {
   title: string;
   pageType?: string;
 };
 
-const PageHead = ({ title, pageType }: Props) => {
+export default function PageHead({ title, pageType }: PageHeadProps) {
   return (
     <div>
       {pageType && (
@@ -16,6 +16,4 @@ const PageHead = ({ title, pageType }: Props) => {
       </h1>
     </div>
   );
-};
-
-export default PageHead;
+}

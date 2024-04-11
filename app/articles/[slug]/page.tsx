@@ -1,14 +1,14 @@
-import PageHead from "@/app/components/PageHead";
-import prisma from "@/prisma/client";
-import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
 import CldImage from "@/app/components/Cloudinary";
+import PageHead from "@/app/components/PageHead";
+import ReactMarkdown from "react-markdown";
 import Section from "@/app/components/Section";
+import { TSlug } from "@/lib/types";
+import { getArticleBySlug } from "@/lib/server-utils";
+import { notFound } from "next/navigation";
 
-const Article = async ({ params }: { params: { slug: string } }) => {
-  const article = await prisma.article.findUnique({
-    where: { slug: params.slug },
-  });
+export default async function Article({ params }: TSlug) {
+  const article = await getArticleBySlug(params.slug);
+
   if (!article) notFound();
 
   return (
@@ -40,6 +40,4 @@ const Article = async ({ params }: { params: { slug: string } }) => {
       </Section>
     </article>
   );
-};
-
-export default Article;
+}

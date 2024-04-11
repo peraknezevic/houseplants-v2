@@ -1,11 +1,11 @@
-import { Metadata } from "next";
 import Card from "../components/Card";
 import CardGrid from "../components/CardGrid";
+import { Metadata } from "next";
 import PageHead from "../components/PageHead";
-import { articlesData } from "../hooks/useData";
+import { getArticles } from "@/lib/server-utils";
 
-const ArticlesPage = async () => {
-  const data = await articlesData();
+export default async function ArticlesPage() {
+  const data = await getArticles();
 
   return (
     <div>
@@ -22,11 +22,9 @@ const ArticlesPage = async () => {
       </CardGrid>
     </div>
   );
-};
+}
 
 export const metadata: Metadata = {
   title: "Articles - Houseplants",
   description: "Articles about your indoor plants",
 };
-
-export default ArticlesPage;

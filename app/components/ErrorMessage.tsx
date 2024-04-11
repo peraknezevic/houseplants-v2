@@ -1,8 +1,6 @@
-import { PropsWithChildren } from "react"
+import { TNode } from "@/lib/types";
 
-const ErrorMessage = ({ children }: PropsWithChildren) => {
-  if (!children) return null
-  return <p className="text-red-600">{children}</p>
+export default function ErrorMessage({ children }: TNode) {
+  if (!children) return null;
+  return <p className="text-red-600">{children}</p>;
 }
-
-export default ErrorMessage

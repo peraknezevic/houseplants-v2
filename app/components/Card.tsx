@@ -1,7 +1,7 @@
-import Link from "next/link";
 import CldImage from "@/app/components/Cloudinary";
+import Link from "next/link";
 
-interface Props {
+type CardProps = {
   item: {
     id: string;
     slug: string;
@@ -9,9 +9,9 @@ interface Props {
   };
   imgFolder: string;
   pageFolder: string;
-}
+};
 
-const Card = ({ item, imgFolder, pageFolder }: Props) => {
+export default function Card({ item, imgFolder, pageFolder }: CardProps) {
   return (
     <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md dark:bg-zinc-900">
       <Link href={`/${pageFolder}/${item.slug}/`}>
@@ -27,5 +27,4 @@ const Card = ({ item, imgFolder, pageFolder }: Props) => {
       </Link>
     </li>
   );
-};
-export default Card;
+}

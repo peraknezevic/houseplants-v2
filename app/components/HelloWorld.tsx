@@ -10,7 +10,7 @@ const HelloWorld = () => {
           <p>Houseplants is finally back!</p>
           <p>
             There is still a lot to do, but feel free to browse around while I
-            twick things and finish (manually) adding all the plants to genera
+            tweak things and finish (manually) adding all the plants to genera
             pages! (this might take a while){" "}
           </p>
         </div>
