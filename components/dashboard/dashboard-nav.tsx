@@ -1,6 +1,6 @@
 import { DashboardNavItems } from "@/lib/constants";
-import DashboardNavLogOut from "./dashboard-nav-logout";
 import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const DashboardNav = () => {
   return (
@@ -13,7 +13,9 @@ const DashboardNav = () => {
               <Link href={item.url}>{item.title}</Link>
             </li>
           ))}
-          <DashboardNavLogOut />
+          <li>
+            <LogoutLink>Log out</LogoutLink>
+          </li>
         </ul>
       </nav>
     </div>
