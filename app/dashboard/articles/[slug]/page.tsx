@@ -1,10 +1,6 @@
-import { articleData } from "@/app/hooks/useData";
-import dynamic from "next/dynamic";
+import { TSlug } from "@/lib/types";
+import { getArticleBySlug } from "@/lib/server-utils";
 import { notFound } from "next/navigation";
-
-interface Props {
-  params: { slug: string };
-}
 
 const ArticleForm = dynamic(
   () => import("@/app/dashboard/articles/_components/ArticleForm"),
@@ -13,8 +9,8 @@ const ArticleForm = dynamic(
   },
 );
 
-const EditArticle = async ({ params }: Props) => {
-  const article = await articleData(params.slug);
+const EditArticle = async ({ params }: TSlug) => {
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) notFound();
 

@@ -1,14 +1,13 @@
-import React from "react";
-import ViewButton from "./ViewButton";
-import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
+import ViewButton from "./ViewButton";
 
-type Props = {
+type DashboardActionsProps = {
   cat: string;
   slug: string;
 };
 
-const Actions = ({ cat, slug }: Props) => {
+export default function DashboardActions({ cat, slug }: DashboardActionsProps) {
   return (
     <td className="space-x-2 lg:w-1/4">
       <ViewButton cat={cat} slug={slug} />
@@ -16,6 +15,4 @@ const Actions = ({ cat, slug }: Props) => {
       <DeleteButton cat={cat} slug={slug} />
     </td>
   );
-};
-
-export default Actions;
+}

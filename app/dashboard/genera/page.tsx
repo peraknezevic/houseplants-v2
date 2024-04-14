@@ -1,6 +1,6 @@
+import Actions from "../_components/dashboard-actions";
+import AddNewButton from "../../../components/button-add-new";
 import prisma from "@/prisma/client";
-import AddNewButton from "../_components/AddNewButton";
-import Actions from "../_components/Actions";
 
 const Pages = async () => {
   const cat = "genera";

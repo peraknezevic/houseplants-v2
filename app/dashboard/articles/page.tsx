@@ -1,16 +1,16 @@
-import prisma from "@/prisma/client";
-import AddNewButton from "../_components/AddNewButton";
-import Actions from "../_components/Actions";
+import Actions from "../_components/dashboard-actions";
+import ButtonAddNew from "@/components/button-add-new";
+import { getArticles } from "@/lib/server-utils";
 
 const cat = "articles";
 
 const Pages = async () => {
-  const articles = await prisma.article.findMany();
+  const articles = await getArticles();
 
   return (
     <div className="space-y-2">
       <div className="my-4 flex justify-between gap-4">
-        <AddNewButton cat={cat} />
+        <ButtonAddNew cat={cat} />
       </div>
       <table>
         <thead>

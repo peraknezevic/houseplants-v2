@@ -1,8 +1,8 @@
-import prisma from "@/prisma/client";
-import Pagination from "../_components/Pagination";
+import Actions from "../_components/dashboard-actions";
+import AddNewButton from "../../../components/button-add-new";
 import GenusFilterData from "./_components/GenusFilterData";
-import AddNewButton from "../_components/AddNewButton";
-import Actions from "../_components/Actions";
+import Pagination from "../_components/Pagination";
+import prisma from "@/prisma/client";
 
 const cat = "plants";
 

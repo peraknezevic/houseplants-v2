@@ -1,9 +1,9 @@
-import prisma from "@/prisma/client";
+import Actions from "../_components/dashboard-actions";
+import AddNewButton from "../../../components/button-add-new";
 import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import ViewButton from "../_components/ViewButton";
-import AddNewButton from "../_components/AddNewButton";
-import Actions from "../_components/Actions";
+import prisma from "@/prisma/client";
 
 const cat = "pages";
 

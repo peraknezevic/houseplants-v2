@@ -1,8 +1,14 @@
 "use client";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const DeleteButton = ({ slug, cat }: { slug: string; cat: string }) => {
+type DeleteButtonProps = {
+  slug: string;
+  cat: string;
+};
+
+export default function DeleteButton({ slug, cat }: DeleteButtonProps) {
   const apiUrl = `/api/${cat}/${slug}`;
   const redirectUrl = `/dashboard/${cat}/`;
   const router = useRouter();
@@ -22,6 +28,4 @@ const DeleteButton = ({ slug, cat }: { slug: string; cat: string }) => {
       Delete
     </button>
   );
-};
-
-export default DeleteButton;
+}

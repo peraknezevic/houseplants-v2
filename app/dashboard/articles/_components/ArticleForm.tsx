@@ -10,6 +10,7 @@ import SimpleMDE from "react-simplemde-editor";
 import Spinner from "@/components/spinner";
 import { articlesSchema } from "@/lib/validations";
 import axios from "axios";
+import { makeSlug } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
@@ -23,7 +24,6 @@ const ArticleForm = ({ article }: { article?: Article }) => {
     register,
     control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ArticleData>({
     resolver: zodResolver(articlesSchema),
@@ -31,14 +31,6 @@ const ArticleForm = ({ article }: { article?: Article }) => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [slugSuggestion, setSlugSuggestion] = useState("");
-
-  const makeSlug = (text: string) => {
-    return text
-      .replaceAll(" ", "-")
-      .replaceAll("'", "")
-      .replaceAll('"', "")
-      .toLowerCase();
-  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {

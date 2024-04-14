@@ -2,13 +2,15 @@ import "./globals.css";
 
 import { PHProvider, PostHogPageview } from "./providers";
 
-import AuthProvider from "./auth/Provider";
+import AuthProvider from "./auth-old/Provider";
 import Footer from "../components/footer";
-import { GeistSans } from "geist/font";
 import Header from "../components/header";
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import { Suspense } from "react";
 import { TNode } from "@/lib/types";
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: TNode) {
   return (
@@ -18,7 +20,7 @@ export default function RootLayout({ children }: TNode) {
       </Suspense>
       <PHProvider>
         <body
-          className={`${GeistSans.className} bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300`}
+          className={`${outfit.className} bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300`}
         >
           <AuthProvider>
             <Header />

@@ -22,3 +22,11 @@ export const socialNavItems = [
   },
   { id: 4, title: "Patreon", url: "https://www.patreon.com/houseplants" },
 ];
+
+export const DashboardNavItems = [
+  { id: 1, url: "/dashboard/plants", title: "Plants" },
+  { id: 2, url: "/dashboard/plant-profiles", title: "Plant Profiles" },
+  { id: 3, url: "/dashboard/genera", title: "Genera" },
+  { id: 4, url: "/dashboard/articles", title: "Articles" },
+  { id: 5, url: "/dashboard/pages", title: "Pages" },
+];

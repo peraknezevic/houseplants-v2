@@ -1,10 +1,7 @@
-import DashboardNav from "./DashboardNav";
+import DashboardNav from "@/components/dashboard-nav";
+import { TNode } from "@/lib/types";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function DashboardLayout({ children }: TNode) {
   return (
     <div className="bg-gray-50 dark:bg-zinc-900">
       <DashboardNav />
