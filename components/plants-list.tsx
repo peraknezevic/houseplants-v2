@@ -26,9 +26,7 @@ export default function PlantsList({ plants, genusTitle }: PlantsListProps) {
                 key={plant.slug}
                 className="flex before:mr-2 before:content-['▸']"
               >
-                <a href={"#" + removeChars(plant.botanicalName)}>
-                  {plant.botanicalName}
-                </a>
+                <a href={"#" + removeChars(plant.title)}>{plant.title}</a>
               </li>
             ))}
           </ul>

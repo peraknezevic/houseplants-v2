@@ -19,10 +19,10 @@ export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
       .replaceAll(" ", "")
       .toLowerCase();
   return (
-    <Section id={removeChars(plant.botanicalName)} key={plant.slug}>
+    <Section id={removeChars(plant.title)} key={plant.slug}>
       <div>
         <h3>
-          <Link href={"/plants/" + plant.slug}>{plant.botanicalName}</Link>
+          <Link href={"/plants/" + plant.slug}>{plant.title}</Link>
         </h3>
         {plant.synonyms && (
           <p>
@@ -101,10 +101,10 @@ export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
             src={`/images/genus/${genusSlug}/${plant.slug}.jpg`}
             width={800}
             height={1000}
-            alt={plant.botanicalName}
+            alt={plant.title}
           />
           <figcaption>
-            {plant.botanicalName}
+            {plant.title}
             <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
           </figcaption>
         </figure>
@@ -117,7 +117,7 @@ export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
           <p>
             Send it via e-mail at{" "}
             <a
-              href={`mailto:houseplants.xyz@gmail.com?subject=${plant.botanicalName} photo`}
+              href={`mailto:houseplants.xyz@gmail.com?subject=${plant.title} photo`}
             >
               houseplants.xyz@gmail.com
             </a>{" "}
