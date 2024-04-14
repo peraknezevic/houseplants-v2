@@ -1,17 +1,12 @@
 "server only";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { redirect } from "next/navigation";
 
-export async function adminAccess() {
-  const { getPermission, isAuthenticated } = getKindeServerSession();
-  const isLoggedIn = await isAuthenticated();
-  const isAllowed = await getPermission("modify-content");
+export async function isLoggedIn() {
+  const { isAuthenticated } = await getKindeServerSession();
+  return isAuthenticated;
+}
 
-  if (!isLoggedIn) redirect("/signin");
-  if (!isAllowed?.isGranted) {
-    return new Error("Not allowed");
-  }
-
-  return null;
+export function deleteItem(cat: string, slug: string) {
+  console.log(`Item ${slug} ${cat} deleted`);
 }

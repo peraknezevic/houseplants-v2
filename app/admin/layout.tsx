@@ -3,7 +3,7 @@ import {
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import DashboardNav from "@/components/admin/admin-navbar";
+import { AdminNavbar } from "@/components/admin/admin-navbar";
 import { TNode } from "@/lib/types";
 import { redirect } from "next/navigation";
 
@@ -23,7 +23,7 @@ export default async function DashboardLayout({ children }: TNode) {
     );
   return (
     <div className="bg-gray-50 dark:bg-zinc-900">
-      <DashboardNav />
+      <AdminNavbar />
       <main className="w-full p-5">{children}</main>
     </div>
   );

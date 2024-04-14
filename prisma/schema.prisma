@@ -99,10 +99,10 @@ model GenusPage {
 }
 
 model Plant {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
-  slug          String  @unique
-  botanicalName String
-  hasProfile    Boolean @default(false)
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  slug       String  @unique
+  title      String
+  hasProfile Boolean @default(false)
 
   isSpecies  Boolean @default(true)
   isCultivar Boolean @default(false)
@@ -127,6 +127,8 @@ model Plant {
   hasImage          Boolean @default(true)
   imagesForApproval String?
   imageCredits      String?
+
+  published Publish @default(PUBLISHED)
 }
 
 model PlantProfile {

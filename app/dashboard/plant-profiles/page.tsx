@@ -1,4 +1,4 @@
-import Actions from "../_components/dashboard-actions";
+import Actions from "../../../components/admin/admin-actions-bar";
 import AddNewButton from "../../../components/button-add-new";
 import prisma from "@/prisma/client";
 

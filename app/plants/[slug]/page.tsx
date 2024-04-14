@@ -1,10 +1,10 @@
 import CldImage from "@/components/cloudinary";
+import { DAILY } from "@/lib/constants";
 import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
 import { TSlug } from "@/lib/types";
 import { getPlantBySlug } from "@/lib/server-utils";
-import { DAILY } from "@/lib/constants";
 
 export const revalidate = DAILY;
 
@@ -15,7 +15,7 @@ export default async function PlantProfile({ params }: TSlug) {
 
   return (
     <article>
-      <PageHead title={plant.botanicalName} pageType="Plant" />
+      <PageHead title={plant.title} pageType="Plant" />
       <Section>
         <div>
           {plant.synonyms && (
@@ -75,10 +75,10 @@ export default async function PlantProfile({ params }: TSlug) {
               src={`/images/genus/${plant.genusPageSlug}/${plant.slug}.jpg`}
               width={800}
               height={1000}
-              alt={plant.botanicalName}
+              alt={plant.title}
             />
             <figcaption>
-              {plant.botanicalName}
+              {plant.title}
               <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
             </figcaption>
           </figure>
