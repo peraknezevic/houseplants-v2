@@ -1,10 +1,18 @@
-export const makeSlug = (text: string) => {
-  return text
+export const makeSlug = (text: string) =>
+  text
     .replaceAll(" ", "-")
     .replaceAll("'", "")
     .replaceAll('"', "")
     .toLowerCase();
-};
+
+export const removeChars = (text: string) =>
+  text
+    .replaceAll("'", "")
+    .replaceAll("‘", "")
+    .replaceAll("’", "")
+    .replaceAll('"', "")
+    .replaceAll(" ", "")
+    .toLowerCase();
 
 export const publishStatusClass = (status: string | undefined) => {
   switch (status) {

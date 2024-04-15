@@ -1,13 +1,15 @@
 import { z } from "zod";
 
-export const pagesSchema = z.object({
+export const pageSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   content: z.string().min(100),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export const articlesSchema = z.object({
+export type TPageForm = z.infer<typeof pageSchema>;
+
+export const articleSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string().min(50).optional().or(z.literal("")),
@@ -15,6 +17,8 @@ export const articlesSchema = z.object({
   imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
+
+export type TArticleForm = z.infer<typeof articleSchema>;
 
 export const generaSchema = z.object({
   title: z.string().min(3).max(150),
@@ -24,6 +28,8 @@ export const generaSchema = z.object({
   changeLog: z.string(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
+
+export type TGeneraForm = z.infer<typeof generaSchema>;
 
 export const plantSchema = z.object({
   slug: z.string().min(3).max(80),
@@ -52,7 +58,10 @@ export const plantSchema = z.object({
   hasImage: z.boolean().optional(),
   imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
   imagesForApproval: z.string().min(3).optional().or(z.literal("")),
+  published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
+
+export type TPlantForm = z.infer<typeof plantSchema>;
 
 export const plantProfileSchema = z.object({
   slug: z.string().min(3).max(40),
@@ -110,3 +119,5 @@ export const plantProfileSchema = z.object({
 
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
+
+export type TPlantProfileForm = z.infer<typeof plantProfileSchema>;

@@ -1,5 +1,6 @@
 import { Plant } from "@prisma/client";
 import Section from "@/components/section";
+import { removeChars } from "@/lib/utils";
 
 interface PlantsListProps {
   plants: Plant[];
@@ -7,14 +8,6 @@ interface PlantsListProps {
 }
 
 export default function PlantsList({ plants, genusTitle }: PlantsListProps) {
-  const removeChars = (text: string) =>
-    text
-      .replaceAll("'", "")
-      .replaceAll("‘", "")
-      .replaceAll("’", "")
-      .replaceAll('"', "")
-      .replaceAll(" ", "")
-      .toLowerCase();
   return (
     <>
       <h2>{genusTitle} Plants List</h2>
