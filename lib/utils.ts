@@ -1,28 +1,6 @@
-export const makeSlug = (text: string) =>
-  text
-    .replaceAll(" ", "-")
-    .replaceAll("'", "")
-    .replaceAll('"', "")
-    .toLowerCase();
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-export const removeChars = (text: string) =>
-  text
-    .replaceAll("'", "")
-    .replaceAll("‘", "")
-    .replaceAll("’", "")
-    .replaceAll('"', "")
-    .replaceAll(" ", "")
-    .toLowerCase();
-
-export const publishStatusClass = (status: string | undefined) => {
-  switch (status) {
-    case "PUBLISHED":
-      return "text-emerald-800";
-    case "DRAFT":
-      return "text-gray-800";
-    case "REVIEW":
-      return "text-rose-800";
-    default:
-      return "text-emerald-800";
-  }
-};
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}

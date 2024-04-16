@@ -1,92 +1,76 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+  @tailwind components;
+  @tailwind utilities;
 
-@layer base {
-  a {
-    @apply text-emerald-900 underline underline-offset-4 dark:text-white;
-  }
-  a:hover {
-    @apply opacity-80;
-  }
-  footer a {
-    @apply text-white;
-  }
-  footer a:hover {
-    @apply text-white opacity-80;
-  }
-  article {
-    @apply mx-auto my-4 max-w-4xl px-4;
-  }
-  h2 {
-    @apply mb-4 text-3xl font-bold;
-  }
-  h3 {
-    @apply mb-4 text-2xl font-bold;
-  }
-  img {
-    @apply h-auto w-full object-fill;
-  }
-  section div {
-    @apply m-8 flex flex-col gap-4 text-xl;
-  }
-  section div p {
-    @apply border-b-2 border-gray-100 pb-3;
-  }
-  figcaption {
-    @apply -mt-20 p-4 text-right text-white drop-shadow-lg;
-  }
-  figcaption a {
-    @apply text-zinc-100;
-  }
-  input,
-  select,
-  textarea {
-    @apply border border-zinc-400 px-2 py-1 dark:bg-zinc-900 dark:text-zinc-100;
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+    }
   }
 
-  label {
-    @apply px-2 py-1 dark:text-zinc-100;
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
   }
-  .btn {
-    @apply inline-block px-2 py-1 text-sm font-medium uppercase text-zinc-100 no-underline hover:opacity-75;
-  }
-  .btn a {
-    @apply text-zinc-100 no-underline;
-  }
-  .btn-black {
-    @apply bg-zinc-950 px-4 py-2 text-base font-bold dark:bg-zinc-700;
-  }
-  .btn-red {
-    @apply bg-red-800;
-  }
-  .btn-neutral {
-    @apply bg-zinc-600 hover:bg-zinc-500;
-  }
-  .btn-green {
-    @apply bg-green-800;
-  }
-  table {
-    @apply w-full text-left;
-  }
-  thead {
-    @apply bg-slate-200 dark:bg-zinc-800;
-  }
-  td,
-  th {
-    @apply px-3 py-3;
-  }
-  tbody > tr {
-    @apply border hover:bg-slate-100 dark:border-zinc-800 dark:hover:bg-zinc-700;
-  }
-  th {
-    @apply text-sm uppercase;
-  }
-  #changelog ul,
-  #notes ul {
-    @apply mb-6 list-disc pl-4;
-  }
-  #changelog h4 {
-    @apply font-bold;
-  }
-}

@@ -1,26 +1,35 @@
 import { z } from "zod";
 
-export const pageSchema = z.object({
+export const idSchema = z.string();
+
+export const pageFormSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   content: z.string().min(100),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPageForm = z.infer<typeof pageSchema>;
+export type TPageForm = z.infer<typeof pageFormSchema>;
 
-export const articleSchema = z.object({
+export const articleFormSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
-  intro: z.string().min(50).optional().or(z.literal("")),
+  intro: z.string().min(50).optional().or(z.literal("")).nullish(),
   content: z.string().min(100),
-  imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
+  imageCredits: z
+    .string()
+    .min(3)
+    .max(200)
+    .optional()
+    .or(z.literal(""))
+    .nullish(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
+  language: z.enum(["ENGLISH", "SRPSKI"]),
 });
 
-export type TArticleForm = z.infer<typeof articleSchema>;
+export type TArticleForm = z.infer<typeof articleFormSchema>;
 
-export const generaSchema = z.object({
+export const generaFormSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string(),
@@ -29,9 +38,9 @@ export const generaSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TGeneraForm = z.infer<typeof generaSchema>;
+export type TGeneraForm = z.infer<typeof generaFormSchema>;
 
-export const plantSchema = z.object({
+export const plantFormSchema = z.object({
   slug: z.string().min(3).max(80),
   botanicalName: z.string().min(3).max(80),
   hasProfile: z.boolean().optional(),
@@ -61,9 +70,9 @@ export const plantSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPlantForm = z.infer<typeof plantSchema>;
+export type TPlantForm = z.infer<typeof plantFormSchema>;
 
-export const plantProfileSchema = z.object({
+export const plantProfileFormSchema = z.object({
   slug: z.string().min(3).max(40),
   title: z.string().min(3).max(40),
   botanicalName: z.string().min(3).max(40),
@@ -120,4 +129,4 @@ export const plantProfileSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPlantProfileForm = z.infer<typeof plantProfileSchema>;
+export type TPlantProfileForm = z.infer<typeof plantProfileFormSchema>;

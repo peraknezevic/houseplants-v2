@@ -1,8 +1,7 @@
 "server only";
 
-import { articleFormSchema, idSchema } from "@/lib/validations";
+import { articleSchema, idSchema } from "@/lib/validations";
 
-import { ArticleEssentials } from "@/lib/types";
 import { getArticleById } from "@/lib/server-utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/prisma/client";
@@ -22,7 +21,7 @@ export async function addArticle(article: unknown) {
 
   if (!isAllowed) return { message: "Not authorized" };
 
-  const validatedArticle = articleFormSchema.safeParse(article);
+  const validatedArticle = articleSchema.safeParse(article);
 
   if (!validatedArticle.success) return { message: "Invalid article data" };
 
@@ -41,15 +40,15 @@ export async function addArticle(article: unknown) {
 
 export async function editArticle(articleId: unknown, newArticleData: unknown) {
   const validatedArticleId = idSchema.safeParse(articleId);
-  const validatedArticle = articleFormSchema.safeParse(newArticleData);
+  const validatedArticle = articleSchema.safeParse(newArticleData);
 
   const isAllowed = await isAuthorized();
 
-  if (!isAllowed) return { message: "Not authorized" };
+  if (!isAllowed) return { message: "Not authorized to edit" };
 
   if (!validatedArticleId.success || !validatedArticle.success) {
     return {
-      message: "Invalid article data",
+      message: "Invalid data",
     };
   }
 

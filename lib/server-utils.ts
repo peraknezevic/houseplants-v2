@@ -5,23 +5,6 @@ import { Article, GenusPage, Page, Plant, PlantProfile } from "@prisma/client";
 import { cache } from "react";
 import prisma from "@/prisma/client";
 
-export const getItemsByCategory = cache(async (category: string) => {
-  switch (category) {
-    case "articles":
-      return await getArticles();
-    case "genera":
-      return await getGeneras();
-    case "pages":
-      return await getPages();
-    case "plant-profiles":
-      return await getPlantProfiles();
-    case "plants":
-      return await getPlants();
-    default:
-      break;
-  }
-});
-
 export const getArticles = cache(async () => {
   const data = await prisma.article.findMany();
   return data;
@@ -31,6 +14,15 @@ export const getArticleBySlug = cache(async (slug: Article["slug"]) => {
   const data = await prisma.article.findUnique({
     where: {
       slug,
+    },
+  });
+  return data;
+});
+
+export const getArticleById = cache(async (id: Article["id"]) => {
+  const data = await prisma.article.findUnique({
+    where: {
+      id,
     },
   });
   return data;
