@@ -14,15 +14,9 @@ export type TPageForm = z.infer<typeof pageFormSchema>;
 export const articleFormSchema = z.object({
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
-  intro: z.string().min(50).optional().or(z.literal("")).nullish(),
+  intro: z.string().min(50).nullish(),
   content: z.string().min(100),
-  imageCredits: z
-    .string()
-    .min(3)
-    .max(200)
-    .optional()
-    .or(z.literal(""))
-    .nullish(),
+  imageCredits: z.string().min(3).max(200).nullish(),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
   language: z.enum(["ENGLISH", "SRPSKI"]),
 });

@@ -1,6 +1,6 @@
 import { Plant } from "@prisma/client";
 import Section from "@/components/section";
-import { removeChars } from "@/lib/utils";
+import { makeSlug } from "@/lib/utils";
 
 interface PlantsListProps {
   plants: Plant[];
@@ -19,7 +19,7 @@ export default function PlantsList({ plants, genusTitle }: PlantsListProps) {
                 key={plant.slug}
                 className="flex before:mr-2 before:content-['▸']"
               >
-                <a href={"#" + removeChars(plant.title)}>{plant.title}</a>
+                <a href={"#" + makeSlug(plant.title)}>{plant.title}</a>
               </li>
             ))}
           </ul>

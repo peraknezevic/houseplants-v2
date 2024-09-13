@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Plant } from "@prisma/client";
 import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
-import { removeChars } from "@/lib/utils";
+import { makeSlug } from "@/lib/utils";
 
 interface PlantCardProps {
   plant: Plant;
@@ -12,7 +12,7 @@ interface PlantCardProps {
 
 export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
   return (
-    <Section id={removeChars(plant.title)} key={plant.slug}>
+    <Section id={makeSlug(plant.title)} key={plant.slug}>
       <div>
         <h3>
           <Link href={"/plants/" + plant.slug}>{plant.title}</Link>
@@ -63,11 +63,7 @@ export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
             {plant.parents.split(", ").map((parent, i) => (
               <span key="child">
                 {i > 0 && ", "}
-                <a
-                  key={parent}
-                  href={"#" + removeChars(parent)}
-                  className="mr-2"
-                >
+                <a key={parent} href={"#" + makeSlug(parent)} className="mr-2">
                   {parent.replaceAll('"', "")}
                 </a>
               </span>
@@ -80,7 +76,7 @@ export default function PlantCard({ plant, genusSlug }: PlantCardProps) {
             {plant.children.split(", ").map((child, i) => (
               <span key={child}>
                 {i > 0 && ", "}
-                <a key={child} href={"#" + removeChars(child)} className="mr-2">
+                <a key={child} href={"#" + makeSlug(child)} className="mr-2">
                   {child.replaceAll('"', "")}
                 </a>
               </span>

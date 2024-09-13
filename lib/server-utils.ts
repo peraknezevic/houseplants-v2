@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { Article, GenusPage, Page, Plant, PlantProfile } from "@prisma/client";
 

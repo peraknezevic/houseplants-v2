@@ -6,7 +6,7 @@ export default async function ContentPage() {
 
   return (
     <div>
-      <AdminTable category="pages" items={items} />
+      <AdminTable category="articles" items={items} />
     </div>
   );
 }

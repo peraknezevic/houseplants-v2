@@ -18,63 +18,65 @@ export async function isAuthorized() {
 }
 
 export async function addArticle(article: unknown) {
-  const isAllowed = await isAuthorized();
+  // const isAllowed = await isAuthorized();
 
-  if (!isAllowed) return { message: "Not authorized" };
+  // if (!isAllowed) return { message: "Not authorized" };
 
-  const validatedArticle = articleFormSchema.safeParse(article);
+  // const validatedArticle = articleFormSchema.safeParse(article);
 
-  if (!validatedArticle.success) return { message: "Invalid article data" };
+  // if (!validatedArticle.success) return { message: "Invalid article data" };
 
-  try {
-    await prisma.article.create({
-      data: { ...validatedArticle.data },
-    });
-  } catch (error) {
-    return {
-      message: "Couldn't add an article",
-    };
-  }
+  // try {
+  //   await prisma.article.create({
+  //     data: { ...validatedArticle.data },
+  //   });
+  // } catch (error) {
+  //   return {
+  //     message: "Couldn't add an article",
+  //   };
+  // }
 
-  revalidatePath("/articles", "page");
+  // revalidatePath("/articles", "page");
+  console.log(article);
 }
 
 export async function editArticle(articleId: unknown, newArticleData: unknown) {
-  const validatedArticleId = idSchema.safeParse(articleId);
-  const validatedArticle = articleFormSchema.safeParse(newArticleData);
+  // const validatedArticleId = idSchema.safeParse(articleId);
+  // const validatedArticle = articleFormSchema.safeParse(newArticleData);
 
-  const isAllowed = await isAuthorized();
+  // const isAllowed = await isAuthorized();
 
-  if (!isAllowed) return { message: "Not authorized" };
+  // if (!isAllowed) return { message: "Not authorized" };
 
-  if (!validatedArticleId.success || !validatedArticle.success) {
-    return {
-      message: "Invalid article data",
-    };
-  }
+  // if (!validatedArticleId.success || !validatedArticle.success) {
+  //   return {
+  //     message: "Invalid article data",
+  //   };
+  // }
 
-  const article = await getArticleById(validatedArticleId.data);
+  // const article = await getArticleById(validatedArticleId.data);
 
-  if (!article) {
-    return {
-      message: "Couldn't find article",
-    };
-  }
+  // if (!article) {
+  //   return {
+  //     message: "Couldn't find article",
+  //   };
+  // }
 
-  try {
-    await prisma.article.update({
-      where: {
-        id: validatedArticleId.data,
-      },
-      data: validatedArticle.data,
-    });
-  } catch (error) {
-    return {
-      message: "Couldn't edit article",
-    };
-  }
+  // try {
+  //   await prisma.article.update({
+  //     where: {
+  //       id: validatedArticleId.data,
+  //     },
+  //     data: validatedArticle.data,
+  //   });
+  // } catch (error) {
+  //   return {
+  //     message: "Couldn't edit article",
+  //   };
+  // }
 
-  revalidatePath("/articles", "page");
+  // revalidatePath("/articles", "page");
+  console.log(newArticleData);
 }
 
 export async function deleteArticle(articlesId: unknown) {

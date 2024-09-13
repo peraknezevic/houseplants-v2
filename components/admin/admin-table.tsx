@@ -2,7 +2,6 @@ import { Article, GenusPage, Page, Plant, PlantProfile } from "@prisma/client";
 
 import { AdminActionsBar } from "./admin-actions-bar";
 import { ButtonAddNew } from "@/components/admin/button-add-new";
-import { publishStatusClass } from "@/lib/utils";
 
 type AdminTableProps = {
   category: string;
@@ -29,11 +28,7 @@ export const AdminTable = ({ category, items }: AdminTableProps) => {
             return (
               <tr key={item.id}>
                 <td className="lg:w-3/4">
-                  <div
-                    className={`${publishStatusClass(item.published)} font-bold`}
-                  >
-                    {item.title}
-                  </div>
+                  <div>{item.title}</div>
                   <div>{item.slug}</div>
                 </td>
 

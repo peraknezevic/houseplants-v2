@@ -3,7 +3,7 @@ import { socialNavItems } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center gap-6 bg-pink-950 px-4 py-6 text-white md:gap-8 md:px-6 md:py-12 dark:bg-emerald-950">
+    <footer className="mt-auto flex flex-col items-center justify-center gap-6 bg-pink-950 px-4 py-6 text-white dark:bg-emerald-950 md:gap-8 md:px-6 md:py-12">
       <div className="flex flex-wrap gap-4 md:flex-nowrap md:gap-8">
         <span className="w-full md:w-auto">Follow us on:</span>
         <ul className="list-unstyled flex justify-between gap-x-8">
