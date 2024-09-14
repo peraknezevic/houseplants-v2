@@ -33,7 +33,9 @@ const HomePageBlock = ({
           />
         ))}
       </CardsGrid>
-      <Button link={link} title={btnTitle} />
+      <div className="pb-16 pt-8 text-center underline">
+        <Button link={link} title={btnTitle} />
+      </div>
     </>
   );
 };
