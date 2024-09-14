@@ -12,6 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 export const removeChars = (text: string) =>
   text
     .replaceAll("'", "")
+    .replaceAll(".", "")
     .replaceAll("‘", "")
     .replaceAll("’", "")
     .replaceAll('"', "")

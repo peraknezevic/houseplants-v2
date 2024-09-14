@@ -8,7 +8,7 @@ const ArticlesPage = async () => {
   const data = await getPublishedArticles();
 
   return (
-    <div>
+    <>
       <PageHead title="Articles" />
       <CardGrid>
         {data.map((item) => (
@@ -20,7 +20,7 @@ const ArticlesPage = async () => {
           />
         ))}
       </CardGrid>
-    </div>
+    </>
   );
 };
 
