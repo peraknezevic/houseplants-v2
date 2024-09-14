@@ -29,7 +29,7 @@ export const getArticleById = async (id: Article["id"]) =>
     },
   });
 
-// Genera Pages
+// Genera
 
 export const getGeneras = async () => await prisma.genusPage.findMany();
 
@@ -126,10 +126,14 @@ const getLatestArticles = async () =>
     take: 3,
   });
 
-export const getHomePageData = async () => {
-  return await Promise.all([
+export const getHomePageData = async () =>
+  await Promise.all([
     getLatestPlantProfiles(),
     getRecentlyUpdatedGeneras(),
     getArticles(),
   ]);
-};
+
+// Genera pages
+
+export const getGenusPageData = async (slug: GenusPage["slug"]) =>
+  await Promise.all([getGenusBySlug(slug), getPlantsByGenusSlug(slug)]);

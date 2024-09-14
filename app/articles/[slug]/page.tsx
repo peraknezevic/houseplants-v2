@@ -1,6 +1,6 @@
-import CldImage from "@/components/cloudinary";
+import Figure from "@/components/ui/figure";
+import Markdown from "@/components/ui/markdown";
 import PageHead from "@/components/page-head";
-import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
 import { Slug } from "@/lib/types";
 import { getArticleBySlug } from "@/lib/data";
@@ -17,26 +17,17 @@ const Article = async ({ params }: Slug) => {
 
       {article.intro && (
         <Section>
-          <div>
-            <ReactMarkdown>{article.intro}</ReactMarkdown>
-          </div>
+          <Markdown content={article.intro} />
         </Section>
       )}
       <Section>
-        <div>
-          <ReactMarkdown>{article.content}</ReactMarkdown>
-        </div>
-        <figure>
-          <CldImage
-            src={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
-            width={800}
-            height={1000}
-            alt={article.title}
-          />
-          <figcaption>
-            <ReactMarkdown>{article.imageCredits}</ReactMarkdown>
-          </figcaption>
-        </figure>
+        <Markdown content={article.content} />
+        <Figure
+          imgUrl={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
+          alt={article.title}
+          caption={article.title}
+          credit={article.imageCredits || "Photo by Houseplants/xyz"}
+        />
       </Section>
     </article>
   );

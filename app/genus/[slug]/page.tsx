@@ -1,19 +1,15 @@
-import { getGenusBySlug, getPlantsByGenusSlug } from "@/lib/data";
-
-import { HOURLY } from "@/lib/constants";
+import H2 from "@/components/ui/H2";
+import Markdown from "@/components/ui/markdown";
 import PageHead from "@/components/page-head";
-import PlantCards from "@/components/plant-cards-container";
+import PlantCard from "@/components/plant-card";
 import PlantsList from "@/components/plants-list";
-import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
-import { TSlug } from "@/lib/types";
+import { Slug } from "@/lib/types";
 import { getCldOgImageUrl } from "next-cloudinary";
+import { getGenusPageData } from "@/lib/data";
 
-export const revalidate = HOURLY;
-
-export default async function GenusPage({ params }: TSlug) {
-  const genusPage = await getGenusBySlug(params.slug);
-  const plants = await getPlantsByGenusSlug(params.slug);
+export default async function GenusPage({ params }: Slug) {
+  const [genusPage, plants] = await getGenusPageData(params.slug);
 
   if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
@@ -22,43 +18,35 @@ export default async function GenusPage({ params }: TSlug) {
     return <p>This genus page is being reviewed</p>;
 
   return (
-    <article id="top">
+    <article>
       <PageHead title={genusPage.title} pageType="Genus" />
 
-      <Section id="intro">
-        <div>
-          <ReactMarkdown>{genusPage.intro}</ReactMarkdown>
-        </div>
+      <Section>
+        <Markdown content={genusPage.intro} />
       </Section>
 
-      <PlantsList plants={plants} genusTitle={genusPage.title} />
+      <H2 title={`${genusPage.title} Plants List`} />
+      <PlantsList plants={plants} />
 
-      <PlantCards
-        plants={plants}
-        genusSlug={genusPage.slug}
-        genusTitle={genusPage.title}
-      />
+      <H2 title={`${genusPage.title} Plants`} />
+      {plants.map((plant) => (
+        <PlantCard plant={plant} genusSlug={params.slug} key={plant.slug} />
+      ))}
 
       {genusPage.thanks && (
-        <Section id="thanks">
-          <div>
-            <h3>Thanks</h3>
-            <ReactMarkdown>{genusPage.thanks}</ReactMarkdown>
-          </div>
+        <Section>
+          <Markdown title="Thanks" content={genusPage.thanks} />
         </Section>
       )}
 
-      <Section id="changelog">
-        <div className="list-disc">
-          <h3>Changelog</h3>
-          <ReactMarkdown>{genusPage.changeLog}</ReactMarkdown>
-        </div>
+      <Section>
+        <Markdown title="Changelog" content={genusPage.changeLog} />
       </Section>
     </article>
   );
 }
 
-export async function generateMetadata({ params }: TSlug) {
+export async function generateMetadata({ params }: Slug) {
   const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`;
   const url = "https://houseplants.xyz";
   const pageUrl = `${url}/genus/${params.slug}`;

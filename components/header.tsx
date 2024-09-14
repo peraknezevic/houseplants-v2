@@ -8,10 +8,13 @@ export default function Header() {
         Houseplants
       </div>
       <nav>
-        <ul className="m-4 flex justify-center gap-6 font-sans font-light md:m-8 md:gap-8 md:text-2xl">
+        <ul className="m-4 flex justify-center gap-6 font-sans font-light  md:m-8 md:gap-8 md:text-2xl">
           {mainNavItems.map((item) => (
             <li key={item.id}>
-              <Link href={item.url} className="underline underline-offset-8">
+              <Link
+                href={item.url}
+                className="tracking-wide underline decoration-2 underline-offset-8 transition-all hover:opacity-50"
+              >
                 {item.title}
               </Link>
             </li>

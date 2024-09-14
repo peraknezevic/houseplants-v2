@@ -21,7 +21,7 @@ export default function Card({ item, imgFolder, pageFolder }: CardProps) {
           height={500}
           alt={item.title}
         />
-        <h3 className="mb-2 px-4 py-4 text-xl font-bold leading-8">
+        <h3 className="font-regular mb-2 px-4 py-4 text-xl leading-8 hover:underline">
           {item.title}
         </h3>
       </Link>
