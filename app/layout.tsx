@@ -1,26 +1,36 @@
 import "./globals.css";
 
+import { Outfit, Zilla_Slab } from "next/font/google";
 import { PHProvider, PostHogPageview } from "./providers";
 
-import Footer from "../components/footer";
-import Header from "../components/header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Node } from "@/lib/types";
 import { Suspense } from "react";
-import { TNode } from "@/lib/types";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
-export default function RootLayout({ children }: TNode) {
+const zillaSlab = Zilla_Slab({
+  subsets: ["latin"],
+  weight: ["300"],
+  variable: "--font-zilla-slab",
+  display: "swap",
+});
+
+const RootLayout = ({ children }: Node) => {
   return (
-    <html lang="en">
+    <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
       <Suspense>
         <PostHogPageview />
       </Suspense>
       <PHProvider>
-        <body
-          className={`${outfit.className} bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300`}
-        >
+        <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
           <Header />
           <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
           <Footer />
@@ -28,9 +38,11 @@ export default function RootLayout({ children }: TNode) {
       </PHProvider>
     </html>
   );
-}
+};
 
 export const metadata: Metadata = {
   title: "Houseplants",
   description: "All about your indoor plants",
 };
+
+export default RootLayout;

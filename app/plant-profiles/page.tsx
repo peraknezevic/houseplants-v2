@@ -1,9 +1,9 @@
 import Card from "@/components/card";
 import CardGrid from "@/components/cards-grid";
+import { DAILY } from "@/lib/constants";
 import { Metadata } from "next";
 import PageHead from "@/components/page-head";
-import { getPlantProfiles } from "@/lib/server-utils";
-import { DAILY } from "@/lib/constants";
+import { getPlantProfiles } from "@/lib/data";
 
 export const revalidate = DAILY;
 

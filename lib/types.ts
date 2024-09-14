@@ -1,12 +1,12 @@
 import { Article } from "@prisma/client";
 
-export type TSlug = {
+export type Slug = {
   params: { slug: string };
 };
 
-export type TNode = { children: React.ReactNode };
+export type Node = { children: React.ReactNode };
 
-export type TPostTypes =
+export type PostTypes =
   | "article"
   | "plant"
   | "plantProfile"

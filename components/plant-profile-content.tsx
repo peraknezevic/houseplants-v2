@@ -1,240 +1,117 @@
 import CldImage from "@/components/cloudinary";
+import Figure from "./ui/figure";
 import { PlantProfile } from "@prisma/client";
+import PlantProfileNotes from "./plant-profile-notes";
+import PlantProfileP from "./plant-profile-p";
 import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
+import { enumToString } from "@/lib/utils";
 
-interface PlantProfileProps {
-  plant: PlantProfile;
-}
-
-export default function PlantProfileContent({ plant }: PlantProfileProps) {
+const PlantProfileContent = ({ plant }: { plant: PlantProfile }) => {
   return (
     <>
       <Section>
-        <div>
-          <p>
-            <strong>Botanical name: </strong>
-            {plant.botanicalName}
-          </p>
-          {plant.synonyms && (
-            <p>
-              <strong>Synonyms: </strong>
-              {plant.synonyms}
-            </p>
-          )}
-          {plant.namedBy && (
-            <p>
-              <strong>Named by: </strong>
-              {plant.namedBy}
-            </p>
-          )}
-          {plant.family && (
-            <p>
-              <strong>Family: </strong>
-              {plant.family}
-            </p>
-          )}
-          {plant.subFamily && (
-            <p>
-              <strong>Subfamily: </strong>
-              {plant.subFamily}
-            </p>
-          )}
-          <p>
-            <strong>Genus: </strong>
-            {plant.genus}
-          </p>
-          {plant.nativeArea && (
-            <p>
-              <strong>Native Area: </strong>
-              {plant.nativeArea}
-            </p>
-          )}
-          {plant.tradeNames && (
-            <p>
-              <strong>Trade names: </strong>
-              {plant.tradeNames}
-            </p>
-          )}
-          {plant.inventor && (
-            <p>
-              <strong>Cultivar Inventor: </strong>
-              {plant.inventor}
-            </p>
-          )}
-          {plant.patent && (
-            <p>
-              <strong>Patent: </strong>
-              {plant.patent}
-            </p>
-          )}
-          {plant.commonNames && (
-            <p>
-              <strong>Common Names: </strong>
-              {plant.commonNames}
-            </p>
-          )}
-        </div>
-        <figure>
-          <CldImage
-            src={`/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
-            width={800}
-            height={1000}
-            alt={plant.title}
-          />
-          <figcaption>
-            {plant.botanicalName}
-            <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
-          </figcaption>
-        </figure>
+        <PlantProfileP title="Botanical name" content={plant.botanicalName} />
+        {plant.synonyms && (
+          <PlantProfileP title="Synonyms" content={plant.synonyms} />
+        )}
+        {plant.namedBy && (
+          <PlantProfileP title="Named by" content={plant.namedBy} />
+        )}
+        {plant.family && (
+          <PlantProfileP title="Family" content={plant.family} />
+        )}
+        {plant.subFamily && (
+          <PlantProfileP title="Subfamily" content={plant.subFamily} />
+        )}
+        <PlantProfileP title="Genus" content={plant.genus} />
+        {plant.nativeArea && (
+          <PlantProfileP title="Native Area" content={plant.nativeArea} />
+        )}
+        {plant.tradeNames && (
+          <PlantProfileP title="Trade Names" content={plant.tradeNames} />
+        )}
+        {plant.inventor && (
+          <PlantProfileP title="Inventor" content={plant.inventor} />
+        )}
+        {plant.patent && (
+          <PlantProfileP title="Patent" content={plant.patent} />
+        )}
+        {plant.commonNames && (
+          <PlantProfileP title="Common Names" content={plant.commonNames} />
+        )}
+        <Figure
+          imgUrl={`/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
+          alt={plant.title}
+          caption={plant.botanicalName}
+          credit={plant.imageCredits || "Photo by Houseplants.xyz"}
+        />
       </Section>
 
       <Section>
-        <div>
-          <p>
-            <strong>Care difficulty: </strong>
-            {plant.care === "EASY" && "Easy"}
-            {plant.care === "AVARAGE" && "Avarage"}
-            {plant.care === "DIFFICULT" && "Difficult"}
-          </p>
-          <p>
-            <strong>Light preference: </strong>
-            {plant.light === "LOW_LIGHT" && "Low light"}
-            {plant.light === "PARTIAL_SHADE" && "Partial shade"}
-            {plant.light === "MEDIUM_LIGHT" && "Medium light"}
-            {plant.light === "BRIGHT_LIGHT" && "Bright light"}
-            {plant.light === "FULL_SUN" && "Full sun"}
-          </p>
-          <p>
-            <strong>Minimal Temperature: </strong>
-            {plant.minimalT}&deg;C / {Math.round((plant.minimalT * 9) / 5 + 32)}
-            &deg;F
-          </p>
-          <p>
-            <strong>Optimal Temperature: </strong>
-            {plant.optimalT}&deg;C / {Math.round((plant.optimalT * 9) / 5 + 32)}
-            &deg;F
-          </p>
-          <p>
-            <strong>Humidity: </strong>
-            {plant.humidity === "LOW" && "Low"}
-            {plant.humidity === "MEDIUM" && "Medium"}
-            {plant.humidity === "HIGH" && "High"}
-          </p>
-          {plant.watering && (
-            <p>
-              <strong>Watering: </strong>
-              {plant.watering}
-            </p>
-          )}
-          {plant.feeding && (
-            <p>
-              <strong>Feeding: </strong>
-              {plant.feeding}
-            </p>
-          )}
-          {plant.soil && (
-            <p>
-              <strong>Soil: </strong>
-              {plant.soil}
-            </p>
-          )}
-          {plant.soilPH && (
-            <p>
-              <strong>Soil PH: </strong>
-              {plant.soilPH}
-            </p>
-          )}
-          {plant.repotting && (
-            <p>
-              <strong>Repotting: </strong>
-              {plant.repotting}
-            </p>
-          )}
-        </div>
-        <figure>
-          <CldImage
-            src={`/images/plants/${plant.slug}/${plant.slug}-02.jpg`}
-            width={800}
-            height={1000}
-            alt={plant.title}
-          />
-          <figcaption>
-            {plant.botanicalName}
-            <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
-          </figcaption>
-        </figure>
+        <PlantProfileP
+          title="Care difficulty"
+          content={enumToString(plant.care)}
+        />
+        <PlantProfileP
+          title="Light preference"
+          content={enumToString(plant.light)}
+        />
+        <PlantProfileP
+          title="Minimal Temperature"
+          content={`${plant.minimalT}\u00B0 C or ${Math.round((plant.minimalT * 9) / 5 + 32)}\u00B0 F`}
+        />
+        <PlantProfileP
+          title="Optimal Temperature"
+          content={`${plant.optimalT}\u00B0 C or ${Math.round((plant.optimalT * 9) / 5 + 32)}\u00B0 F`}
+        />
+        <PlantProfileP
+          title="Humidity"
+          content={enumToString(plant.humidity)}
+        />
+        <PlantProfileP title="Watering" content={plant.watering} />
+        <PlantProfileP title="Feeding" content={plant.feeding} />
+        <PlantProfileP title="Soil" content={plant.soil} />
+        <PlantProfileP title="Soil PH" content={plant.soilPH} />
+        <PlantProfileP title="Repotting" content={plant.repotting} />
+
+        <Figure
+          imgUrl={`/images/plants/${plant.slug}/${plant.slug}-02.jpg`}
+          alt={plant.title}
+          caption={plant.botanicalName}
+          credit={plant.imageCredits || "Photo by Houseplants.xyz"}
+        />
       </Section>
 
       <Section>
-        <div>
-          <p>
-            <strong>Speed of growth: </strong>
-            {plant.speedOfGrowth === "SLOW" && "Slow"}
-            {plant.speedOfGrowth === "MODERATE" && "Moderate"}
-            {plant.speedOfGrowth === "FAST" && "Fast"}
-          </p>
-          {plant.matureSize && (
-            <p>
-              <strong>Mature size: </strong>
-              {plant.matureSize}
-            </p>
-          )}
-          {plant.flower && (
-            <p>
-              <strong>Flower: </strong>
-              {plant.flower}
-            </p>
-          )}
-          {plant.propagation && (
-            <p>
-              <strong>Propagation: </strong>
-              {plant.propagation}
-            </p>
-          )}
-          {plant.pests && (
-            <p>
-              <strong>Pests: </strong>
-              {plant.pests}
-            </p>
-          )}
-          {plant.diseases && (
-            <p>
-              <strong>Diseases: </strong>
-              {plant.diseases}
-            </p>
-          )}
-          {plant.toxicity && (
-            <p>
-              <strong>Toxicity: </strong>
-              {plant.toxicity === "NOT_TOXIC" && "Not Toxic"}
-              {plant.toxicity === "TOXIC" && "Toxic"}
-              {plant.toxicity === "NO_INFO" && "No Info"}
-            </p>
-          )}
-        </div>
-        <figure>
-          <CldImage
-            src={`/images/plants/${plant.slug}/${plant.slug}-03.jpg`}
-            width={800}
-            height={1000}
-            alt={plant.title}
-          />
-          <figcaption>
-            {plant.botanicalName}
-            <ReactMarkdown>{plant.imageCredits}</ReactMarkdown>
-          </figcaption>
-        </figure>
+        <PlantProfileP
+          title="Speed of growth"
+          content={enumToString(plant.speedOfGrowth)}
+        />
+        <PlantProfileP title="Mature size" content={plant.matureSize} />
+        <PlantProfileP title="Flower" content={plant.flower} />
+        <PlantProfileP title="Propagation" content={plant.propagation} />
+        <PlantProfileP title="Pests" content={plant.pests} />
+        <PlantProfileP title="Diseases" content={plant.diseases} />
+        <PlantProfileP
+          title="Toxicity"
+          content={enumToString(plant.toxicity)}
+        />
+        <Figure
+          imgUrl={`/images/plants/${plant.slug}/${plant.slug}-03.jpg`}
+          alt={plant.title}
+          caption={plant.botanicalName}
+          credit={plant.imageCredits || "Photo by Houseplants.xyz"}
+        />
       </Section>
 
       {plant.notes && (
-        <Section id="notes">
-          <div>
-            <h3>Notes</h3>
-            <ReactMarkdown>{plant.notes}</ReactMarkdown>
-          </div>
+        <Section>
+          <PlantProfileNotes content={plant.notes} />
         </Section>
       )}
     </>
   );
-}
+};
+
+export default PlantProfileContent;

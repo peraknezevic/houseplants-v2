@@ -4,7 +4,7 @@ import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
 import { TSlug } from "@/lib/types";
-import { getPlantBySlug } from "@/lib/server-utils";
+import { getPlantBySlug } from "@/lib/data";
 
 export const revalidate = DAILY;
 

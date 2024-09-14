@@ -1,15 +1,12 @@
 import CldImage from "@/components/cloudinary";
-import { DAILY } from "@/lib/constants";
 import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
 import Section from "@/components/section";
-import { TSlug } from "@/lib/types";
-import { getArticleBySlug } from "@/lib/server-utils";
+import { Slug } from "@/lib/types";
+import { getArticleBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-export const revalidate = DAILY;
-
-export default async function Article({ params }: TSlug) {
+const Article = async ({ params }: Slug) => {
   const article = await getArticleBySlug(params.slug);
 
   if (!article) notFound();
@@ -43,4 +40,6 @@ export default async function Article({ params }: TSlug) {
       </Section>
     </article>
   );
-}
+};
+
+export default Article;

@@ -1,17 +1,18 @@
-import { ReactNode } from "react";
-
-type SectionProps = {
-  children: ReactNode;
+const Section = ({
+  children,
+  id = "",
+}: {
+  children: React.ReactNode;
   id?: string;
-};
-
-export default function Section({ children, id = "" }: SectionProps) {
+}) => {
   return (
     <section
-      className="mb-8 overflow-hidden rounded-xl bg-white drop-shadow-md md:mb-16 dark:bg-zinc-950"
+      className="mb-8 rounded-xl bg-white pt-8 font-serif text-xl font-light drop-shadow-md dark:bg-zinc-950 md:mb-16"
       id={id}
     >
       {children}
     </section>
   );
-}
+};
+
+export default Section;

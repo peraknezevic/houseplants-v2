@@ -1,13 +1,10 @@
 import PageHead from "@/components/page-head";
 import ReactMarkdown from "react-markdown";
-import { TSlug } from "@/lib/types";
-import { getPageBySlug } from "@/lib/server-utils";
+import { Slug } from "@/lib/types";
+import { getPageBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
-import { DAILY } from "@/lib/constants";
 
-export const revalidate = DAILY;
-
-export default async function Page({ params }: TSlug) {
+const Page = async ({ params }: Slug) => {
   const page = await getPageBySlug(params.slug);
   if (!page) notFound();
 
@@ -19,4 +16,6 @@ export default async function Page({ params }: TSlug) {
       </div>
     </article>
   );
-}
+};
+
+export default Page;

@@ -3,7 +3,7 @@
 import { articleFormSchema, idSchema } from "@/lib/validations";
 
 import { ArticleEssentials } from "@/lib/types";
-import { getArticleById } from "@/lib/server-utils";
+import { getArticleById } from "@/lib/data";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/prisma/client";
 import { revalidatePath } from "next/cache";

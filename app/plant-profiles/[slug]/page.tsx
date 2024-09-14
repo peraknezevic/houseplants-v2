@@ -1,13 +1,10 @@
 import PageHead from "@/components/page-head";
 import PlantProfileContent from "@/components/plant-profile-content";
 import React from "react";
-import { TSlug } from "@/lib/types";
-import { getPlantProfileBySlug } from "@/lib/server-utils";
-import { DAILY } from "@/lib/constants";
+import { getPlantProfileBySlug } from "@/lib/data";
+import { Slug } from "@/lib/types";
 
-export const revalidate = DAILY;
-
-export default async function PlantProfilePage({ params }: TSlug) {
+const PlantProfilePage = async ({ params }: Slug) => {
   const plantProfile = await getPlantProfileBySlug(params.slug);
 
   if (!plantProfile)
@@ -23,4 +20,6 @@ export default async function PlantProfilePage({ params }: TSlug) {
       <PlantProfileContent plant={plantProfile} />
     </article>
   );
-}
+};
+
+export default PlantProfilePage;

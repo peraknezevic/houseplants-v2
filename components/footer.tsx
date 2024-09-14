@@ -25,7 +25,7 @@ export default function Footer() {
         </ul>
       </nav>
       <p className="mx-auto text-center">
-        &copy; 2021-{new Date().getFullYear()}. Designed and developed by{" "}
+        &copy; 2021.-{new Date().getFullYear()}. Designed and developed by{" "}
         <a href="https://peraknezevic.com">Pera Knezevic</a>. All rights
         reserved.
       </p>

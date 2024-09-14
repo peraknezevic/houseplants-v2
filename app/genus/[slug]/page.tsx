@@ -1,4 +1,4 @@
-import { getGenusBySlug, getPlantsByGenusSlug } from "@/lib/server-utils";
+import { getGenusBySlug, getPlantsByGenusSlug } from "@/lib/data";
 
 import { HOURLY } from "@/lib/constants";
 import PageHead from "@/components/page-head";
