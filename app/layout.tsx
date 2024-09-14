@@ -6,7 +6,6 @@ import { PHProvider, PostHogPageview } from "./providers";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import type { Metadata } from "next";
-import { Node } from "@/lib/types";
 import { Suspense } from "react";
 
 const outfit = Outfit({
@@ -23,7 +22,7 @@ const zillaSlab = Zilla_Slab({
   display: "swap",
 });
 
-const RootLayout = ({ children }: Node) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
       <Suspense>

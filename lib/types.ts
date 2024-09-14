@@ -4,8 +4,6 @@ export type Slug = {
   params: { slug: string };
 };
 
-export type Node = { children: React.ReactNode };
-
 export type PostTypes =
   | "article"
   | "plant"

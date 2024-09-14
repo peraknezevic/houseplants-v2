@@ -6,7 +6,7 @@ import { getPlantBySlug } from "@/lib/data";
 const PlantProfile = async ({ params }: Slug) => {
   const plant = await getPlantBySlug(params.slug);
 
-  if (!plant) return <p>We don't have a page for this plant yet</p>;
+  if (!plant) return <p>We don&apos;t have a page for this plant yet</p>;
 
   return (
     <article>

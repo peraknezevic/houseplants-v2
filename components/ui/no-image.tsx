@@ -2,7 +2,7 @@ const NoImage = ({ title }: { title: string }) => {
   return (
     <div className="px-8 pb-8 pt-4 text-base">
       <p>
-        We don't have an image for this plant yet. Would you like to share
+        We don&apos;t have an image for this plant yet. Would you like to share
         yours?
       </p>
       <p>
