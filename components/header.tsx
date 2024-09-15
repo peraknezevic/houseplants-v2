@@ -1,26 +1,13 @@
-import Link from "next/link";
-import { mainNavItems } from "@/lib/constants";
+import Logo from "./ui/logo";
+import NavMain from "./nav-main";
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="mt-4">
-      <div className="my-8 text-center font-sans text-4xl font-bold uppercase md:my-12 md:text-6xl lg:my-16 lg:text-8xl">
-        Houseplants
-      </div>
-      <nav>
-        <ul className="m-4 flex justify-center gap-6 font-sans font-light  md:m-8 md:gap-8 md:text-2xl">
-          {mainNavItems.map((item) => (
-            <li key={item.id}>
-              <Link
-                href={item.url}
-                className="tracking-wide underline decoration-2 underline-offset-8 transition-all hover:opacity-50"
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <Logo />
+      <NavMain />
     </header>
   );
-}
+};
+
+export default Header;

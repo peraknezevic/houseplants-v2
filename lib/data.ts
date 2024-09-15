@@ -13,6 +13,11 @@ export const getPublishedArticles = async () =>
     where: {
       published: "PUBLISHED",
     },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
   });
 
 export const getArticleBySlug = async (slug: Article["slug"]) =>
@@ -31,12 +36,24 @@ export const getArticleById = async (id: Article["id"]) =>
 
 // Genera
 
-export const getGeneras = async () => await prisma.genusPage.findMany();
+export const getGeneras = async () =>
+  await prisma.genusPage.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
+  });
 
 export const getPublishedGeneras = async () =>
   await prisma.genusPage.findMany({
     where: {
       published: "PUBLISHED",
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
     },
   });
 
@@ -59,7 +76,14 @@ export const getPlantsByGenusSlug = async (
     },
   });
 
-export const getPlants = async () => await prisma.plant.findMany();
+export const getPlants = async () =>
+  await prisma.plant.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
+  });
 
 export const getPlantBySlug = async (slug: Plant["slug"]) =>
   await prisma.plant.findUnique({
@@ -72,6 +96,26 @@ export const getPlantProfiles = async () =>
   await prisma.plantProfile.findMany({
     orderBy: {
       slug: "asc",
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
+  });
+
+export const getPublishedPlantProfiles = async () =>
+  await prisma.plantProfile.findMany({
+    where: {
+      published: "PUBLISHED",
+    },
+    orderBy: {
+      slug: "asc",
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
     },
   });
 
@@ -101,6 +145,11 @@ const getLatestPlantProfiles = async () =>
     orderBy: {
       createdAt: "desc",
     },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
     take: 3,
   });
 
@@ -111,6 +160,11 @@ const getRecentlyUpdatedGeneras = async () =>
     },
     orderBy: {
       updatedAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
     },
     take: 3,
   });
@@ -123,6 +177,11 @@ const getLatestArticles = async () =>
     orderBy: {
       updatedAt: "desc",
     },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
     take: 3,
   });
 
@@ -130,7 +189,7 @@ export const getHomePageData = async () =>
   await Promise.all([
     getLatestPlantProfiles(),
     getRecentlyUpdatedGeneras(),
-    getArticles(),
+    getLatestArticles(),
   ]);
 
 // Genera pages

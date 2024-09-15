@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import PageHead from "@/components/page-head";
 import { getPublishedGeneras } from "@/lib/data";
 
-const GenerasPage = async () => {
+const Page = async () => {
   const data = await getPublishedGeneras();
 
   return (
@@ -30,4 +30,4 @@ export const metadata: Metadata = {
     "Pages dedicated to various Plant genera, listing all the species, cultivars and hybrids",
 };
 
-export default GenerasPage;
+export default Page;

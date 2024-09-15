@@ -1,7 +1,11 @@
 import CldImage from "@/components/cloudinary";
 import Link from "next/link";
 
-type CardProps = {
+const Card = ({
+  item,
+  imgFolder,
+  pageFolder,
+}: {
   item: {
     id: string;
     slug: string;
@@ -9,11 +13,9 @@ type CardProps = {
   };
   imgFolder: string;
   pageFolder: string;
-};
-
-export default function Card({ item, imgFolder, pageFolder }: CardProps) {
+}) => {
   return (
-    <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md dark:bg-zinc-900">
+    <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md transition-shadow hover:shadow-xl dark:bg-zinc-900">
       <Link href={`/${pageFolder}/${item.slug}/`}>
         <CldImage
           src={`/images/${imgFolder}/${item.slug}/${item.slug}.jpg`}
@@ -21,10 +23,12 @@ export default function Card({ item, imgFolder, pageFolder }: CardProps) {
           height={500}
           alt={item.title}
         />
-        <h3 className="font-regular mb-2 px-4 py-4 text-xl leading-8 hover:underline">
+        <h3 className="font-regular mb-2 px-4 py-4 text-xl leading-8">
           {item.title}
         </h3>
       </Link>
     </li>
   );
-}
+};
+
+export default Card;

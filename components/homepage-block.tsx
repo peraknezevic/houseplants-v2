@@ -1,5 +1,3 @@
-import { Article, GenusPage, PlantProfile } from "@prisma/client";
-
 import Button from "./ui/button";
 import Card from "./card";
 import CardsGrid from "./cards-grid";
@@ -11,14 +9,14 @@ const HomePageBlock = ({
   data,
   imgFolder,
   pageFolder,
-  btnTitle,
+  linkTitle,
 }: {
   title: string;
   link: string;
-  data: PlantProfile[] | GenusPage[] | Article[];
+  data: { id: string; title: string; slug: string }[];
   imgFolder: string;
   pageFolder: string;
-  btnTitle: string;
+  linkTitle: string;
 }) => {
   return (
     <>
@@ -34,7 +32,7 @@ const HomePageBlock = ({
         ))}
       </CardsGrid>
       <div className="pb-16 pt-8 text-center underline">
-        <Button link={link} title={btnTitle} />
+        <Button link={link} title={linkTitle} />
       </div>
     </>
   );

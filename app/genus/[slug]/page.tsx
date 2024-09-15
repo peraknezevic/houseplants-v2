@@ -4,11 +4,10 @@ import PageHead from "@/components/page-head";
 import PlantCard from "@/components/plant-card";
 import PlantsList from "@/components/plants-list";
 import Section from "@/components/section";
-import { Slug } from "@/lib/types";
 import { getCldOgImageUrl } from "next-cloudinary";
 import { getGenusPageData } from "@/lib/data";
 
-export default async function GenusPage({ params }: Slug) {
+const Page = async ({ params }: { params: { slug: string } }) => {
   const [genusPage, plants] = await getGenusPageData(params.slug);
 
   if (!genusPage) return <p>No genus page found</p>;
@@ -44,9 +43,13 @@ export default async function GenusPage({ params }: Slug) {
       </Section>
     </article>
   );
-}
+};
 
-export async function generateMetadata({ params }: Slug) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`;
   const url = "https://houseplants.xyz";
   const pageUrl = `${url}/genus/${params.slug}`;
@@ -123,3 +126,5 @@ export async function generateMetadata({ params }: Slug) {
     },
   };
 }
+
+export default Page;

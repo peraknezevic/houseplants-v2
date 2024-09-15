@@ -2,11 +2,10 @@ import Figure from "@/components/ui/figure";
 import Markdown from "@/components/ui/markdown";
 import PageHead from "@/components/page-head";
 import Section from "@/components/section";
-import { Slug } from "@/lib/types";
 import { getArticleBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-const Article = async ({ params }: Slug) => {
+const Page = async ({ params }: { params: { slug: string } }) => {
   const article = await getArticleBySlug(params.slug);
 
   if (!article) notFound();
@@ -33,4 +32,4 @@ const Article = async ({ params }: Slug) => {
   );
 };
 
-export default Article;
+export default Page;

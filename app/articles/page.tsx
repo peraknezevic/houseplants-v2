@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import PageHead from "@/components/page-head";
 import { getPublishedArticles } from "@/lib/data";
 
-const ArticlesPage = async () => {
+const Page = async () => {
   const data = await getPublishedArticles();
 
   return (
@@ -29,4 +29,4 @@ export const metadata: Metadata = {
   description: "Articles about your indoor plants",
 };
 
-export default ArticlesPage;
+export default Page;

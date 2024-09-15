@@ -1,6 +1,3 @@
-export const HOURLY = 60 * 60;
-export const DAILY = 60 * 60 * 24;
-
 export const mainNavItems = [
   { id: 1, title: "Home", url: "/" },
   { id: 2, title: "Genera", url: "/genus" },

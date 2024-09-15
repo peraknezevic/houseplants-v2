@@ -1,14 +1,11 @@
 import Card from "@/components/card";
 import CardGrid from "@/components/cards-grid";
-import { DAILY } from "@/lib/constants";
 import { Metadata } from "next";
 import PageHead from "@/components/page-head";
-import { getPlantProfiles } from "@/lib/data";
+import { getPublishedPlantProfiles } from "@/lib/data";
 
-export const revalidate = DAILY;
-
-export default async function PlantProfilesPage() {
-  const data = await getPlantProfiles();
+const Page = async () => {
+  const data = await getPublishedPlantProfiles();
 
   return (
     <>
@@ -25,9 +22,11 @@ export default async function PlantProfilesPage() {
       </CardGrid>
     </>
   );
-}
+};
 
 export const metadata: Metadata = {
   title: "Plant Profiles - Houseplants",
   description: "Care guides for your indoor plants",
 };
+
+export default Page;

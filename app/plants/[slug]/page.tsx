@@ -3,7 +3,7 @@ import PlantCardSingle from "@/components/plant-card-single";
 import ScrollTopFix from "@/components/scroll-fix";
 import { getPlantBySlug } from "@/lib/data";
 
-const PlantProfile = async ({ params }: { params: { slug: string } }) => {
+const Pages = async ({ params }: { params: { slug: string } }) => {
   const plant = await getPlantBySlug(params.slug);
 
   if (!plant) return <p>We don&apos;t have a page for this plant yet</p>;
@@ -17,4 +17,4 @@ const PlantProfile = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default PlantProfile;
+export default Pages;

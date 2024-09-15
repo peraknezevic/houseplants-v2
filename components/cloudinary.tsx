@@ -2,6 +2,8 @@
 
 import { CldImage as CldImageDefault, CldImageProps } from "next-cloudinary";
 
-export default function CldImage(props: CldImageProps) {
+const CldImage = (props: CldImageProps) => {
   return <CldImageDefault {...props} />;
-}
+};
+
+export default CldImage;

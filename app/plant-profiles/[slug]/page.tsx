@@ -1,10 +1,8 @@
 import PageHead from "@/components/page-head";
 import PlantProfileContent from "@/components/plant-profile-content";
-import React from "react";
 import { getPlantProfileBySlug } from "@/lib/data";
-import { Slug } from "@/lib/types";
 
-const PlantProfilePage = async ({ params }: Slug) => {
+const Page = async ({ params }: { params: { slug: string } }) => {
   const plantProfile = await getPlantProfileBySlug(params.slug);
 
   if (!plantProfile)
@@ -22,4 +20,4 @@ const PlantProfilePage = async ({ params }: Slug) => {
   );
 };
 
-export default PlantProfilePage;
+export default Page;
