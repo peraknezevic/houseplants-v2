@@ -67,11 +67,11 @@ model Article {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   title        String  @unique
   slug         String  @unique
-  intro        String?
+  intro        String
   content      String
   user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String? @db.ObjectId
-  imageCredits String?
+  imageCredits String
 
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
@@ -102,6 +102,7 @@ model GenusPage {
 
   updatedAt DateTime? @updatedAt
   createdAt DateTime? @default(now())
+  language  Language  @default(ENGLISH)
   published Publish   @default(PUBLISHED)
 }
 

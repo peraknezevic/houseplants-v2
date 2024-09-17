@@ -1,29 +1,30 @@
 import { z } from "zod";
 
-export const idSchema = z.string();
-
-export const pageFormSchema = z.object({
+export const pageSchema = z.object({
+  id: z.string(),
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
-  content: z.string().min(100),
+  content: z.string().min(10),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPageForm = z.infer<typeof pageFormSchema>;
+export const pageFormSchema = pageSchema.omit({ id: true });
 
-export const articleFormSchema = z.object({
+export const articleSchema = z.object({
+  id: z.string(),
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
-  intro: z.string().min(50).nullish(),
-  content: z.string().min(100),
-  imageCredits: z.string().min(3).max(200).nullish(),
+  intro: z.string().min(20).optional().or(z.literal("")),
+  content: z.string().min(3),
+  imageCredits: z.string().min(3).max(200).optional().or(z.literal("")),
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
   language: z.enum(["ENGLISH", "SRPSKI"]),
 });
 
-export type TArticleForm = z.infer<typeof articleFormSchema>;
+export const articleFormSchema = articleSchema.omit({ id: true });
 
-export const generaFormSchema = z.object({
+export const generaSchema = z.object({
+  id: z.string(),
   title: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   intro: z.string(),
@@ -32,9 +33,10 @@ export const generaFormSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TGeneraForm = z.infer<typeof generaFormSchema>;
+export const generaFormSchema = generaSchema.omit({ id: true });
 
-export const plantFormSchema = z.object({
+export const plantSchema = z.object({
+  id: z.string(),
   slug: z.string().min(3).max(80),
   botanicalName: z.string().min(3).max(80),
   hasProfile: z.boolean().optional(),
@@ -64,14 +66,15 @@ export const plantFormSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPlantForm = z.infer<typeof plantFormSchema>;
+export const plantFormSchema = plantSchema.omit({ id: true });
 
-export const plantProfileFormSchema = z.object({
+export const plantProfileSchema = z.object({
+  id: z.string(),
   slug: z.string().min(3).max(40),
   title: z.string().min(3).max(40),
   botanicalName: z.string().min(3).max(40),
-  synonyms: z.string().optional().or(z.literal("")),
-  namedBy: z.string().optional().or(z.literal("")),
+  synonyms: z.string().optional().nullish().or(z.literal("")),
+  namedBy: z.string().optional().nullish().or(z.literal("")),
   inventor: z.string().optional().or(z.literal("")),
   patent: z.string().optional().or(z.literal("")),
   tradeNames: z.string().optional().or(z.literal("")),
@@ -123,4 +126,4 @@ export const plantProfileFormSchema = z.object({
   published: z.enum(["PUBLISHED", "DRAFT", "REVIEW"]),
 });
 
-export type TPlantProfileForm = z.infer<typeof plantProfileFormSchema>;
+export const plantProfileFormSchema = plantProfileSchema.omit({ id: true });

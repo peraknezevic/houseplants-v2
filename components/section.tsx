@@ -7,7 +7,7 @@ const Section = ({
 }) => {
   return (
     <section
-      className="mb-8 rounded-xl bg-white pt-8 font-serif text-xl font-light drop-shadow-md dark:bg-zinc-950 md:mb-16"
+      className="mb-8 rounded-xl bg-white pt-8 font-serif text-xl font-light drop-shadow-xl dark:bg-zinc-950 md:mb-16"
       id={id}
     >
       {children}
