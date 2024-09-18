@@ -1,8 +1,8 @@
 "use server";
 
 import { Article, GenusPage, Page, Plant, PlantProfile } from "@prisma/client";
-import { articleFields, generaFields, pageFields, plantProfileFields } from "./constants";
-import { articleFormSchema, articleSchema, generaFormSchema, pageFormSchema, pageSchema, plantFormSchema, plantProfileFormSchema, plantProfileSchema } from "./validations";
+import { articleFields, generaFields, pageFields, plantFields, plantProfileFields } from "./constants";
+import { articleFormSchema, articleSchema, generaFormSchema, pageFormSchema, pageSchema, plantFormSchema, plantProfileFormSchema, plantProfileSchema, plantSchema } from "./validations";
 
 import prisma from "@/prisma/client";
 import { redirect } from "next/navigation";
@@ -308,7 +308,7 @@ export const createPlant = async (
   const genusSlug = formData.get("genusPageSlug") as Plant["genusPageSlug"];
   const data: {[key: string]: string | number | boolean } = {}
 
-  plantProfileFields.forEach(field => {
+  plantFields.forEach(field => {
     if (field.type === "number") { data[field.name] = Number(formData.get(field.name)) as number}
     if (field.type === "checkbox") { data[field.name] = Boolean(formData.get(field.name)) as boolean}
     else { data[field.name] = formData.get(field.name) as string }
@@ -346,10 +346,9 @@ export const updatePlant = async (
 ) => {
   let success = false
   const id = formData.get("id") as Plant["id"];
-  const genusSlug = formData.get("genusPageSlug") as Plant["genusPageSlug"];
   const data: {[key: string]: string | number | boolean } = {}
 
-  plantProfileFields.forEach(field => {
+  plantFields.forEach(field => {
     if (field.type === "number") { data[field.name] = Number(formData.get(field.name)) as number}
     if (field.type === "checkbox") { data[field.name] = Boolean(formData.get(field.name)) as boolean}
     else { data[field.name] = formData.get(field.name) as string }
@@ -364,7 +363,6 @@ export const updatePlant = async (
       where: { id },
       data: validation.data
     });
-    revalidatePath("/genus/" + genusSlug);
     revalidatePath("/admin/plants");
     success = true 
   } catch (error) {

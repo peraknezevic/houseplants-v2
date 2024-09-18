@@ -49,7 +49,7 @@ export const plantSchema = z.object({
   children:  z.string().optional().nullish().or(z.literal("")),
   parents:  z.string().optional().nullish().or(z.literal("")),
 
-  genusPageSlug: z.string().min(3).max(20),
+  genusPageSlug: z.string().min(3).max(20).or(z.literal("")),
 
   synonyms: z.string().min(3).max(500).optional().nullish().or(z.literal("")),
   tradeNames: z.string().min(3).max(250).optional().nullish().or(z.literal("")),
