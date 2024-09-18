@@ -1,8 +1,8 @@
 "use server";
 
-import { Article, Page, PlantProfile } from "@prisma/client";
-import { articleFields, pageFields, plantProfileFields } from "./constants";
-import { articleFormSchema, articleSchema, pageFormSchema, pageSchema, plantProfileFormSchema, plantProfileSchema } from "./validations";
+import { Article, GenusPage, Page, Plant, PlantProfile } from "@prisma/client";
+import { articleFields, generaFields, pageFields, plantProfileFields } from "./constants";
+import { articleFormSchema, articleSchema, generaFormSchema, pageFormSchema, pageSchema, plantFormSchema, plantProfileFormSchema, plantProfileSchema } from "./validations";
 
 import prisma from "@/prisma/client";
 import { redirect } from "next/navigation";
@@ -37,7 +37,7 @@ export const createPage = async (
     if (exists) throw new Error("Page with slug already exists")
 
     await prisma.page.create({
-      data,
+      data: validation.data,
     });
 
     revalidatePath("/admin/pages");
@@ -66,7 +66,7 @@ export const updatePage = async (
   try {
     await prisma.page.update({
       where: { id },
-      data
+      data: validation.data
     });
 
     revalidatePath("/admin/pages");
@@ -104,7 +104,7 @@ export const createArticle = async (
     if (exists) throw new Error("Article with this slug already exists");
 
     await prisma.article.create({
-      data,
+      data: validation.data
     });
 
     revalidatePath("/articles");
@@ -137,7 +137,7 @@ export const updateArticle = async (
   try {
     await prisma.article.update({
       where: { id },
-      data
+      data: validation.data
     });
     revalidatePath("/admin/articles");
     revalidatePath("/articles");
@@ -150,16 +150,93 @@ export const updateArticle = async (
 
 };
 
+export const createGenera = async (
+  previousState: z.infer<typeof generaFormSchema>,
+  formData: FormData,
+) => {
+  let success = false
+  const slug = formData.get("slug") as GenusPage["slug"];
+
+  const data: {[key: string]: string;} = {}
+
+  generaFields.forEach(field => {
+     data[field.name] = formData.get(field.name) as string 
+  })
+
+  const validation = generaFormSchema.safeParse(data);
+
+  if (!validation.success) return { errors: validation.error.issues };
+
+  console.log(validation.data)
+
+  try {
+    const exists = await prisma.genusPage.findUnique({
+      where: {
+        slug,
+      },
+    });
+  
+    if (exists) throw new Error("Genus with this slug already exists");
+
+    await prisma.genusPage.create({
+      data: validation.data
+    });
+
+    revalidatePath("/");
+    revalidatePath("/genus");
+    revalidatePath("/admin/genera");
+
+    success = true
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (success) redirect("/admin/genera");
+};
+
+export const updateGenera = async (
+  previousState: z.infer<typeof generaFormSchema>,
+  formData: FormData,
+) => {
+  let success = false
+  const id = formData.get("id") as GenusPage["id"]
+  const data: {[key: string]: string;} = {}
+
+  generaFields.forEach(field => {
+     data[field.name] = formData.get(field.name) as string 
+  })
+
+  const validation = generaFormSchema.safeParse(data)
+
+  if (!validation.success) return { errors: validation.error.issues }
+
+  try {
+    await prisma.genusPage.update({
+      where: { id },
+      data: validation.data
+    });
+    revalidatePath("/");
+    revalidatePath("/genus");
+    revalidatePath("/admin/genera");
+    success = true 
+  } catch (error) {
+    console.log(error);
+  }
+  
+  if (success) redirect("/admin/genera");
+
+};
+
 export const createPlantProfile = async (
-  previousState: z.infer<typeof plantProfileSchema>,
+  previousState: z.infer<typeof plantProfileFormSchema>,
   formData: FormData,
 ) => {
   let success = false
   const slug = formData.get("slug") as PlantProfile["slug"];
-  const data: {[key: string]: string | number; } = {}
+  const data: {[key: string]: string | number } = {}
 
   plantProfileFields.forEach(field => {
-    if (field.type === "number") { data[field.name] = Number(formData.get(field.name))}
+    if (field.type === "number") { data[field.name] = Number(formData.get(field.name)) as number}
     else { data[field.name] = formData.get(field.name) as string }
   })
   
@@ -176,7 +253,7 @@ export const createPlantProfile = async (
   
     if (exists) throw new Error("Article with this slug already exists");
 
-    await prisma.plantProfile.create({ data });
+    await prisma.plantProfile.create({ data: validation.data });
 
     revalidatePath("/");
     revalidatePath("/plant-profiles");
@@ -209,7 +286,7 @@ export const updatePlantProfile = async (
   try {
     await prisma.plantProfile.update({
       where: { id },
-      data
+      data: validation.data
     });
     revalidatePath("/");
     revalidatePath("/plant-profiles");
@@ -220,6 +297,81 @@ export const updatePlantProfile = async (
   }
   
   if (success) redirect("/admin/plant-profiles");
+};
+
+export const createPlant = async (
+  previousState: z.infer<typeof plantFormSchema>,
+  formData: FormData,
+) => {
+  let success = false
+  const slug = formData.get("slug") as Plant["slug"];
+  const genusSlug = formData.get("genusPageSlug") as Plant["genusPageSlug"];
+  const data: {[key: string]: string | number | boolean } = {}
+
+  plantProfileFields.forEach(field => {
+    if (field.type === "number") { data[field.name] = Number(formData.get(field.name)) as number}
+    if (field.type === "checkbox") { data[field.name] = Boolean(formData.get(field.name)) as boolean}
+    else { data[field.name] = formData.get(field.name) as string }
+  })
+  
+  const validation = plantFormSchema.safeParse(data);
+
+  if (!validation.success) return { errors: validation.error.issues };
+
+  try {
+    const exists = await prisma.plant.findUnique({
+      where: {
+        slug
+      },
+    });
+  
+    if (exists) throw new Error("Plant with this slug already exists");
+
+    await prisma.plant.create({ data: validation.data });
+
+    revalidatePath("/");
+    revalidatePath("/genus/" + genusSlug);
+    revalidatePath("/admin/plants");
+    success = true
+  } catch (error) {
+    console.log(error);
+  } 
+
+  if (success) redirect("/admin/plants");
+};
+
+export const updatePlant = async (
+  previousState: z.infer<typeof plantFormSchema>,
+  formData: FormData,
+) => {
+  let success = false
+  const id = formData.get("id") as Plant["id"];
+  const genusSlug = formData.get("genusPageSlug") as Plant["genusPageSlug"];
+  const data: {[key: string]: string | number | boolean } = {}
+
+  plantProfileFields.forEach(field => {
+    if (field.type === "number") { data[field.name] = Number(formData.get(field.name)) as number}
+    if (field.type === "checkbox") { data[field.name] = Boolean(formData.get(field.name)) as boolean}
+    else { data[field.name] = formData.get(field.name) as string }
+  })
+
+  const validation = plantFormSchema.safeParse(data);
+
+  if (!validation.success) return { errors: validation.error.issues };
+
+  try {
+    await prisma.plant.update({
+      where: { id },
+      data: validation.data
+    });
+    revalidatePath("/genus/" + genusSlug);
+    revalidatePath("/admin/plants");
+    success = true 
+  } catch (error) {
+    console.log(error);
+  }
+  
+  if (success) redirect("/admin/plants");
 };
 
 // function getKindeServerSession(): { getPermission: any; isAuthenticated: any } {

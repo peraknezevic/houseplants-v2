@@ -19,4 +19,6 @@ export type Field = {
   label: string;
   options?: string[];
   placeholder?: string;
+  defaultValue?: string | boolean | number | undefined
+  checked?: boolean
 };

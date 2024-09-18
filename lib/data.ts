@@ -64,6 +64,13 @@ export const getGenusBySlug = async (slug: GenusPage["slug"]) =>
       slug,
     },
   });
+  
+export const getGenusById = async (id: GenusPage["id"]) =>
+  await prisma.genusPage.findUnique({
+    where: {
+      id,
+    },
+  });
 
 export const getPlantsByGenusSlug = async (
   genusPageSlug: Plant["genusPageSlug"],
@@ -90,12 +97,19 @@ export const getPlants = async () =>
     },
   });
 
-export const getPlantBySlug = async (slug: Plant["slug"]) =>
-  await prisma.plant.findUnique({
-    where: {
-      slug,
-    },
-  });
+  export const getPlantBySlug = async (slug: Plant["slug"]) =>
+    await prisma.plant.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+  export const getPlantById = async (id: Plant["id"]) =>
+    await prisma.plant.findUnique({
+      where: {
+        id,
+      },
+    });
 
 export const getPlantProfiles = async () =>
   await prisma.plantProfile.findMany({

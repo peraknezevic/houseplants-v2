@@ -115,6 +115,48 @@ export const pageFields = [
   },
 ];
 
+export const generaFields = [
+  {
+    id: 1,
+    name: "title",
+    label: "Genera Title",
+    element: "input",
+    type: "text",
+  },
+  {
+    id: 2,
+    name: "slug",
+    label: "Slug",
+    element: "input",
+    type: "text",
+  },
+  {
+    id: 3,
+    name: "intro",
+    label: "Intro",
+    element: "textarea",
+  },
+  {
+    id: 4,
+    name: "thanks",
+    label: "Thanks",
+    element: "textarea",
+  },
+  {
+    id: 5,
+    name: "changeLog",
+    label: "Changelog",
+    element: "textarea",
+  },
+  {
+    id: 6,
+    name: "published",
+    label: "Status",
+    element: "select",
+    options: ["PUBLISHED", "DRAFT", "REVIEW"],
+  }
+]
+
 export const plantProfileFields = [
   {
     id: 1,
@@ -427,6 +469,169 @@ export const plantProfileFields = [
     name: "beleske",
     label: "Beleške",
     element: "textarea"
+  },
+  {
+    id: 45,
+    name: "published",
+    label: "Published",
+    element: "select",
+    options: ["PUBLISHED", "DRAFT", "REVIEW"]
+  },
+]
+
+export const plantFields = [
+  {
+    id: 1,
+    name: "slug",
+    label: "Slug",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 2,
+    name: "title",
+    label: "Title",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 3,
+    name: "hasProfile",
+    label: "Has Profile",
+    element: "input",
+    type: "checkbox",
+    checked: false
+  },
+  {
+    id: 4,
+    name: "isSpecies",
+    label: "Species",
+    element: "input",
+    type: "checkbox",
+    checked: true
+  },
+  {
+    id: 5,
+    name: "isCultivar",
+    label: "Cultivar",
+    element: "input",
+    type: "checkbox",
+    checked: false
+  },
+  {
+    id: 6,
+    name: "isHybrid",
+    label: "Hybrid",
+    element: "input",
+    type: "checkbox",
+    checked: false
+  },
+  {
+    id: 7,
+    name: "isUnsorted",
+    label: "Unsorted",
+    element: "input",
+    type: "checkbox",
+    checked: false
+  },
+  {
+    id: 8,
+    name: "children",
+    label: "Children",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 9,
+    name: "parents",
+    label: "Parents",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 10,
+    name: "genusPageSlug",
+    label: "Genus Page Slug",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 11,
+    name: "synonyms",
+    label: "Synonyms",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 12,
+    name: "tradeNames",
+    label: "Trade Names",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 13,
+    name: "commonNames",
+    label: "Common Names",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 14,
+    name: "namedBy",
+    label: "Named by",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 15,
+    name: "inventor",
+    label: "Inventor",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 16,
+    name: "patent",
+    label: "Patent",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 17,
+    name: "nativeArea",
+    label: "Native Area",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 18,
+    name: "note",
+    label: "Note",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 19,
+    name: "hasImage",
+    label: "Image",
+    element: "input",
+    type: "checkbox",
+    checked: true
+  },
+  {
+    id: 20,
+    name: "imagesForApproval",
+    label: "Images for Approval",
+    element: "input",
+    type: "text"
+  },
+  {
+    id: 21,
+    name: "imageCredits",
+    label: "Images Credits",
+    element: "input",
+    type: "text"
   },
   {
     id: 45,

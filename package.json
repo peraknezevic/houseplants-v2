@@ -14,7 +14,7 @@
     "clsx": "^2.1.0",
     "easymde": "^2.18.0",
     "mongoose": "^8.6.2",
-    "next": "^14.2.11",
+    "next": "^15.0.0-rc.0",
     "next-cloudinary": "^5.20.0",
     "next-themes": "^0.3.0",
     "posthog-js": "^1.161.3",
