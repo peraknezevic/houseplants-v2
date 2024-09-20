@@ -23,9 +23,7 @@ const Card = ({
           height={500}
           alt={item.title}
         />
-        <h3 className="font-regular mb-2 px-4 py-4 text-xl leading-8">
-          {item.title}
-        </h3>
+        <h3 className="mb-2 px-4 py-4 text-xl leading-8">{item.title}</h3>
       </Link>
     </li>
   );

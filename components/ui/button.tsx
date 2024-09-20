@@ -30,7 +30,7 @@ const Button = ({
         return (
           <Link
             href={link}
-            className="block border border-zinc-900 bg-zinc-900 px-4 py-2 text-base font-semibold uppercase tracking-wider text-zinc-50 hover:bg-zinc-500 hover:text-zinc-900"
+            className="rounded bg-white px-4 py-2 text-base uppercase text-emerald-950 no-underline shadow-md transition hover:shadow-xl"
           >
             {title}
           </Link>

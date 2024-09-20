@@ -29,9 +29,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <PostHogPageview />
       </Suspense>
       <PHProvider>
-        <body className=" bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
+        <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
           <Header />
-          <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
+          <div className="mx-auto my-8 min-h-screen max-w-4xl md:py-16">
+            {children}
+          </div>
           <Footer />
         </body>
       </PHProvider>

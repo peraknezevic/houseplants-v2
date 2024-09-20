@@ -68,8 +68,6 @@ export async function generateMetadata({
       siteName: "Houseplants",
       images: [
         {
-          // Prefer a different size? Be sure to update the width and height of the
-          // metadata as well as the image configuration of getCldOgImageUrl
           width: 1200,
           height: 627,
           url: getCldOgImageUrl({

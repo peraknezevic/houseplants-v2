@@ -3,6 +3,7 @@ import Markdown from "@/components/ui/markdown";
 import PageHead from "@/components/page-head";
 import Section from "@/components/section";
 import { getArticleBySlug } from "@/lib/data";
+import { getCldOgImageUrl } from "next-cloudinary";
 import { notFound } from "next/navigation";
 
 const Page = async ({ params }: { params: { slug: string } }) => {
