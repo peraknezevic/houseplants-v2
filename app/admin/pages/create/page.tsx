@@ -1,4 +1,4 @@
-import Form from "@/components/forms/form";
+import Form from "@/components/form";
 import { createPage } from "@/lib/actions";
 import { pageFields } from "@/lib/constants";
 const Page = () => {

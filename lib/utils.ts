@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import type { ZodSchema } from 'zod';
+import type { ZodIssue, ZodSchema } from "zod";
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -18,16 +18,8 @@ export const removeChars = (text: string) =>
     .replaceAll(" ", "-")
     .toLowerCase();
 
-export function zodSchemaToKeys(schema: ZodSchema) {
-  const fields: Record<string, true> = {};
-  const proxy = new Proxy(fields, {
-    get(_, key) {
-      if (key === 'then' || typeof key !== 'string') {
-        return;
-      }
-      fields[key] = true;
-    },
-  });
-  schema.safeParse(proxy);
-  return fields;
-}
+export const findErrors = (fieldName: string, errors: ZodIssue[]) => {
+  return errors
+    .filter((item) => item.path.includes(fieldName))
+    .map((item) => item.message);
+};

@@ -1,4 +1,4 @@
-import Form from "@/components/forms/form";
+import Form from "@/components/form";
 import { generaFields } from "@/lib/constants";
 import { getGenusById } from "@/lib/data";
 import { updateGenera } from "@/lib/actions";

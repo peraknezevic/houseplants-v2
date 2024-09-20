@@ -1,4 +1,4 @@
-import Form from "@/components/forms/form";
+import Form from "@/components/form";
 import { createPlantProfile } from "@/lib/actions";
 import { plantProfileFields } from "@/lib/constants";
 const Page = () => {

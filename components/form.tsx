@@ -8,12 +8,14 @@ import {
   plantSchema,
 } from "@/lib/validations";
 
-import Button from "../ui/button";
+import Button from "./ui/button";
+import ErrorMessage from "./error-message";
 import { Field } from "@/lib/types";
-import Input from "../ui/input";
-import Select from "../ui/select";
-import Textarea from "../ui/textarea";
+import Input from "./ui/input";
+import Select from "./ui/select";
+import Textarea from "./ui/textarea";
 import { ZodIssue } from "zod";
+import { findErrors } from "@/lib/utils";
 import { twMerge } from "tailwind-merge";
 import { useActionState } from "react";
 import { z } from "zod";
@@ -97,7 +99,7 @@ const Form = ({
             />
           )}
           {state && (
-            <ErrorMessages errors={findErrors(field.name, state.errors)} />
+            <ErrorMessage errors={findErrors(field.name, state.errors)} />
           )}
         </div>
       ))}
@@ -106,20 +108,6 @@ const Form = ({
       </div>
     </form>
   );
-};
-
-const ErrorMessages = ({ errors }: { errors: string[] }) => {
-  if (errors.length === 0) return null;
-
-  const text = errors.join(", ");
-
-  return <div className="peer col-span-6 text-red-600">{text}</div>;
-};
-
-const findErrors = (fieldName: string, errors: ZodIssue[]) => {
-  return errors
-    .filter((item) => item.path.includes(fieldName))
-    .map((item) => item.message);
 };
 
 export default Form;
