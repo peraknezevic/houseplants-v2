@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { ThemeProvider } from "next-themes";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -24,17 +25,23 @@ const zillaSlab = Zilla_Slab({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${zillaSlab.variable}`}
+      suppressHydrationWarning
+    >
       <Suspense>
         <PostHogPageview />
       </Suspense>
       <PHProvider>
         <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
-          <Header />
-          <div className="mx-auto my-8 min-h-screen max-w-4xl md:py-16">
-            {children}
-          </div>
-          <Footer />
+          <ThemeProvider attribute="class">
+            <Header />
+            <div className="mx-auto my-8 min-h-screen max-w-4xl md:py-16">
+              {children}
+            </div>
+            <Footer />
+          </ThemeProvider>
         </body>
       </PHProvider>
     </html>

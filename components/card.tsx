@@ -1,4 +1,4 @@
-import CldImage from "@/components/cloudinary";
+import CldImage from "./cloudinary";
 import Link from "next/link";
 
 const Card = ({

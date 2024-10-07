@@ -12,6 +12,7 @@ export const getPublishedArticles = async () =>
   await prisma.article.findMany({
     where: {
       published: "PUBLISHED",
+      language: "ENGLISH",
     },
     select: {
       id: true,
@@ -64,7 +65,7 @@ export const getGenusBySlug = async (slug: GenusPage["slug"]) =>
       slug,
     },
   });
-  
+
 export const getGenusById = async (id: GenusPage["id"]) =>
   await prisma.genusPage.findUnique({
     where: {
@@ -97,19 +98,19 @@ export const getPlants = async () =>
     },
   });
 
-  export const getPlantBySlug = async (slug: Plant["slug"]) =>
-    await prisma.plant.findUnique({
-      where: {
-        slug,
-      },
-    });
+export const getPlantBySlug = async (slug: Plant["slug"]) =>
+  await prisma.plant.findUnique({
+    where: {
+      slug,
+    },
+  });
 
-  export const getPlantById = async (id: Plant["id"]) =>
-    await prisma.plant.findUnique({
-      where: {
-        id,
-      },
-    });
+export const getPlantById = async (id: Plant["id"]) =>
+  await prisma.plant.findUnique({
+    where: {
+      id,
+    },
+  });
 
 export const getPlantProfiles = async () =>
   await prisma.plantProfile.findMany({
@@ -121,7 +122,7 @@ export const getPlantProfiles = async () =>
     },
     orderBy: {
       slug: "asc",
-    }
+    },
   });
 
 export const getPublishedPlantProfiles = async () =>
@@ -146,12 +147,12 @@ export const getPlantProfileBySlug = async (slug: PlantProfile["slug"]) =>
     },
   });
 
-  export const getPlantProfileById = async (id: PlantProfile["id"]) =>
-    await prisma.plantProfile.findUnique({
-      where: {
-        id,
-      },
-    });
+export const getPlantProfileById = async (id: PlantProfile["id"]) =>
+  await prisma.plantProfile.findUnique({
+    where: {
+      id,
+    },
+  });
 
 export const getPages = async () => await prisma.page.findMany();
 
@@ -162,7 +163,7 @@ export const getPageBySlug = async (slug: Page["slug"]) =>
     },
   });
 
-  export const getPageById = async (id: Page["id"]) =>
+export const getPageById = async (id: Page["id"]) =>
   await prisma.page.findUnique({
     where: {
       id,
@@ -207,6 +208,7 @@ const getLatestArticles = async () =>
   prisma.article.findMany({
     where: {
       published: "PUBLISHED",
+      language: "ENGLISH",
     },
     orderBy: {
       updatedAt: "desc",

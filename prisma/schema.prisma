@@ -71,6 +71,7 @@ model Article {
   content      String
   user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String? @db.ObjectId
+  imageSlug    String?
   imageCredits String
 
   createdAt DateTime? @default(now())
@@ -96,8 +97,11 @@ model GenusPage {
   title     String  @unique
   slug      String  @unique
   intro     String
+  uvod      String?
   thanks    String?
+  hvala     String?
   changeLog String
+  promene   String?
   plants    Plant[]
 
   updatedAt DateTime? @updatedAt
@@ -122,14 +126,16 @@ model Plant {
   genusPage     GenusPage @relation(fields: [genusPageSlug], references: [slug])
   genusPageSlug String
 
-  synonyms    String?
-  tradeNames  String?
-  commonNames String?
-  namedBy     String?
-  inventor    String?
-  patent      String?
-  nativeArea  String?
-  note        String?
+  synonyms     String?
+  tradeNames   String?
+  narodniNaziv String?
+  commonNames  String?
+  namedBy      String?
+  inventor     String?
+  patent       String?
+  nativeArea   String?
+  note         String?
+  beleske      String?
 
   hasImage          Boolean @default(true)
   imagesForApproval String?
@@ -162,32 +168,32 @@ model PlantProfile {
   care          Care          @default(EASY)
   light         Light         @default(BRIGHT_LIGHT)
   watering      String
-  zalivanje     String? //
+  zalivanje     String
   soil          String
-  supstrat      String? //
+  supstrat      String
   soilPH        String
   humidity      Humidity      @default(MEDIUM)
   feeding       String
-  prihrana      String? //
+  prihrana      String
   minimalT      Int
   optimalT      Int
   speedOfGrowth SpeedOfGrowth @default(MODERATE)
   matureSize    String
-  velicina      String? //
+  velicina      String
   repotting     String
-  presadjivanje String? //
+  presadjivanje String
   flower        String
-  cvet          String? //
+  cvet          String
   propagation   String
-  razmnozavanje String? //
+  razmnozavanje String
   toxicity      Toxicity      @default(TOXIC)
   pests         String
-  stetocine     String? //
+  stetocine     String
   diseases      String
-  bolesti       String? //
-  imageCredits  String?
-  notes         String?
-  beleske       String? //
+  bolesti       String
+  imageCredits  String
+  notes         String
+  beleske       String
 
   updatedAt DateTime? @updatedAt
   createdAt DateTime? @default(now())
