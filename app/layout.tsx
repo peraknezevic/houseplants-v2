@@ -26,7 +26,11 @@ const zillaSlab = Zilla_Slab({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${zillaSlab.variable}`}
+      suppressHydrationWarning
+    >
       <PHProvider>
         <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
           <Suspense>
