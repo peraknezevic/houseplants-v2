@@ -3,8 +3,9 @@ import PageHead from "@/components/page-head";
 import { getPageBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const page = await getPageBySlug(params.slug);
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const page = await getPageBySlug(slug);
   if (!page) notFound();
 
   return (

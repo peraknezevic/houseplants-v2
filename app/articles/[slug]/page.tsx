@@ -3,11 +3,11 @@ import Markdown from "@/components/ui/markdown";
 import PageHead from "@/components/page-head";
 import Section from "@/components/section";
 import { getArticleBySlug } from "@/lib/data";
-import { getCldOgImageUrl } from "next-cloudinary";
 import { notFound } from "next/navigation";
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const article = await getArticleBySlug(params.slug);
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
 
   if (!article) notFound();
 

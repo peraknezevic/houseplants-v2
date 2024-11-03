@@ -3,8 +3,9 @@ import PlantCardSingle from "@/components/plant-card-single";
 import ScrollTopFix from "@/components/scroll-fix";
 import { getPlantBySlug } from "@/lib/data";
 
-const Pages = async ({ params }: { params: { slug: string } }) => {
-  const plant = await getPlantBySlug(params.slug);
+const Pages = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const plant = await getPlantBySlug(slug);
 
   if (!plant) return <p>We don&apos;t have a page for this plant yet</p>;
 

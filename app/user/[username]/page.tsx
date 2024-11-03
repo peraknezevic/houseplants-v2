@@ -1,5 +1,6 @@
-const Page = ({ params }: { params: { username: string } }) => {
-  return <div>UserPage {params.username}</div>;
+const Page = async ({ params }: { params: Promise<{ username: string }> }) => {
+  const { username } = await params;
+  return <div>UserPage {username}</div>;
 };
 
 export default Page;

@@ -1,11 +1,12 @@
 import "./globals.css";
 
 import { Outfit, Zilla_Slab } from "next/font/google";
-import { PHProvider, PostHogPageview } from "./providers";
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import type { Metadata } from "next";
+import { PHProvider } from "./providers";
+import PostHogPageview from "./PostHogPageView";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 
@@ -25,16 +26,12 @@ const zillaSlab = Zilla_Slab({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html
-      lang="en"
-      className={`${outfit.variable} ${zillaSlab.variable}`}
-      suppressHydrationWarning
-    >
-      <Suspense>
-        <PostHogPageview />
-      </Suspense>
+    <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
       <PHProvider>
         <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
+          <Suspense>
+            <PostHogPageview />
+          </Suspense>
           <ThemeProvider attribute="class">
             <Header />
             <div className="mx-auto my-8 min-h-screen max-w-4xl md:py-16">
