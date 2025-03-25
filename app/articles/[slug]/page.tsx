@@ -5,8 +5,9 @@ import Section from "@/components/section";
 import { getArticleBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const article = await getArticleBySlug(params.slug);
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
 
   if (!article) notFound();
 

@@ -7,8 +7,9 @@ import Section from "@/components/section";
 import { getCldOgImageUrl } from "next-cloudinary";
 import { getGenusPageData } from "@/lib/data";
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const [genusPage, plants] = await getGenusPageData(params.slug);
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const [genusPage, plants] = await getGenusPageData(slug);
 
   if (!genusPage) return <p>No genus page found</p>;
   if (genusPage.published === "DRAFT")
@@ -29,7 +30,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 
       <H2 title={`${genusPage.title} Plants`} />
       {plants.map((plant) => (
-        <PlantCard plant={plant} genusSlug={params.slug} key={plant.slug} />
+        <PlantCard plant={plant} genusSlug={slug} key={plant.slug} />
       ))}
 
       {genusPage.thanks && (
@@ -48,12 +49,13 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`;
+  const { slug } = await params;
+  const publicId = `images/genus/${slug}/genus-${slug}-og-en.jpg`;
   const url = "https://houseplants.xyz";
-  const pageUrl = `${url}/genus/${params.slug}`;
-  const pageTitle = params.slug[0].toUpperCase() + params.slug.slice(1);
+  const pageUrl = `${url}/genus/${slug}`;
+  const pageTitle = slug[0].toUpperCase() + slug.slice(1);
   const title = `${pageTitle} species, cultivars and hybrids - genus ${pageTitle}`;
   const description = `List of all the ${pageTitle} plant varieties in cultivation`;
   const keywords = `${pageTitle}, ${pageTitle} varieties, ${pageTitle} species, ${pageTitle} cultivars, ${pageTitle} hybrids`;
@@ -81,11 +83,7 @@ export async function generateMetadata({
                 width: 2400,
                 height: 1254,
                 crop: "fill",
-                effects: [
-                  {
-                    opacity: 30,
-                  },
-                ],
+                effects: [{ opacity: 30 }],
               },
               {
                 width: 1400,
@@ -98,9 +96,7 @@ export async function generateMetadata({
                   fontWeight: "bold",
                   text: pageTitle,
                 },
-                position: {
-                  y: -100,
-                },
+                position: { y: -100 },
               },
               {
                 width: 1400,
@@ -112,9 +108,7 @@ export async function generateMetadata({
                   fontSize: 74,
                   text: description,
                 },
-                position: {
-                  y: 100,
-                },
+                position: { y: 100 },
               },
             ],
           }),

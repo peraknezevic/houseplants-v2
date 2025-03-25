@@ -18,7 +18,7 @@ const P = ({
       {content && content}
       {list &&
         list.split(", ").map((parent, i) => (
-          <span key="child">
+          <span key={i}>
             {i > 0 && ", "}
             {external ? (
               <Link href={removeChars(parent)}>
