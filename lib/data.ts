@@ -27,6 +27,18 @@ export const getGeneras = async () =>
     select: { id: true, title: true, slug: true },
   });
 
+export const getGenerasForAdmin = async () =>
+  await prisma.genusPage.findMany({
+    orderBy: { title: "asc" },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      published: true,
+      updatedAt: true,
+    },
+  });
+
 export const getPublishedGeneras = async () =>
   await prisma.genusPage.findMany({
     where: { published: "PUBLISHED" },
@@ -35,6 +47,9 @@ export const getPublishedGeneras = async () =>
 
 export const getGenusBySlug = async (slug: GenusPage["slug"]) =>
   await prisma.genusPage.findUnique({ where: { slug } });
+
+export const getGenusPageById = async (id: GenusPage["id"]) =>
+  await prisma.genusPage.findUnique({ where: { id } });
 
 export const getPlantsByGenusSlug = async (
   genusPageSlug: Plant["genusPageSlug"],
@@ -49,13 +64,47 @@ export const getPlants = async () =>
     select: { id: true, title: true, slug: true },
   });
 
+export const getPlantsForAdmin = async ({
+  skip,
+  take,
+}: { skip?: number; take?: number } = {}) =>
+  await prisma.plant.findMany({
+    orderBy: { title: "asc" },
+    skip,
+    take,
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      published: true,
+      updatedAt: true,
+    },
+  });
+
+export const getPlantsCount = async () => await prisma.plant.count();
+
 export const getPlantBySlug = async (slug: Plant["slug"]) =>
   await prisma.plant.findUnique({ where: { slug } });
+
+export const getPlantById = async (id: Plant["id"]) =>
+  await prisma.plant.findUnique({ where: { id } });
 
 export const getPlantProfiles = async () =>
   await prisma.plantProfile.findMany({
     orderBy: { slug: "asc" },
     select: { id: true, title: true, slug: true },
+  });
+
+export const getPlantProfilesForAdmin = async () =>
+  await prisma.plantProfile.findMany({
+    orderBy: { title: "asc" },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      published: true,
+      updatedAt: true,
+    },
   });
 
 export const getPublishedPlantProfiles = async () =>
@@ -68,10 +117,16 @@ export const getPublishedPlantProfiles = async () =>
 export const getPlantProfileBySlug = async (slug: PlantProfile["slug"]) =>
   await prisma.plantProfile.findUnique({ where: { slug } });
 
+export const getPlantProfileById = async (id: PlantProfile["id"]) =>
+  await prisma.plantProfile.findUnique({ where: { id } });
+
 export const getPages = async () => await prisma.page.findMany();
 
 export const getPageBySlug = async (slug: Page["slug"]) =>
   await prisma.page.findUnique({ where: { slug: slug } });
+
+export const getPageById = async (id: Page["id"]) =>
+  await prisma.page.findUnique({ where: { id } });
 
 // Homepage stuff
 

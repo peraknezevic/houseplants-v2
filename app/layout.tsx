@@ -6,7 +6,6 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import type { Metadata } from "next";
 import { PostHogProvider } from "./providers";
-import { Suspense } from "react";
 
 const outfit = Outfit({
   subsets: ["latin"],

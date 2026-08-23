@@ -1,4 +1,4 @@
-import Button from "./ui/button";
+import SiteButton from "./ui/site-button";
 import Card from "./card";
 import CardsGrid from "./cards-grid";
 import H2 from "./ui/H2";
@@ -32,7 +32,7 @@ const HomePageBlock = ({
         ))}
       </CardsGrid>
       <div className="pb-16 pt-8 text-center underline">
-        <Button link={link} title={linkTitle} />
+        <SiteButton link={link} title={linkTitle} />
       </div>
     </>
   );

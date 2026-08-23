@@ -42,3 +42,6 @@ next-env.d.ts
 /wp
 # Sentry Config File
 .sentryclirc
+
+CLAUDE.md
+.mcp.json
