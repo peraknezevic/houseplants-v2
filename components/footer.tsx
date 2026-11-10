@@ -9,25 +9,42 @@ const Footer = () => {
         <ul className="list-unstyled flex justify-between gap-x-8">
           {socialNavItems.map((item) => (
             <li key={item.id}>
-              <a href={item.url}>{item.title}</a>
+              <a href={item.url} className="underline underline-offset-4">
+                {item.title}
+              </a>
             </li>
           ))}
         </ul>
       </div>
-      <nav>
+      <nav aria-label="Footer">
         <ul className="flex gap-4 md:gap-8">
           <li>
-            <Link href="/pages/privacy-policy">Privacy policy</Link>
+            <Link
+              href="/pages/privacy-policy"
+              className="underline underline-offset-4"
+            >
+              Privacy policy
+            </Link>
           </li>
           <li>
-            <a href="mailto:houseplants.xyz@gmail.com">Contact via email</a>
+            <a
+              href="mailto:houseplants.xyz@gmail.com"
+              className="underline underline-offset-4"
+            >
+              Contact via email
+            </a>
           </li>
         </ul>
       </nav>
       <p className="mx-auto text-center">
         &copy; 2021.-{new Date().getFullYear()}. Designed and developed by{" "}
-        <a href="https://peraknezevic.com">Pera Knezevic</a>. All rights
-        reserved.
+        <a
+          href="https://peraknezevic.com"
+          className="underline underline-offset-4"
+        >
+          Pera Knezevic
+        </a>
+        . All rights reserved.
       </p>
     </footer>
   );

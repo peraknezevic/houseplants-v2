@@ -21,11 +21,18 @@ const P = ({
           <span key={i}>
             {i > 0 && ", "}
             {external ? (
-              <Link href={removeChars(parent)}>
+              <Link
+                href={removeChars(parent)}
+                className="underline underline-offset-4"
+              >
                 {parent.replaceAll('"', "")}
               </Link>
             ) : (
-              <a key={parent} href={"#" + removeChars(parent)}>
+              <a
+                key={parent}
+                href={"#" + removeChars(parent)}
+                className="underline underline-offset-4"
+              >
                 {parent.replaceAll('"', "")}
               </a>
             )}

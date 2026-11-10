@@ -15,15 +15,16 @@ const Figure = ({
   credit: string;
 }) => {
   return (
-    <figure className="mt-4 overflow-hidden rounded-bl-xl rounded-br-xl">
+    <figure className="relative mt-4 overflow-hidden rounded-bl-xl rounded-br-xl">
       <CldImage
-        className="w-full"
+        className="block w-full"
         src={imgUrl}
         width={800}
         height={1000}
         alt={alt}
       />
-      <figcaption className="z-10 -mt-20 block px-4 pb-2 text-right text-white">
+      {/* Dark gradient behind the caption keeps white text readable on any photo. */}
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent px-4 pb-2 pt-10 text-right text-white [&_a]:underline">
         <p>{caption}</p>
         <ReactMarkdown>{credit}</ReactMarkdown>
       </figcaption>

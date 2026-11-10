@@ -28,6 +28,7 @@ const HomePageBlock = ({
             item={item}
             imgFolder={imgFolder}
             pageFolder={pageFolder}
+            headingLevel="h3"
           />
         ))}
       </CardsGrid>

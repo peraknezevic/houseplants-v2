@@ -28,7 +28,7 @@ const PlantCard = ({
       {plant.inventor && <P title="Inventor" content={plant.inventor} />}
       {plant.patent && <P title="Patent" content={plant.patent} />}
       {plant.nativeArea && <P title="Native Area" content={plant.nativeArea} />}
-      {plant.note && <P title="*" content={plant.note} />}
+      {plant.note && <P title="Note" content={plant.note} />}
 
       {plant.parents && <P title="Plant parent(s)" list={plant.parents} />}
       {plant.children && (

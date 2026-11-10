@@ -46,9 +46,7 @@ const PageForm = ({ page }: { page?: Page }) => {
 
   const onSubmit = (data: TPageForm) => {
     startTransition(async () => {
-      const result = page
-        ? await editPage(page.id, data)
-        : await addPage(data);
+      const result = page ? await editPage(page.id, data) : await addPage(data);
 
       if (result?.success) {
         toast.success(page ? "Page updated" : "Page created");
@@ -106,10 +104,12 @@ const PageForm = ({ page }: { page?: Page }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Content</FormLabel>
-              <MarkdownEditor
-                value={field.value ?? ""}
-                onChange={field.onChange}
-              />
+              <FormControl>
+                <MarkdownEditor
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

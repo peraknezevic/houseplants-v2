@@ -7,6 +7,8 @@ const Page = async () => {
 
   return (
     <>
+      {/* The visible logo isn't a heading, so give the page a top-level heading for screen readers. */}
+      <h1 className="sr-only">Houseplants: all about your indoor plants</h1>
       <HomePageBlock
         title="Recently Updated Genera Pages"
         data={genera}

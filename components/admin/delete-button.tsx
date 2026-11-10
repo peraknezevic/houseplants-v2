@@ -49,7 +49,11 @@ const DeleteButton = ({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button
+          variant="outline"
+          size="sm"
+          aria-label={`Delete "${itemLabel}"`}
+        >
           Delete
         </Button>
       </AlertDialogTrigger>

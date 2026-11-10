@@ -123,10 +123,12 @@ const ArticleForm = ({ article }: { article?: Article }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Content</FormLabel>
-              <MarkdownEditor
-                value={field.value ?? ""}
-                onChange={field.onChange}
-              />
+              <FormControl>
+                <MarkdownEditor
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

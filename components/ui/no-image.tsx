@@ -7,8 +7,11 @@ const NoImage = ({ title }: { title: string }) => {
       </p>
       <p>
         Send it via e-mail at{" "}
-        <a href={`mailto:houseplants.xyz@gmail.com?subject=${title} photo`}>
-          houseplants.xyz@gmail.com{" "}
+        <a
+          href={`mailto:houseplants.xyz@gmail.com?subject=${title} photo`}
+          className="underline underline-offset-4"
+        >
+          houseplants.xyz@gmail.com
         </a>{" "}
         or via instagram at @houseplants.xyz
       </p>

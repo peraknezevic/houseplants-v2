@@ -25,9 +25,21 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
       <PostHogProvider>
-        <body className=" bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
+        <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-emerald-950 focus:shadow-lg"
+          >
+            Skip to content
+          </a>
           <Header />
-          <div className="mx-auto my-8 max-w-4xl md:py-16">{children}</div>
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className="mx-auto my-8 max-w-4xl focus:outline-none md:py-16"
+          >
+            {children}
+          </main>
           <Footer />
         </body>
       </PostHogProvider>

@@ -1,9 +1,11 @@
+import Spinner from "@/components/spinner";
+
 const Loading = () => {
   return (
-    <div className="p-5">
-      <span className="loading loading-spinner loading-lg"></span>
+    <div className="flex justify-center p-5">
+      <Spinner size="lg" />
     </div>
-  )
-}
+  );
+};
 
-export default Loading
+export default Loading;

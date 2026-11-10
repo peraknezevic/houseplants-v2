@@ -9,11 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { TGeneraForm, generaFormSchema } from "@/lib/validations";
-import {
-  addGenusPage,
-  deleteGenusPage,
-  editGenusPage,
-} from "@/lib/actions";
+import { addGenusPage, deleteGenusPage, editGenusPage } from "@/lib/actions";
 import {
   Select,
   SelectContent,
@@ -113,10 +109,12 @@ const GenusForm = ({ genusPage }: { genusPage?: GenusPage }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Intro</FormLabel>
-              <MarkdownEditor
-                value={field.value ?? ""}
-                onChange={field.onChange}
-              />
+              <FormControl>
+                <MarkdownEditor
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -127,10 +125,12 @@ const GenusForm = ({ genusPage }: { genusPage?: GenusPage }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Change log</FormLabel>
-              <MarkdownEditor
-                value={field.value ?? ""}
-                onChange={field.onChange}
-              />
+              <FormControl>
+                <MarkdownEditor
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
